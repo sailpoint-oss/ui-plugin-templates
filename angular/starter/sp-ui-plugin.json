@@ -1,0 +1,25 @@
+{
+    "version": 1,
+    "manifest": {
+        "alias": "",
+        "name": {
+            "en": ""
+        },
+        "description": {
+            "en": ""
+        },
+        "apiScopes": [
+            "sp:scopes:all"
+        ],
+        "permissionPolicy": {},
+        "iframeAllow": {},
+        "contentSecurityPolicies": {},
+        "slots": [{
+            "slotId": "full-page"
+        }]
+    },
+    "build": {
+        "outDir": "./dist/starter/browser",
+        "port": 4200
+    }
+}
