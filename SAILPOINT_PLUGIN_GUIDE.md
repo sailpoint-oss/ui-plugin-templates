@@ -91,6 +91,83 @@ Because local dev uses a real scoped token minted from your declared
 `apiScopes`, an endpoint you did not declare fails locally exactly as it would
 in production. Add scopes to `sp-ui-plugin.json` when you need them.
 
+For plugin-document security headers during local dev, see
+[Local dev document headers](#local-dev-document-headers).
+
+## Local dev document headers
+
+The plugin iframe is governed by plugin-document `Content-Security-Policy` and
+`Permissions-Policy` headers. In production, UMS stamps these on CDN assets.
+During local development, your dev server must emit the same headers for CSP
+parity.
+
+**Source of truth for the dev server:** your framework's dev-server configuration
+(for example, Vite `server.headers` or Angular `angular.json` serve options).
+`sp-ui-plugin.json` does **not** control dev-server response headers.
+
+### Getting the effective header values
+
+On successful `sail ui-plugins create` or `sail ui-plugins link`, UMS returns
+`devDocumentHeaders` in the API response:
+
+```json
+{
+  "devDocumentHeaders": {
+    "Content-Security-Policy": "...",
+    "Permissions-Policy": "..."
+  }
+}
+```
+
+Inspect this response to see the merged headers your production CDN assets will
+carry (platform baseline plus any author extensions from your manifest). Copy
+these values into your dev-server config — do not guess tenant-specific origins
+such as `https://<your-org>.api.cloud.sailpoint.com`.
+
+**Restart required:** If your dev server is already running when create or link
+returns new headers, restart it before testing in ISC.
+
+### Example: Vite dev server
+
+```javascript
+// vite.config.js — adapt to your stack and port
+export default {
+  server: {
+    port: 4200, // match sp-ui-plugin.json build.port
+    headers: {
+      'Content-Security-Policy':
+        "default-src 'self'; connect-src 'self' https://<your-org>.api.cloud.sailpoint.com; ...",
+      'Permissions-Policy': 'camera=(), microphone=(), ...'
+    }
+  }
+};
+```
+
+Use the `Content-Security-Policy` and `Permissions-Policy` strings from
+`devDocumentHeaders`, not the placeholders above.
+
+### Angular starter (CLI default)
+
+If you scaffolded with the default `sail ui-plugins init` flow (Angular template),
+the CLI updates `angular.json` automatically. See
+`SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the Angular starter — you do not need to
+wire headers manually.
+
+### Existing project (`init --path`)
+
+`sail ui-plugins init --path <dir>` adds `sp-ui-plugin.json` and this guide to
+an existing project but does **not** modify your dev-server config. After
+create/link, copy `devDocumentHeaders` into your bundler's dev-server settings
+yourself (Vite example above, or the equivalent for your stack).
+
+### Manifest security fields
+
+`sp-ui-plugin.json` `contentSecurityPolicies` and `permissionPolicy` do **not**
+directly configure dev-server headers. If you change manifest security fields and
+update the plugin instance, UMS merges those changes with the platform baseline;
+create/link returns updated `devDocumentHeaders` for you to apply to your dev
+server (or, on the Angular path, for the CLI to write into `angular.json`).
+
 ## Building and deploying
 
 Build your project with your framework's own tooling, ensuring the output lands

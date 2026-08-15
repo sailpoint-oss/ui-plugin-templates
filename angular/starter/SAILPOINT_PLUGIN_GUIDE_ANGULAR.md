@@ -74,6 +74,53 @@ Because local dev uses a real scoped token minted from your declared
 `apiScopes`, an endpoint you did not declare fails locally exactly as it would
 in production. Add scopes to `sp-ui-plugin.json` when you need them.
 
+For plugin-document security headers during local dev, see
+[Local dev document headers](#local-dev-document-headers).
+
+## Local dev document headers
+
+The plugin iframe is governed by plugin-document `Content-Security-Policy` and
+`Permissions-Policy` headers. In production, UMS stamps these on CDN assets. During
+local development, your dev server must emit the same headers — otherwise API calls
+(for example, fetches to your tenant API) may be blocked by CSP.
+
+**Source of truth for the dev server:** `angular.json` →
+`projects.<your-plugin>.architect.serve.options.headers`. The dev server does
+**not** read security headers from `sp-ui-plugin.json`.
+
+### Automatic setup (normal workflow)
+
+After you register the plugin, the SailPoint CLI writes the effective headers into
+`angular.json` when you run:
+
+- `sail ui-plugins create`
+- `sail ui-plugins link`
+
+You do not need to hand-edit these values under the normal CLI workflow.
+
+**Restart required:** If `npm start` (or `ng serve`) is already running when
+create or link updates `angular.json`, restart the dev server so the new headers
+take effect.
+
+### Example (after create or link)
+
+```json
+"headers": {
+  "Content-Security-Policy": "default-src 'self'; connect-src 'self' https://<your-org>.api.cloud.sailpoint.com; ...",
+  "Permissions-Policy": "camera=(), microphone=(), ..."
+}
+```
+
+The CLI populates real values for your tenant. The snippet above uses
+placeholders only.
+
+### Manifest security fields
+
+`sp-ui-plugin.json` `contentSecurityPolicies` and `permissionPolicy` do **not**
+directly configure dev-server headers. If you change manifest security fields and
+update the plugin instance in your tenant, UMS merges your changes with the
+platform baseline; the CLI refreshes `angular.json` on the next create or link.
+
 ## Building and deploying
 
 ```bash
