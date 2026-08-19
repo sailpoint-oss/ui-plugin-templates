@@ -16,7 +16,8 @@
         "contentSecurityPolicies": {},
         "slots": [{
             "slotId": "full-page"
-        }]
+        }],
+        "state": "ENABLED"
     },
     "build": {
         "outDir": "./dist/starter/browser",
