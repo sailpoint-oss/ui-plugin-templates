@@ -68,8 +68,9 @@
     <h1>Hello, {{ title() }}</h1>
     <p>
       This whole template is a starting point — replace everything in
-      <code>app.html</code> with your own UI. Nothing here needs to be kept. The sections below
-      confirm the plugin is connected and show the SDK pattern to follow.
+      <code>app.html</code> with your own UI. Nothing here needs to be kept. The
+      sections below confirm the plugin is connected and show the SDK pattern to
+      follow.
     </p>
   </header>
 
@@ -105,8 +106,55 @@
     <p>
       Inject <code>SailpointPluginService</code> and read its <code>context</code>,
       <code>tenant</code>, <code>user</code>, and <code>status</code> signals. Use
-      <code>get()</code> and <code>post()</code> for authenticated SailPoint API calls.
+      <code>SailpointApiService</code> for typed <code>sailpoint-api-client</code>
+      calls (<code>getApi</code> or <code>getApi$</code>), or <code>get()</code> and <code>post()</code> on the plugin service for
+      simple requests.
     </p>
+
+    <h3>Promise: <code>getApi()</code></h3>
+    <p>
+      <code>promiseApiCall()</code> loads tenant metadata with
+      <code>TenantApi</code> and <code>async</code>/<code>await</code>.
+    </p>
+    <button
+      type="button"
+      (click)="promiseApiCall()"
+      [disabled]="tenantLoading() || !apiReady()"
+    >
+      Call tenant API (Promise)
+    </button>
+    @if (tenantLoading()) {
+      <p>Loading tenant…</p>
+    }
+    @if (tenantError()) {
+      <pre>{{ tenantError() }}</pre>
+    }
+    @if (tenant(); as tenantData) {
+      <pre style="height: 250px; overflow-x: auto;">{{ tenantData | json }}</pre>
+    }
+
+    <h3>Observable: <code>getApi$()</code></h3>
+    <p>
+      <code>observableApiCall()</code> lists identities with
+      <code>IdentitiesApi</code>, <code>switchMap</code>, and <code>from()</code>.
+      Results are written to signals so the zoneless app updates the view.
+    </p>
+    <button
+      type="button"
+      (click)="observableApiCall()"
+      [disabled]="identitiesLoading() || !apiReady()"
+    >
+      List identities (Observable)
+    </button>
+    @if (identitiesLoading()) {
+      <p>Loading identities…</p>
+    }
+    @if (identitiesError()) {
+      <pre>{{ identitiesError() }}</pre>
+    }
+    @if (identities(); as identityList) {
+      <pre style="height: 250px; overflow-x: auto;">{{ identityList | json }}</pre>
+    }
   </section>
 
   <router-outlet />

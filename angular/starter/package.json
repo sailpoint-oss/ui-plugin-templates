@@ -18,6 +18,7 @@
     "@angular/router": "^22.1.1",
     "@sailpoint/ui-plugin-sdk": "^0.0.1",
     "rxjs": "~7.8.0",
+    "sailpoint-api-client": "2.1.26",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
