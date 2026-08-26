@@ -1,10 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import type { Identity } from 'sailpoint-api-client/identities/api';
-import { IdentitiesApi } from 'sailpoint-api-client/identities/api';
-import type { Tenant } from 'sailpoint-api-client/tenant/api';
-import { TenantApi } from 'sailpoint-api-client/tenant/api';
+import type { Identity } from '@sailpoint/api-client/identities/api';
+import { IdentitiesApi } from '@sailpoint/api-client/identities/api';
+import type { Tenant } from '@sailpoint/api-client/tenant/api';
+import { TenantApi } from '@sailpoint/api-client/tenant/api';
 import { from } from 'rxjs';
 import { finalize, map, switchMap, take } from 'rxjs/operators';
 

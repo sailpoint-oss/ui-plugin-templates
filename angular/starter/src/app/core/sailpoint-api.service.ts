@@ -1,5 +1,5 @@
 import { computed, inject, Injectable } from '@angular/core';
-import { Configuration } from 'sailpoint-api-client/configuration';
+import { Configuration } from '@sailpoint/api-client/configuration';
 import { defer, type Observable } from 'rxjs';
 
 import { SailpointPluginService } from './sailpoint-plugin.service';
@@ -7,7 +7,7 @@ import { SailpointPluginService } from './sailpoint-plugin.service';
 const API_UNAVAILABLE =
   'SailPoint API client is not available until the App Shell handshake completes. Open the plugin inside ISC with ?spPluginDev=<alias>.';
 
-/** Constructor for a partition API class from sailpoint-api-client. */
+/** Constructor for a partition API class from @sailpoint/api-client. */
 export type SailPointApiConstructor<T> = new (
   configuration: Configuration,
 ) => T;
@@ -21,7 +21,7 @@ type GlobalWithConfig = typeof globalThis & {
 };
 
 /**
- * Handshake-aware access to sailpoint-api-client. Owns one shared
+ * Handshake-aware access to @sailpoint/api-client. Owns one shared
  * {@link Configuration} (via {@link Configuration.autoconfigure}) and factories
  * for typed partition API classes.
  *
@@ -61,9 +61,9 @@ export class SailpointApiService {
    * this method only resolves the client itself.
    *
    * Import API classes from a partition sub-path (for example
-   * `sailpoint-api-client/tenant/api`) to keep bundles smaller than a root import.
+   * `@sailpoint/api-client/tenant/api`) to keep bundles smaller than a root import.
    *
-   * @param ApiClass - Constructor for a partition API from `sailpoint-api-client`.
+   * @param ApiClass - Constructor for a partition API from `@sailpoint/api-client`.
    * @returns A Promise that resolves to a configured partition client.
    * @throws When the handshake did not complete (plugin opened outside ISC).
    *
@@ -71,7 +71,7 @@ export class SailpointApiService {
    * ```typescript
    * import { inject } from '@angular/core';
    * import { SailpointApiService } from '@core';
-   * import { TenantApi } from 'sailpoint-api-client/tenant/api';
+   * import { TenantApi } from '@sailpoint/api-client/tenant/api';
    *
    * const api = inject(SailpointApiService);
    *
@@ -100,7 +100,7 @@ export class SailpointApiService {
    * calls with `from()` inside `switchMap` (or similar) when you need the HTTP
    * response as part of an Observable chain.
    *
-   * @param ApiClass - Constructor for a partition API from `sailpoint-api-client`.
+   * @param ApiClass - Constructor for a partition API from `@sailpoint/api-client`.
    * @returns An Observable that emits one configured partition client, then completes.
    * Errors (including a failed handshake) propagate on the Observable error channel.
    *
@@ -110,7 +110,7 @@ export class SailpointApiService {
    * import { EMPTY, from } from 'rxjs';
    * import { switchMap, catchError } from 'rxjs/operators';
    * import { SailpointApiService } from '@core';
-   * import { TenantApi } from 'sailpoint-api-client/tenant/api';
+   * import { TenantApi } from '@sailpoint/api-client/tenant/api';
    *
    * const api = inject(SailpointApiService);
    *

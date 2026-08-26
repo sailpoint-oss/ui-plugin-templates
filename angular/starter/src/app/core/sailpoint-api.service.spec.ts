@@ -1,14 +1,20 @@
 import { TestBed } from '@angular/core/testing';
-import { Configuration } from 'sailpoint-api-client/configuration';
-import { TenantApi } from 'sailpoint-api-client/tenant/api';
-import type { PluginContext, SailPointPluginSDK, UserCapabilities } from '@sailpoint/ui-plugin-sdk';
+import { Configuration } from '@sailpoint/api-client/configuration';
+import { TenantApi } from '@sailpoint/api-client/tenant/api';
+import type {
+  PluginContext,
+  SailPointPluginSDK,
+  UserCapabilities,
+} from '@sailpoint/ui-plugin-sdk';
 import { firstValueFrom } from 'rxjs';
 
 import { SailpointApiService } from './sailpoint-api.service';
 import { SailpointPluginService } from './sailpoint-plugin.service';
 
 const SINGLETON_KEY = Symbol.for('@sailpoint/ui-plugin-sdk#singleton');
-const CONFIG_SINGLETON_KEY = Symbol.for('@sailpoint/ui-plugin-sdk#api-configuration');
+const CONFIG_SINGLETON_KEY = Symbol.for(
+  '@sailpoint/ui-plugin-sdk#api-configuration',
+);
 
 const CAPABILITIES: UserCapabilities = {
   isOrgAdmin: false,
@@ -75,7 +81,9 @@ describe('SailpointApiService', () => {
 
   it('autoconfigures once and returns TenantApi after handshake', async () => {
     const plugin = seedPlugin(Promise.resolve(CONTEXT));
-    const autoconfigure = vi.spyOn(Configuration, 'autoconfigure').mockResolvedValue({} as Configuration);
+    const autoconfigure = vi
+      .spyOn(Configuration, 'autoconfigure')
+      .mockResolvedValue({} as Configuration);
 
     const api = TestBed.inject(SailpointApiService);
     await plugin.whenReady();
@@ -97,7 +105,9 @@ describe('SailpointApiService', () => {
 
   it('getApi$ emits TenantApi after handshake', async () => {
     const plugin = seedPlugin(Promise.resolve(CONTEXT));
-    vi.spyOn(Configuration, 'autoconfigure').mockResolvedValue({} as Configuration);
+    vi.spyOn(Configuration, 'autoconfigure').mockResolvedValue(
+      {} as Configuration,
+    );
 
     const api = TestBed.inject(SailpointApiService);
     await plugin.whenReady();
