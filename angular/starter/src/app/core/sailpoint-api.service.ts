@@ -5,7 +5,7 @@ import { defer, type Observable } from 'rxjs';
 import { SailpointPluginService } from './sailpoint-plugin.service';
 
 const API_UNAVAILABLE =
-  'SailPoint API client is not available until the App Shell handshake completes. Open the plugin inside ISC with ?spPluginDev=<alias>.';
+  'SailPoint API client is not available until the App Shell handshake completes. Open the plugin in SailPoint Identity Security with ?spPluginDev=<alias>.';
 
 /** Constructor for a partition API class from @sailpoint/api-client. */
 export type SailPointApiConstructor<T> = new (
@@ -65,7 +65,8 @@ export class SailpointApiService {
    *
    * @param ApiClass - Constructor for a partition API from `@sailpoint/api-client`.
    * @returns A Promise that resolves to a configured partition client.
-   * @throws When the handshake did not complete (plugin opened outside ISC).
+   * @throws When the handshake did not complete (plugin opened outside SailPoint
+   * Identity Security).
    *
    * @example
    * ```typescript

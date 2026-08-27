@@ -1,11 +1,11 @@
 # SailPoint UI Plugin Guide (Angular)
 
-> Angular-specific guide for developing this plugin against SailPoint Identity Security Cloud (ISC). It is intentionally self-contained so both humans and AI coding assistants have full context without external lookups.
+> Angular-specific guide for developing this plugin against SailPoint Identity Security. It is intentionally self-contained so both humans and AI coding assistants have full context without external lookups.
 
 ## Context for AI assistants
 
-- This project is a **SailPoint ISC UI plugin**: a standalone Angular app that ISC loads inside a **sandboxed iframe** at a designated UI **slot**.
-- The plugin is isolated from the ISC host. It communicates with the host only through the SailPoint UI Plugin SDK, which wraps a `postMessage` protocol (COIP). Do not assume direct DOM, cookie, or network access to the ISC page.
+- This project is a **SailPoint UI plugin**: a standalone Angular app that SailPoint Identity Security loads inside a **sandboxed iframe** at a designated UI **slot**.
+- The plugin is isolated from the host. It communicates with the host only through the SailPoint UI Plugin SDK, which wraps a `postMessage` protocol (COIP). Do not assume direct DOM, cookie, or network access to the host page.
 - Network calls to SailPoint APIs use a **scoped token** limited to the `apiScopes` declared in `sp-ui-plugin.json`. A call to an undeclared scope fails the same way locally as in production.
 - `sp-ui-plugin.json` is the source of truth for the plugin's identity and security posture. Treat it as the contract with the backend.
 - Build tooling is the Angular CLI. The SailPoint CLI orchestrates registration and deployment. The CLI does not replace `ng`.
@@ -58,7 +58,7 @@ The SailPoint CLI registers your plugin and links your local server for in-tenan
 
 1. Register the plugin with your tenant.
 2. Start the Angular dev server — `npm start` (`ng serve`).
-3. Link your local server to your identity. Open the returned developer URL (`?spPluginDev=<alias>`) in ISC. If you are authorized, the host loads your local code inside the live tenant with a local-dev badge. You get a real handshake, a real scoped token, and live data.
+3. Link your local server to your identity. Open the returned developer URL (`?spPluginDev=<alias>`). If you are authorized, the host loads your local code inside the live tenant with a local-dev badge. You get a real handshake, a real scoped token, and live data.
 
 Because local dev uses a real scoped token minted from your declared `apiScopes`, an endpoint you did not declare fails locally exactly as it would in production. Add scopes to `sp-ui-plugin.json` before you call an endpoint. If you already ran `create`, run `push-manifest` after you add scopes.
 
@@ -66,7 +66,7 @@ For plugin-document security headers during local dev, see [Local dev document h
 
 ## Local dev document headers
 
-The plugin iframe is governed by plugin-document `Content-Security-Policy` and `Permissions-Policy` headers. In production, UMS stamps these on CDN assets. During local development, your dev server must emit the same headers. If it does not, API calls (for example, fetches to your tenant API) can be blocked by CSP.
+The plugin iframe is governed by plugin-document `Content-Security-Policy` and `Permissions-Policy` headers. In production, a SailPoint service, UMS, stamps these on CDN assets. During local development, your dev server must emit the same headers. If it does not, API calls (for example, fetches to your tenant API) can be blocked by CSP.
 
 **Source of truth for the dev server:** `angular.json` → `projects.<your-plugin>.architect.serve.options.headers`. The dev server does **not** read security headers from `sp-ui-plugin.json`.
 
@@ -106,7 +106,7 @@ Deploy the compiled assets with the SailPoint CLI (see [SailPoint CLI](#sailpoin
 
 ### Relative asset paths
 
-ISC serves production plugin assets from a CDN URL. Built assets must use **relative** paths, not absolute paths like `/assets/main.js`. This starter sets `baseHref: "./"` and `deployUrl: "./"` in `angular.json` build options so production output is CDN-safe. Do not change these to root-absolute values before you upload.
+SailPoint Identity Security serves production plugin assets from a CDN URL. Built assets must use **relative** paths, not absolute paths like `/assets/main.js`. This starter sets `baseHref: "./"` and `deployUrl: "./"` in `angular.json` build options so production output is CDN-safe. Do not change these to root-absolute values before you upload.
 
 If script or stylesheet URLs in the built `index.html` start with `/`, the plugin can fail to load after upload. The browser console shows 404 errors for JS or CSS.
 
@@ -253,4 +253,4 @@ const unsubscribe = this.plugin.sdk.events.onViewportChange(({ width, height }) 
 
 ## Design tokens / theming
 
-_TBD._ Importing SailPoint design tokens so the plugin matches ISC styling. Because the iframe's CSS is isolated, tokens must be imported explicitly.
+_TBD._ Importing SailPoint design tokens so the plugin matches host styling. Because the iframe's CSS is isolated, tokens must be imported explicitly.

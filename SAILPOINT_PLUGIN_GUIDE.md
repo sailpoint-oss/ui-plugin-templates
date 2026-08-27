@@ -1,13 +1,13 @@
 # SailPoint UI Plugin Guide
 
-> Framework-agnostic guide for building a SailPoint Identity Security Cloud (ISC) UI plugin and wiring the SDK into your own project. It is intentionally self-contained so both humans and AI coding assistants have full context without external lookups.
+> Framework-agnostic guide for building a SailPoint Identity Security UI plugin and wiring the SDK into your own project. It is intentionally self-contained so both humans and AI coding assistants have full context without external lookups.
 >
 > Using the Angular starter? See the Angular-specific guide instead (`angular/starter/SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the `ui-plugin-templates` repository). You only need the one guide that matches how you started.
 
 ## Context for AI assistants
 
-- This project is a **SailPoint ISC UI plugin**: a standalone frontend app that ISC loads inside a **sandboxed iframe** at a designated UI **slot**.
-- The plugin is isolated from the ISC host. It communicates with the host only through the SailPoint UI Plugin SDK, which wraps a `postMessage` protocol (COIP). Do not assume direct DOM, cookie, or network access to the ISC page.
+- This project is a **SailPoint UI plugin**: a standalone frontend app that SailPoint Identity Security loads inside a **sandboxed iframe** at a designated UI **slot**.
+- The plugin is isolated from the host. It communicates with the host only through the SailPoint UI Plugin SDK, which wraps a `postMessage` protocol (COIP). Do not assume direct DOM, cookie, or network access to the host page.
 - Network calls to SailPoint APIs use a **scoped token** limited to the `apiScopes` declared in `sp-ui-plugin.json`. A call to an undeclared scope fails the same way locally as in production.
 - `sp-ui-plugin.json` is the source of truth for the plugin's identity and security posture. Treat it as the contract with the backend.
 - Build tooling is your framework's own. The SailPoint CLI orchestrates registration and deployment. The CLI does not replace your bundler.
@@ -61,9 +61,9 @@ Use this checklist when you add plugin support to a project that already exists.
 4. Expose `status` and `context` through your app's state mechanism (see [Plugin bootstrap contract](#plugin-bootstrap-contract)).
 5. Configure the dev server for HTTPS, the correct port, and document headers (see [Dev environment requirements](#dev-environment-requirements)). Configure the production build for relative asset paths (see [Building and deploying](#relative-asset-paths-required-for-upload)).
 6. Run `sail ui-plugins create`, then `sail ui-plugins link`. Restart the dev server after header values change.
-7. Open Identity Security Cloud with `?spPluginDev=<alias>` to load your local code in the tenant.
+7. Open SailPoint Identity Security with `?spPluginDev=<alias>` to load your local code in the tenant.
 
-Import SailPoint design tokens when you want ISC styling (see [Design tokens / theming](#design-tokens--theming)).
+Import SailPoint design tokens when you want host styling (see [Design tokens / theming](#design-tokens--theming)).
 
 ## Local development
 
@@ -71,7 +71,7 @@ The SailPoint CLI registers your plugin and links your local server for in-tenan
 
 1. Register the plugin with your tenant.
 2. Start your framework's dev server over HTTPS on `build.port`.
-3. Link your local server to your identity. Open the returned developer URL (`?spPluginDev=<alias>`) in ISC. If you are authorized, the host loads your local code inside the live tenant with a local-dev badge. You get a real handshake, a real scoped token, and live data.
+3. Link your local server to your identity. Open the returned developer URL (`?spPluginDev=<alias>`). If you are authorized, the host loads your local code inside the live tenant with a local-dev badge. You get a real handshake, a real scoped token, and live data.
 
 Because local dev uses a real scoped token from your declared `apiScopes`, an endpoint you did not declare fails locally the same way it fails in production. Add scopes to `sp-ui-plugin.json` before you need them. If you already ran `create`, run `push-manifest` after you add scopes.
 
@@ -82,9 +82,9 @@ For plugin-document security headers during local dev, see [Local dev document h
 | How you open the app | Handshake | API calls |
 |---|---|---|
 | Dev server URL directly (`https://localhost:<port>`) | `failed` (expected) | Do not work |
-| ISC with `?spPluginDev=<alias>` | `ready` | Work with declared scopes |
+| SailPoint Identity Security with `?spPluginDev=<alias>` | `ready` | Work with declared scopes |
 
-A failed handshake on the dev server alone is normal. Test API calls only inside ISC with the developer URL from link.
+A failed handshake on the dev server alone is normal. Test API calls only in SailPoint Identity Security with the developer URL from link.
 
 ## Dev environment requirements
 
@@ -94,12 +94,12 @@ Every bundler must satisfy the same concerns. The config file names differ.
 |---|---|---|
 | Output directory | `sp-ui-plugin.json` `build.outDir` | Must match your production build output |
 | Dev port | `sp-ui-plugin.json` `build.port` and dev server config | Values must match |
-| HTTPS | Dev server config | ISC loads plugins from `https://localhost:<port>` |
+| HTTPS | Dev server config | SailPoint Identity Security loads plugins from `https://localhost:<port>` |
 | Document headers | Dev server config | Copy from `devDocumentHeaders` after create/link |
 
 ### HTTPS for local development
 
-ISC expects your dev server at `https://localhost:<port>`. Most bundlers need explicit HTTPS setup: a plugin, a certificate, or a reverse proxy. Self-signed certificates are common locally. Browser trust warnings are expected.
+SailPoint Identity Security expects your dev server at `https://localhost:<port>`. Most bundlers need explicit HTTPS setup: a plugin, a certificate, or a reverse proxy. Self-signed certificates are common locally. Browser trust warnings are expected.
 
 Read your bundler's HTTPS documentation. Do not assume one flag works in every stack.
 
@@ -125,7 +125,7 @@ Install `@vitejs/plugin-basic-ssl` if you use this pattern: `npm install -D @vit
 
 ## Local dev document headers
 
-The plugin iframe is governed by plugin-document `Content-Security-Policy` and `Permissions-Policy` headers. In production, UMS stamps these on CDN assets. During local development, your dev server must emit the same headers for CSP parity.
+The plugin iframe is governed by plugin-document `Content-Security-Policy` and `Permissions-Policy` headers. In production, a SailPoint service, UMS, stamps these on CDN assets. During local development, your dev server must emit the same headers for CSP parity.
 
 **Source of truth for the dev server:** your framework's dev-server configuration (for example, Vite `server.headers` or Angular `angular.json` serve options). `sp-ui-plugin.json` does **not** control dev-server response headers.
 
@@ -144,7 +144,7 @@ On successful `sail ui-plugins create` or `sail ui-plugins link`, UMS returns `d
 
 Inspect this response to see the merged headers your production CDN assets will carry. UMS merges the platform baseline with any author extensions from your manifest. Copy these values into your dev-server config. Do not guess tenant-specific origins such as `https://<your-org>.api.cloud.sailpoint.com`.
 
-**Restart required:** If your dev server is already running when create or link returns new headers, restart it before you test in ISC.
+**Restart required:** If your dev server is already running when create or link returns new headers, restart it before you test in SailPoint Identity Security.
 
 **Symptom:** If the handshake succeeds but API calls fail with CSP or connect errors, the dev server is likely missing `devDocumentHeaders`. Copy them from the create/link output into your dev server's response headers. Then restart the dev server.
 
@@ -168,7 +168,7 @@ Build your project with your framework's own tooling. Make sure that the output 
 
 ### Relative asset paths (required for upload)
 
-ISC serves production plugin assets from a CDN URL. That URL is not the root of your dev server. The built HTML, JavaScript, CSS, fonts, and other static files must reference each other with **relative** paths (for example `./main.js`, not `/main.js`). Absolute paths break after upload. The browser requests them from the wrong location and the plugin fails to load.
+SailPoint Identity Security serves production plugin assets from a CDN URL. That URL is not the root of your dev server. The built HTML, JavaScript, CSS, fonts, and other static files must reference each other with **relative** paths (for example `./main.js`, not `/main.js`). Absolute paths break after upload. The browser requests them from the wrong location and the plugin fails to load.
 
 Configure your **production build** before the first `upload`. This is not a dev-server setting.
 
@@ -236,7 +236,7 @@ function createBootstrap(): PluginBootstrap {
     sdk = createSDK();
     ready = sdk.getContext();
   } catch {
-    ready = Promise.reject(new Error('Open the plugin in ISC with ?spPluginDev=<alias>.'));
+    ready = Promise.reject(new Error('Open the plugin in SailPoint Identity Security with ?spPluginDev=<alias>.'));
     return { sdk: null, status: 'failed', context: null, ready };
   }
 
@@ -275,7 +275,7 @@ export const sdk = pluginBootstrap.sdk;
 export const ready = pluginBootstrap.ready;
 ```
 
-Cache the bootstrap on `globalThis` with a stable key so hot module reload (HMR) does not create a second SDK after a file save. If `createSDK()` throws outside ISC, the app can boot with `status: 'failed'` instead of crashing.
+Cache the bootstrap on `globalThis` with a stable key so hot module reload (HMR) does not create a second SDK after a file save. If `createSDK()` throws outside SailPoint Identity Security, the app can boot with `status: 'failed'` instead of crashing.
 
 ### 3. Resolve the plugin context once
 
@@ -385,14 +385,14 @@ The invariants are the same everywhere: one SDK instance, one shared handshake p
 
 | Symptom | Likely cause | What to do |
 |---|---|---|
-| Handshake stuck or times out | Second SDK instance, or page opened outside ISC | Use one cached singleton. Open ISC with `?spPluginDev=<alias>`. |
-| Handshake `failed` on localhost alone | Expected outside the ISC iframe | Test API calls only through the developer URL in ISC |
+| Handshake stuck or times out | Second SDK instance, or page opened outside SailPoint Identity Security | Use one cached singleton. Open SailPoint Identity Security with `?spPluginDev=<alias>`. |
+| Handshake `failed` on localhost alone | Expected outside the host iframe | Test API calls only through the developer URL in SailPoint Identity Security |
 | API 403 or scope errors | Missing `apiScopes` in `sp-ui-plugin.json` | Add the scope. If you already ran `create`, run `push-manifest`. |
 | API blocked by browser (CSP / connect) | Dev server missing document headers | Copy `devDocumentHeaders` into dev server config. Then restart. |
 | Worked until save or HMR | New SDK instance after module reload | Cache bootstrap on `globalThis` with `Symbol.for(...)` |
-| Typed client CORS errors | Wrong headers or wrong origin | Make sure that the handshake is `ready` in ISC. Use partition imports from `sailpoint-api-client`. |
+| Typed client CORS errors | Wrong headers or wrong origin | Make sure that the handshake is `ready` in SailPoint Identity Security. Use partition imports from `sailpoint-api-client`. |
 | Blank iframe or 404 on JS/CSS after upload | Absolute asset paths in production build | Set bundler to emit relative paths (for example Vite `base: './'`). Rebuild and upload. |
 
 ## Design tokens / theming
 
-_TBD._ Importing SailPoint design tokens so the plugin matches ISC styling. Because the iframe's CSS is isolated, tokens must be imported explicitly.
+_TBD._ Importing SailPoint design tokens so the plugin matches host styling. Because the iframe's CSS is isolated, tokens must be imported explicitly.

@@ -1,5 +1,9 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { createSDK, type PluginContext, type SailPointPluginSDK } from '@sailpoint/ui-plugin-sdk';
+import {
+  createSDK,
+  type PluginContext,
+  type SailPointPluginSDK,
+} from '@sailpoint/ui-plugin-sdk';
 
 /**
  * Single owner of the SailPoint UI Plugin SDK for the whole plugin.
@@ -30,7 +34,7 @@ interface PluginSdkSingleton {
 }
 
 const SDK_UNAVAILABLE =
-  'SailPoint plugin SDK is not available. Open the plugin inside ISC via ?spPluginDev=<alias>.';
+  'SailPoint plugin SDK is not available. Open the plugin in SailPoint Identity Security via ?spPluginDev=<alias>.';
 
 /**
  * `Symbol.for` returns a process-stable key, so the cached singleton survives a
@@ -53,8 +57,9 @@ function getOrCreateSingleton(): PluginSdkSingleton {
   // The SDK resolves the App Shell origin itself from the iframe context (the
   // `?parentOrigin` the host adds, reconciled with the browser ancestor origin
   // where available), so no `targetOrigin` is passed. createSDK() throws
-  // synchronously when opened outside ISC with no resolvable origin — catch that
-  // so standalone dev-server UI iteration still boots with status 'failed'.
+  // synchronously when opened outside SailPoint Identity Security with no
+  // resolvable origin — catch that so standalone dev-server UI iteration still
+  // boots with status 'failed'.
   let sdk: SailPointPluginSDK | null = null;
   let context: Promise<PluginContext>;
 
@@ -97,7 +102,7 @@ export class SailpointPluginService {
     // getOrCreateSingleton() already started the handshake; just mirror its
     // single resolution into signals for reactive consumers.
     this.singleton.context
-      .then(context => {
+      .then((context) => {
         this._context.set(context);
         this._status.set('ready');
       })

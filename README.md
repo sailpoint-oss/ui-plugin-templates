@@ -2,9 +2,9 @@
 
 > 🚧 **Pre-release:** the `sail ui-plugins` command group is not yet generally available. This repository and its guides describe functionality that ships with an upcoming SailPoint CLI release. Remove this notice at GA.
 
-Official starter templates for building [SailPoint Identity Security Cloud (ISC)](https://www.sailpoint.com/) UI plugins.
+Official starter templates for building [SailPoint Identity Security](https://www.sailpoint.com/) UI plugins.
 
-UI plugins are JavaScript applications. ISC runs them inside sandboxed iframes. They extend the ISC interface at defined **slots** (for example, a full-page view). This repository holds the framework starter templates that the SailPoint CLI (`sail ui-plugins init`) uses to scaffold a new plugin workspace.
+UI plugins are JavaScript applications. SailPoint Identity Security runs them inside sandboxed iframes. They extend the SailPoint Identity Security interface at defined **slots** (for example, a full-page view). This repository holds the framework starter templates that the SailPoint CLI (`sail ui-plugins init`) uses to scaffold a new plugin workspace.
 
 ## Repository layout
 
