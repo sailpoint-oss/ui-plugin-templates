@@ -93,8 +93,8 @@
       </dl>
     } @else if (status() === 'failed') {
       <p>
-        The plugin could not complete the App Shell handshake. Open it inside Identity Security
-        Cloud with <code>?spPluginDev=&lt;alias&gt;</code>.
+        The plugin could not complete the App Shell handshake. Open it inside SailPoint Identity Security
+        with <code>?spPluginDev=&lt;alias&gt;</code>.
       </p>
     } @else {
       <p>Connecting to the App Shell…</p>
@@ -119,7 +119,7 @@
     <button
       type="button"
       (click)="promiseApiCall()"
-      [disabled]="tenantLoading() || !apiReady()"
+      [disabled]="tenantLoading() || tenant() || tenantError() || !apiReady()"
     >
       Call tenant API (Promise)
     </button>
@@ -135,14 +135,14 @@
 
     <h3>Observable: <code>getApi$()</code></h3>
     <p>
-      <code>observableApiCall()</code> lists identities with
-      <code>IdentitiesApi</code>, <code>switchMap</code>, and <code>from()</code>.
-      Results are written to signals so the zoneless app updates the view.
+      <code>identities$</code> lists identities with <code>IdentitiesApi</code>,
+      <code>switchMap</code>, and <code>from()</code>. A gate signal starts the
+      stream; the template binds the result with <code>AsyncPipe</code>.
     </p>
     <button
       type="button"
-      (click)="observableApiCall()"
-      [disabled]="identitiesLoading() || !apiReady()"
+      (click)="getIdentities.set(true)"
+      [disabled]="getIdentities() || !apiReady()"
     >
       List identities (Observable)
     </button>
@@ -152,8 +152,10 @@
     @if (identitiesError()) {
       <pre>{{ identitiesError() }}</pre>
     }
-    @if (identities(); as identityList) {
-      <pre style="height: 250px; overflow-x: auto;">{{ identityList | json }}</pre>
+    @if (getIdentities()) {
+      @if (identities$ | async; as identities) {
+        <pre style="height: 250px; overflow-x: auto;">{{ identities | json }}</pre>
+      }
     }
   </section>
 

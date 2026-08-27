@@ -196,34 +196,64 @@ try {
 
 ##### Observable style: `getApi$()`
 
-Use `getApi$()` when you prefer RxJS pipelines. It emits one configured client, then completes. SDK endpoint methods still return Promises — wrap them with `from()` inside `switchMap` to include the HTTP call in the stream:
+Use `getApi$()` when you prefer RxJS pipelines. It emits one configured client, then completes. SDK endpoint methods still return Promises — wrap them with `from()` inside `switchMap` to include the HTTP call in the stream.
+
+Define the pipeline once on the component. Use a gate signal so the template controls when `AsyncPipe` subscribes. Use `finalize()` for loading state and `catchError()` for errors:
 
 ```ts
-import { inject } from '@angular/core';
-import { from } from 'rxjs';
-import { switchMap, map, take, finalize } from 'rxjs/operators';
+import { Component, inject, signal } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { EMPTY, from } from 'rxjs';
+import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { SailpointApiService } from '@core';
 import { IdentitiesApi } from 'sailpoint-api-client/identities/api';
 
-const api = inject(SailpointApiService);
+@Component({
+  imports: [AsyncPipe],
+  template: `
+    <button (click)="getIdentities.set(true)" [disabled]="getIdentities()">Fetch</button>
+    @if (loading()) { <p>Loading…</p> }
+    @if (error()) { <pre>{{ error() }}</pre> }
+    @if (getIdentities()) {
+      @if (identities$ | async; as identities) {
+        <pre>{{ identities | json }}</pre>
+      }
+    }
+  `,
+})
+export class Example {
+  private readonly api = inject(SailpointApiService);
 
-api.getApi$(IdentitiesApi).pipe(
-  switchMap(identitiesApi => from(identitiesApi.listIdentitiesV1({ limit: 5 }))),
-  map(response => response.data),
-  take(1),
-  finalize(() => { /* clear loading signal */ }),
-).subscribe({
-  next: identities => { /* write to a signal or handle inline */ },
-  error: err => console.error(err),
-});
+  protected readonly getIdentities = signal(false);
+  protected readonly loading = signal(false);
+  protected readonly error = signal('');
+
+  protected readonly identities$ = this.api.getApi$(IdentitiesApi).pipe(
+    tap(() => {
+      this.loading.set(true);
+      this.error.set('');
+    }),
+    switchMap((identitiesApi) =>
+      from(identitiesApi.listIdentitiesV1({ limit: 5 })),
+    ),
+    map((response) => response.data),
+    catchError((err) => {
+      this.error.set(String(err));
+      return EMPTY;
+    }),
+    finalize(() => this.loading.set(false)),
+  );
+}
 ```
+
+Alternatively, subscribe in the component and write results to **signals** — useful in zoneless apps when you are not using `AsyncPipe`.
 
 The starter example in `src/app/app.ts` demonstrates both patterns side by side:
 
 - **`promiseApiCall()`** — `TenantApi` via `getApi()` with `async`/`await`.
-- **`observableApiCall()`** — `IdentitiesApi` via `getApi$()`, then `switchMap` and `from()` for the HTTP call.
+- **`identities$` + `getIdentities` gate** — `IdentitiesApi` via `getApi$()`, bound in the template with `AsyncPipe`.
 
-In a zoneless app, Observable callbacks do not trigger change detection by themselves. The starter writes results to **signals** inside `subscribe` (or you can bind with **`AsyncPipe`** in the template). Read `apiReady` or `plugin.status` before you enable UI that triggers API calls.
+Both demo buttons are one-shot (disabled after the first call). Read `apiReady` or `plugin.status` before you enable UI that triggers API calls.
 
 Add the API scopes you need to `sp-ui-plugin.json` before you call an endpoint. If you already ran `create`, run `push-manifest` after you add scopes.
 
