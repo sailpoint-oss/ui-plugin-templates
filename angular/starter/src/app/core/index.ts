@@ -1,3 +1,5 @@
+export { SailpointApiService } from './sailpoint-api.service';
+export type { SailPointApiConstructor } from './sailpoint-api.service';
 export { SailpointPluginService } from './sailpoint-plugin.service';
 
 // Re-export the SDK context types plugin authors commonly type against, so they
