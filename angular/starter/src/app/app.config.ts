@@ -4,7 +4,7 @@ import {
   provideAppInitializer,
   provideBrowserGlobalErrorListeners
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withDisabledInitialNavigation } from '@angular/router';
 
 import { routes } from './app.routes';
 import { SailpointPluginService } from '@core';
@@ -12,7 +12,10 @@ import { SailpointPluginService } from '@core';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    // Prod iframe URL is …/index.html?parentOrigin=…; initial navigation would try to
+    // match the "index.html" segment against our empty route table (NG04002). With no
+    // routes yet skip syncing the router to the browser URL on bootstrap.
+    provideRouter(routes, withDisabledInitialNavigation()),
     // Resolve the COIP handshake + plugin context once, before the app renders,
     // so components and SDK api.get/post calls never race the handshake.
     provideAppInitializer(async () => {
