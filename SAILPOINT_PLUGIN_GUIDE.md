@@ -399,7 +399,7 @@ The invariants are the same everywhere: one SDK instance, one shared handshake p
 
 **Component library (other frameworks):** _TBD._ The Prime family offers framework-specific equivalents ([PrimeReact](https://primereact.org/), [PrimeVue](https://primevue.org/)) that share the same theming model.
 
-**ISC design tokens:** _TBD._ ISC-compatible design tokens and component library theme configuration will be delivered by the `@sailpoint/sds` (SailPoint Design System) package. For Angular, `provideSds()` will be a thin wrapper around `providePrimeNG()` that applies the ISC theme preset automatically. Equivalent integration points for other frameworks are TBD alongside the framework starter decisions.
+**ISC design tokens:** _TBD._ ISC-compatible design tokens and component library theme configuration will be delivered by the SailPoint Design System package. For Angular, `provideSds()` will be a thin wrapper around `providePrimeNG()` that applies the ISC theme preset automatically. Equivalent integration points for other frameworks are TBD alongside the framework starter decisions.
 
 **Icons:** Font Awesome icons are the standard for SailPoint UI plugins across all frameworks. Bundling mechanism _TBD_.
 

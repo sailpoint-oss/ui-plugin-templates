@@ -285,7 +285,7 @@ const unsubscribe = this.plugin.sdk.events.onViewportChange(({ width, height }) 
 
 **Component library:** [PrimeNG](https://primeng.org/) is the chosen component library for SailPoint UI plugins. It is included in this starter's `package.json`.
 
-**ISC design tokens:** _TBD._ ISC-compatible design tokens and PrimeNG theme configuration will be delivered by the `@sailpoint/sds` (SailPoint Design System) package. `provideSds()` will be a thin wrapper around `providePrimeNG()` that applies the ISC theme preset automatically. A placeholder comment in `src/app/app.config.ts` marks where `provideSds()` will be added. Until that package ships, PrimeNG is installed but not explicitly configured — add `providePrimeNG()` at that location manually if you need component customization in the interim.
+**ISC design tokens:** _TBD._ ISC-compatible design tokens and PrimeNG theme configuration will be delivered by the SailPoint Design System package. `provideSds()` will be a thin wrapper around `providePrimeNG()` that applies the ISC theme preset automatically. A placeholder comment in `src/app/app.config.ts` marks where `provideSds()` will be added. Until that package ships, PrimeNG is installed but not explicitly configured — add `providePrimeNG()` at that location manually if you need component customization in the interim.
 
 **Icons:** Font Awesome icons are the standard for SailPoint UI plugins. Bundling mechanism _TBD_.
 
