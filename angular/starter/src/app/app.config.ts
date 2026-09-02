@@ -16,6 +16,22 @@ export const appConfig: ApplicationConfig = {
     // match the "index.html" segment against our empty route table (NG04002). With no
     // routes yet skip syncing the router to the browser URL on bootstrap.
     provideRouter(routes, withDisabledInitialNavigation()),
+    // TODO: When the SailPoint Design System package (@sailpoint/sds or equivalent)
+    // is available, replace the line below with provideSds(). provideSds() is a thin
+    // wrapper that calls providePrimeNG() internally with the ISC-compatible theme
+    // preset and design tokens. Until that package ships, PrimeNG is installed but
+    // not explicitly configured here — add providePrimeNG() manually only if you
+    // need component-level customization in the interim.
+    //
+    // Example (interim, before provideSds is available):
+    //   import { providePrimeNG } from 'primeng/config';
+    //   import Aura from '@primeng/themes/aura';
+    //   providePrimeNG({ theme: { preset: Aura } })
+    //
+    // Example (once provideSds is available):
+    //   import { provideSds } from '@sailpoint/sds';
+    //   provideSds()
+
     // Resolve the COIP handshake + plugin context once, before the app renders,
     // so components and SDK api.get/post calls never race the handshake.
     provideAppInitializer(async () => {
