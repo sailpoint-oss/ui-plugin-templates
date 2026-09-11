@@ -152,7 +152,7 @@ Use the `Content-Security-Policy` and `Permissions-Policy` strings from `devDocu
 
 ### Angular starter (CLI default)
 
-If you scaffolded with the default `sail ui-plugins init` flow (Angular template), the CLI updates `angular.json` automatically. See `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the Angular starter — you do not need to wire headers manually.
+If you scaffolded with the default `sail ui-plugins init` flow (Angular template), the CLI updates `angular.json` automatically. See the [Angular plugin guide](https://github.com/sailpoint-oss/ui-plugin-templates/blob/main/angular/starter/SAILPOINT_PLUGIN_GUIDE_ANGULAR.md) — you do not need to wire headers manually.
 
 ### Existing project (`init --path`)
 
@@ -179,7 +179,7 @@ Configure your **production build** before the first `upload`. This is not a dev
 | Rsbuild | `output.assetPrefix: './'` |
 | Angular | `baseHref: "./"` and `deployUrl: "./"` in `angular.json` build options |
 
-The Angular starter template sets `baseHref` and `deployUrl` already. If you use `init --path` on React, Vue, or another stack, set the equivalent in your bundler config. Then run a production build and inspect `index.html`. Script and stylesheet URLs must be relative.
+If you use a starter template, these values are already configured. If you used `init --path` on React, Vue, or another stack, set the equivalent in your bundler config. Then run a production build and inspect `index.html`. Script and stylesheet URLs must be relative.
 
 **Symptom:** The plugin iframe is blank, or the browser console shows 404 errors for JS or CSS at paths like `/assets/...` instead of paths next to `index.html`.
 
@@ -211,7 +211,7 @@ The SDK resolves the App Shell origin from the iframe context. It uses the `?par
 
 App Shell completes one handshake per iframe mount. A second SDK instance sends a fresh readiness request that the host ignores. That instance never finishes initialization.
 
-This reference module encodes the invariants the Angular starter uses:
+This reference module illustrates the key invariants every plugin should implement:
 
 ```ts
 // plugin-sdk.ts
@@ -373,7 +373,7 @@ const stopToken = sdk.events.onTokenUpdate((token) => {
 
 Put the reference singleton and bootstrap contract in your framework's idiomatic module:
 
-- **Angular** — a `providedIn: 'root'` service that creates the SDK, resolves `getContext()` in an app initializer, and exposes context as signals (the Angular starter ships this pattern). See its guide.
+- **Angular** — a `providedIn: 'root'` service that creates the SDK, resolves `getContext()` in an app initializer, and exposes context as signals. See the [Angular plugin guide](https://github.com/sailpoint-oss/ui-plugin-templates/blob/main/angular/starter/SAILPOINT_PLUGIN_GUIDE_ANGULAR.md).
 - **React** — a module singleton plus a context provider that resolves `getContext()` once and shares `status` and `context`.
 - **Vue** — a plugin or a Pinia store initialized once at app creation.
 - **Svelte** — a store populated once from `getContext()`.
@@ -390,7 +390,7 @@ The invariants are the same everywhere: one SDK instance, one shared handshake p
 | API 403 or scope errors | Missing `apiScopes` in `sp-ui-plugin.json` | Add the scope. If you already ran `create`, run `push-manifest`. |
 | API blocked by browser (CSP / connect) | Dev server missing document headers | Copy `devDocumentHeaders` into dev server config. Then restart. |
 | Worked until save or HMR | New SDK instance after module reload | Cache bootstrap on `globalThis` with `Symbol.for(...)` |
-| Typed client CORS errors | Wrong headers or wrong origin | Make sure that the handshake is `ready` in SailPoint Identity Security. Use partition imports from `sailpoint-api-client`. |
+| Typed client CORS errors | Wrong headers or wrong origin | Make sure the handshake is `ready` in SailPoint Identity Security. Use partition sub-path imports (for example `sailpoint-api-client/tenant/api`). |
 | Blank iframe or 404 on JS/CSS after upload | Absolute asset paths in production build | Set bundler to emit relative paths (for example Vite `base: './'`). Rebuild and upload. |
 
 ## Design tokens / theming
