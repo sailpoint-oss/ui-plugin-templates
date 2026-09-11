@@ -339,7 +339,7 @@ const response = await api.getTenantV1();
 
 Import from a partition sub-path (for example `sailpoint-api-client/tenant/api`) when you build for the browser. This keeps the bundle smaller than importing from the package root.
 
-The Angular starter shows a full component example in `src/app/app.ts`.
+> **Angular:** the Angular starter uses `@sailpoint/angular-sdk`, which replaces `sailpoint-api-client` with Angular-native injectable services. See [the Angular plugin guide](https://github.com/sailpoint-oss/ui-plugin-templates/blob/main/angular/starter/SAILPOINT_PLUGIN_GUIDE_ANGULAR.md).
 
 #### Simple calls with the plugin SDK
 
