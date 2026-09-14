@@ -98,6 +98,9 @@ export class SailpointPluginService {
   readonly tenant = computed(() => this._context()?.tenant ?? null);
   readonly user = computed(() => this._context()?.user ?? null);
 
+  /** True once the COIP handshake completes and API calls may be made. */
+  readonly apiReady = computed(() => this._status() === 'ready');
+
   constructor() {
     // getOrCreateSingleton() already started the handshake; just mirror its
     // single resolution into signals for reactive consumers.

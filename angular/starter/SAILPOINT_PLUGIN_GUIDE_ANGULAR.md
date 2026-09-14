@@ -159,103 +159,70 @@ import { PluginContext } from '@core';
 
 The app initializer waits for the App Shell handshake before the app renders. After that, you can call the API from an event handler or a service. Requests use the scopes in `sp-ui-plugin.json`. If a scope is not declared, the call fails in local dev and in production.
 
-#### Typed calls with `SailpointApiService`
+#### Typed calls with `@sailpoint/angular-sdk`
 
-Install the SailPoint TypeScript SDK package:
+`@sailpoint/angular-sdk` exposes a partition service for each API area (for example, `TenantService`, `IdentitiesService`, `AccountsService`). Inject the service you need and declare it in the component's `providers` array. No separate install or configuration step — `provideSailPoint()` in `app.config.ts` wires up the HTTP interceptor that reads `window.sailpointConfig()` on every request.
 
-```bash
-npm install sailpoint-api-client
-```
+SDK methods return `Observable<T>` directly.
 
-`SailpointApiService` in `src/app/core/` owns one shared `Configuration.autoconfigure()` after the handshake. Call `getApi()` or `getApi$()` with any partition API class so components do not call autoconfigure directly. The UI Plugin SDK registers `window.sailpointConfig()`; the API client reads it on each request.
-
-Import API classes from a partition sub-path (for example `sailpoint-api-client/tenant/api`). This keeps your bundle smaller than a root import.
-
-##### Promise style: `getApi()`
-
-Use `getApi()` when you prefer `async`/`await` or Promise-based control flow (event handlers, sequential chains, or `resource()` loaders):
-
-```ts
-import { inject } from '@angular/core';
-import { SailpointApiService } from '@core';
-import { TenantApi } from 'sailpoint-api-client/tenant/api';
-import { IdentitiesApi } from 'sailpoint-api-client/identities/api';
-
-const api = inject(SailpointApiService);
-
-try {
-  const tenantApi = await api.getApi(TenantApi);
-  const tenant = (await tenantApi.getTenantV1()).data;
-
-  const identitiesApi = await api.getApi(IdentitiesApi);
-  // await identitiesApi.someMethod(...);
-} catch (err) {
-  console.error(err);
-}
-```
-
-##### Observable style: `getApi$()`
-
-Use `getApi$()` when you prefer RxJS pipelines. It emits one configured client, then completes. SDK endpoint methods still return Promises — wrap them with `from()` inside `switchMap` to include the HTTP call in the stream.
-
-Define the pipeline once on the component. Use a gate signal so the template controls when `AsyncPipe` subscribes. Use `finalize()` for loading state and `catchError()` for errors:
+##### Observable style
 
 ```ts
 import { Component, inject, signal } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { EMPTY, from } from 'rxjs';
-import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
-import { SailpointApiService } from '@core';
-import { IdentitiesApi } from 'sailpoint-api-client/identities/api';
+import { EMPTY } from 'rxjs';
+import { catchError, finalize, tap } from 'rxjs/operators';
+import { IdentitiesService } from '@sailpoint/angular-sdk/identities';
 
 @Component({
   imports: [AsyncPipe],
+  providers: [IdentitiesService],
   template: `
     <button (click)="getIdentities.set(true)" [disabled]="getIdentities()">Fetch</button>
     @if (loading()) { <p>Loading…</p> }
     @if (error()) { <pre>{{ error() }}</pre> }
     @if (getIdentities()) {
-      @if (identities$ | async; as identities) {
-        <pre>{{ identities | json }}</pre>
+      @if (identities$ | async; as list) {
+        <pre>{{ list | json }}</pre>
       }
     }
   `,
 })
 export class Example {
-  private readonly api = inject(SailpointApiService);
+  private readonly svc = inject(IdentitiesService);
 
   protected readonly getIdentities = signal(false);
   protected readonly loading = signal(false);
   protected readonly error = signal('');
 
-  protected readonly identities$ = this.api.getApi$(IdentitiesApi).pipe(
-    tap(() => {
-      this.loading.set(true);
-      this.error.set('');
-    }),
-    switchMap((identitiesApi) =>
-      from(identitiesApi.listIdentitiesV1({ limit: 5 })),
-    ),
-    map((response) => response.data),
-    catchError((err) => {
-      this.error.set(String(err));
-      return EMPTY;
-    }),
+  protected readonly identities$ = this.svc.listIdentitiesV1({ limit: 5 }).pipe(
+    tap(() => { this.loading.set(true); this.error.set(''); }),
+    catchError((err) => { this.error.set(String(err)); return EMPTY; }),
     finalize(() => this.loading.set(false)),
   );
 }
 ```
 
-Alternatively, subscribe in the component and write results to **signals** — useful in zoneless apps when you are not using `AsyncPipe`.
+Alternatively, subscribe in the component and write results to signals — useful when you are not using `AsyncPipe`.
 
-The starter example in `src/app/app.ts` demonstrates both patterns side by side:
+##### Promise style
 
-- **`promiseApiCall()`** — `TenantApi` via `getApi()` with `async`/`await`.
-- **`identities$` + `getIdentities` gate** — `IdentitiesApi` via `getApi$()`, bound in the template with `AsyncPipe`.
+For event handlers or sequential chains, wrap any SDK method with `firstValueFrom()` from `rxjs`:
 
-Both demo buttons are one-shot (disabled after the first call). Read `apiReady` or `plugin.status` before you enable UI that triggers API calls.
+```ts
+import { firstValueFrom } from 'rxjs';
 
-Add the API scopes you need to `sp-ui-plugin.json` before you call an endpoint. If you already ran `create`, run `push-manifest` after you add scopes.
+const tenantData = await firstValueFrom(this.tenantSvc.getTenantV1());
+```
+
+The starter in `src/app/app.ts` shows both patterns side by side:
+
+- **`identities$` + `getIdentities` gate** — `IdentitiesService.listIdentitiesV1()`, bound in the template with `AsyncPipe`.
+- **`promiseApiCall()`** — `TenantService.getTenantV1()` via `firstValueFrom()`.
+
+Both demo buttons are one-shot (disabled after the first call). Check `plugin.apiReady` or `plugin.status` before enabling UI that triggers API calls.
+
+Add the API scopes you need to `sp-ui-plugin.json` before you call an endpoint. If you already ran `create`, run `push-manifest` after adding scopes.
 
 #### Simple calls with `get()` and `post()`
 

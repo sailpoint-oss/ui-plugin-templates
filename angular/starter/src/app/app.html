@@ -106,38 +106,15 @@
     <p>
       Inject <code>SailpointPluginService</code> and read its <code>context</code>,
       <code>tenant</code>, <code>user</code>, and <code>status</code> signals. Use
-      <code>SailpointApiService</code> for typed <code>api-client</code>
-      calls (<code>getApi</code> or <code>getApi$</code>), or <code>get()</code> and <code>post()</code> on the plugin service for
-      simple requests.
+      <code>IdentitiesService</code>, <code>TenantService</code> (and any other
+      partition service) from <code>@sailpoint/angular-sdk</code> for typed API calls,
+      or <code>get()</code> and <code>post()</code> on the plugin service for simple requests.
     </p>
 
-    <h3>Promise: <code>getApi()</code></h3>
+    <h3>Observable: <code>IdentitiesService</code></h3>
     <p>
-      <code>promiseApiCall()</code> loads tenant metadata with
-      <code>TenantApi</code> and <code>async</code>/<code>await</code>.
-    </p>
-    <button
-      type="button"
-      (click)="promiseApiCall()"
-      [disabled]="tenantLoading() || tenant() || tenantError() || !apiReady()"
-    >
-      Call tenant API (Promise)
-    </button>
-    @if (tenantLoading()) {
-      <p>Loading tenant…</p>
-    }
-    @if (tenantError()) {
-      <pre>{{ tenantError() }}</pre>
-    }
-    @if (tenant(); as tenantData) {
-      <pre style="height: 250px; overflow-x: auto;">{{ tenantData | json }}</pre>
-    }
-
-    <h3>Observable: <code>getApi$()</code></h3>
-    <p>
-      <code>identities$</code> lists identities with <code>IdentitiesApi</code>,
-      <code>switchMap</code>, and <code>from()</code>. A gate signal starts the
-      stream; the template binds the result with <code>AsyncPipe</code>.
+      <code>identities$</code> lists identities with <code>IdentitiesService.listIdentitiesV1()</code>.
+      A gate signal starts the stream; the template binds the result with <code>AsyncPipe</code>.
     </p>
     <button
       type="button"
@@ -156,6 +133,28 @@
       @if (identities$ | async; as identities) {
         <pre style="height: 250px; overflow-x: auto;">{{ identities | json }}</pre>
       }
+    }
+
+    <h3>Promise: <code>TenantService</code></h3>
+    <p>
+      <code>promiseApiCall()</code> loads tenant metadata with
+      <code>TenantService.getTenantV1()</code> and <code>firstValueFrom()</code>.
+    </p>
+    <button
+      type="button"
+      (click)="promiseApiCall()"
+      [disabled]="tenantLoading() || tenant() || tenantError() || !apiReady()"
+    >
+      Call tenant API (Promise)
+    </button>
+    @if (tenantLoading()) {
+      <p>Loading tenant…</p>
+    }
+    @if (tenantError()) {
+      <pre>{{ tenantError() }}</pre>
+    }
+    @if (tenant(); as tenantData) {
+      <pre style="height: 250px; overflow-x: auto;">{{ tenantData | json }}</pre>
     }
   </section>
 

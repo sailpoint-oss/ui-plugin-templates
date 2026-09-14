@@ -5,6 +5,7 @@ import {
   provideBrowserGlobalErrorListeners
 } from '@angular/core';
 import { provideRouter, withDisabledInitialNavigation } from '@angular/router';
+import { provideSailPoint } from '@sailpoint/angular-sdk';
 
 import { routes } from './app.routes';
 import { SailpointPluginService } from '@core';
@@ -17,6 +18,10 @@ export const appConfig: ApplicationConfig = {
     // our empty route table (NG04002). With no routes yet skip
     // syncing the router to the browser URL on bootstrap.
     provideRouter(routes, withDisabledInitialNavigation()),
+    // provideSailPoint() wires up HttpClient and an auth interceptor that reads
+    // window.sailpointConfig() on every request. No params here — the plugin
+    // host registers that function after the COIP handshake completes below.
+    provideSailPoint(),
     // TODO: When the SailPoint Design System package is available,
     // replace the line below with the thin wrapper from SailPoint
     // Design System that calls providePrimeNG() internally with the
@@ -32,7 +37,8 @@ export const appConfig: ApplicationConfig = {
     //
 
     // Resolve the COIP handshake + plugin context once, before the app renders,
-    // so components and SDK api.get/post calls never race the handshake.
+    // so window.sailpointConfig() is available for the first SDK request.
+    // so api.get/post calls never race the handshake.
     provideAppInitializer(async () => {
       try {
         await inject(SailpointPluginService).whenReady();
