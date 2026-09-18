@@ -5878,34 +5878,33 @@ interface SailPointDesignSystemPresetCssOptions {
 
 // SailPointDesignSystem global stylesheets. PrimeNG emits the preset’s root `css` once, up front.
 const spdsTypographyGlobalCss = ({ dt }: SailPointDesignSystemPresetCssOptions) =>
-	`h1 {
+	`:root {
+	font-family: Inter, sans-serif;
+	line-height: normal;
+}
+
+h1 {
 	font: ${dt('font.heading.xlarge.bold')};
-	line-height: 1.5rem;
 }
 
 h2 {
 	font: ${dt('font.heading.large.bold')};
-	line-height: 1.5rem;
 }
 
 h3 {
 	font: ${dt('font.heading.medium.bold')};
-	line-height: 1.5rem;
 }
 
 h4 {
 	font: ${dt('font.heading.small.bold')};
-	line-height: 1.5rem;
 }
 
 h5 {
 	font: ${dt('font.heading.xsmall.bold')};
-	line-height: 1.5rem;
 }
 
 h6 {
 	font: ${dt('font.heading.xxsmall.bold')};
-	line-height: 1.5rem;
 }
 
 .spds-h1 {
