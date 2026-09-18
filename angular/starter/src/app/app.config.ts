@@ -6,9 +6,12 @@ import {
 } from '@angular/core';
 import { provideRouter, withDisabledInitialNavigation } from '@angular/router';
 import { provideSailPoint } from '@sailpoint/angular-sdk';
+import { providePrimeNG } from 'primeng/config';
 
-import { routes } from './app.routes';
 import { SailpointPluginService } from '@core';
+// These will be imported from the SailPoint Design System package when available.
+import spdsPrimePreset, { SPDS_DARK_MODE_SELECTOR, SPDS_THEME_PREFIX } from '@core/spds-prime-theme';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,18 +26,16 @@ export const appConfig: ApplicationConfig = {
     // host registers that function after the COIP handshake completes below.
     provideSailPoint(),
     // TODO: When the SailPoint Design System package is available,
-    // replace the line below with the thin wrapper from SailPoint
-    // Design System that calls providePrimeNG() internally with the
-    // ISC-compatible theme preset and design tokens. Until that
-    // package ships, PrimeNG is installed but not explicitly
-    // configured here — add providePrimeNG() manually only if you
-    // need component-level customization in the interim.
-    //
-    // Example (interim, before SailPoint Design System is available):
-    //   import { providePrimeNG } from 'primeng/config';
-    //   import Aura from '@primeng/themes/aura';
-    //   providePrimeNG({ theme: { preset: Aura } })
-    //
+    // replace this with the thin wrapper from SailPoint Design System
+    // that calls providePrimeNG() internally with the ISC-compatible
+    // theme preset and design tokens. Interim wiring uses the
+    // generated preset in core/spds-prime-theme.ts.
+    providePrimeNG({
+      theme: {
+        preset: spdsPrimePreset,
+        options: { darkModeSelector: SPDS_DARK_MODE_SELECTOR, prefix: SPDS_THEME_PREFIX },
+      },
+    }),
 
     // Resolve the COIP handshake + plugin context once, before the app renders,
     // so window.sailpointConfig() is available for the first SDK request.

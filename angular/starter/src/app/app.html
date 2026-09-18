@@ -13,16 +13,6 @@
     color: #1a1a2e;
   }
 
-  h1 {
-    margin: 0 0 0.25rem;
-    font-size: 1.5rem;
-  }
-
-  h2 {
-    margin: 1.5rem 0 0.5rem;
-    font-size: 1rem;
-  }
-
   dl {
     display: grid;
     grid-template-columns: max-content 1fr;
@@ -44,23 +34,6 @@
     background: #f1f1f5;
     font-size: 0.9em;
   }
-
-  .status {
-    font-weight: 600;
-    text-transform: capitalize;
-  }
-
-  .status--ready {
-    color: #1b7f4b;
-  }
-
-  .status--pending {
-    color: #8a6d00;
-  }
-
-  .status--failed {
-    color: #b00020;
-  }
 </style>
 
 <main>
@@ -77,7 +50,8 @@
   <section aria-labelledby="connection-heading">
     <h2 id="connection-heading">App Shell connection</h2>
     <p>
-      Handshake status: <span class="status status--{{ status() }}">{{ status() }}</span>
+      Handshake status:
+      <p-tag [value]="status()" [severity]="handshakeSeverity[status()]" />
     </p>
 
     @if (context(); as ctx) {
@@ -116,13 +90,12 @@
       <code>identities$</code> lists identities with <code>IdentitiesService.listIdentitiesV1()</code>.
       A gate signal starts the stream; the template binds the result with <code>AsyncPipe</code>.
     </p>
-    <button
+    <p-button
       type="button"
-      (click)="getIdentities.set(true)"
+      label="List identities (Observable)"
+      (onClick)="getIdentities.set(true)"
       [disabled]="getIdentities() || !apiReady()"
-    >
-      List identities (Observable)
-    </button>
+    />
     @if (identitiesLoading()) {
       <p>Loading identities…</p>
     }
@@ -140,13 +113,12 @@
       <code>promiseApiCall()</code> loads tenant metadata with
       <code>TenantService.getTenantV1()</code> and <code>firstValueFrom()</code>.
     </p>
-    <button
+    <p-button
       type="button"
-      (click)="promiseApiCall()"
+      label="Call tenant API (Promise)"
+      (onClick)="promiseApiCall()"
       [disabled]="tenantLoading() || tenant() || tenantError() || !apiReady()"
-    >
-      Call tenant API (Promise)
-    </button>
+    />
     @if (tenantLoading()) {
       <p>Loading tenant…</p>
     }

@@ -4,12 +4,14 @@ import { RouterOutlet } from '@angular/router';
 import { SailpointPluginService } from '@core';
 import { IdentitiesService } from '@sailpoint/angular-sdk/identities';
 import { TenantService, type Tenant } from '@sailpoint/angular-sdk/tenant';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
 import { EMPTY, firstValueFrom } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [AsyncPipe, JsonPipe, RouterOutlet],
+  imports: [AsyncPipe, JsonPipe, RouterOutlet, ButtonModule, TagModule],
   providers: [IdentitiesService, TenantService],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -24,6 +26,11 @@ export class App {
   protected readonly context = this.plugin.context;
   protected readonly status = this.plugin.status;
   protected readonly apiReady = this.plugin.apiReady;
+  protected readonly handshakeSeverity = {
+    pending: 'warn',
+    ready: 'success',
+    failed: 'danger',
+  } as const;
 
   /** Observable example: IdentitiesService with AsyncPipe and a gate signal. */
   protected readonly identitiesLoading = signal(false);

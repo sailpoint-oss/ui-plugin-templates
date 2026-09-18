@@ -14,22 +14,22 @@
 
 ```jsonc
 {
-    "version": 1,
-    "manifest": {
-        "alias": "",                    // tenant-unique, path-safe key (lowercase,
-                                        // alphanumeric + dashes, 3-63 chars)
-        "name": { "en": "" },           // localized display name
-        "description": { "en": "" },    // localized description
-        "apiScopes": ["sp:scopes:all"], // SailPoint API scopes the plugin may use
-        "permissionPolicy": {},         // Permissions-Policy directives
-        "iframeAllow": {},              // iframe `allow` directives (object form)
-        "contentSecurityPolicies": {},  // CSP directives for the plugin's assets
-        "slots": [{ "slotId": "full-page" }]
-    },
-    "build": {
-        "outDir": "./dist/<your-plugin>/browser", // compiled assets uploaded on deploy
-        "port": 4200                              // local dev server port
-    }
+	"version": 1,
+	"manifest": {
+		"alias": "", // tenant-unique, path-safe key (lowercase,
+		// alphanumeric + dashes, 3-63 chars)
+		"name": { "en": "" }, // localized display name
+		"description": { "en": "" }, // localized description
+		"apiScopes": ["sp:scopes:all"], // SailPoint API scopes the plugin may use
+		"permissionPolicy": {}, // Permissions-Policy directives
+		"iframeAllow": {}, // iframe `allow` directives (object form)
+		"contentSecurityPolicies": {}, // CSP directives for the plugin's assets
+		"slots": [{ "slotId": "full-page" }],
+	},
+	"build": {
+		"outDir": "./dist/<your-plugin>/browser", // compiled assets uploaded on deploy
+		"port": 4200, // local dev server port
+	},
 }
 ```
 
@@ -41,10 +41,10 @@
 
 `sail ui-plugins init` generates `sp-ui-plugin.json` in this workspace. Review the file and edit it as your plugin needs.
 
-| When you edit | What to do |
-|---|---|
-| After `init`, before `create` | Edit `sp-ui-plugin.json`. Then run `sail ui-plugins create`. |
-| After `create` | Edit `sp-ui-plugin.json`. Then run `sail ui-plugins push-manifest` (alias `update`) to send the updated `manifest` section to the tenant. |
+| When you edit                 | What to do                                                                                                                                |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| After `init`, before `create` | Edit `sp-ui-plugin.json`. Then run `sail ui-plugins create`.                                                                              |
+| After `create`                | Edit `sp-ui-plugin.json`. Then run `sail ui-plugins push-manifest` (alias `update`) to send the updated `manifest` section to the tenant. |
 
 The `build` section is local only. If you change manifest security fields after `create`, run `push-manifest`. Then run `link` again so the CLI refreshes `angular.json` with updated `devDocumentHeaders`.
 
@@ -130,22 +130,22 @@ import { Component, inject } from '@angular/core';
 import { SailpointPluginService } from '@core';
 
 @Component({
-  selector: 'app-example',
-  template: `
-    @if (context(); as ctx) {
-      <p>{{ ctx.user.displayName }} — {{ ctx.tenant.org }}</p>
-    } @else {
-      <p>Connecting to the App Shell…</p>
-    }
-  `,
+	selector: 'app-example',
+	template: `
+		@if (context(); as ctx) {
+			<p>{{ ctx.user.displayName }} — {{ ctx.tenant.org }}</p>
+		} @else {
+			<p>Connecting to the App Shell…</p>
+		}
+	`,
 })
 export class Example {
-  private readonly plugin = inject(SailpointPluginService);
+	private readonly plugin = inject(SailpointPluginService);
 
-  protected readonly context = this.plugin.context; // Signal<PluginContext | null>
-  protected readonly status = this.plugin.status; // 'pending' | 'ready' | 'failed'
-  protected readonly tenant = this.plugin.tenant; // Signal<TenantContext | null>
-  protected readonly user = this.plugin.user; // Signal<UserContext | null>
+	protected readonly context = this.plugin.context; // Signal<PluginContext | null>
+	protected readonly status = this.plugin.status; // 'pending' | 'ready' | 'failed'
+	protected readonly tenant = this.plugin.tenant; // Signal<TenantContext | null>
+	protected readonly user = this.plugin.user; // Signal<UserContext | null>
 }
 ```
 
@@ -175,31 +175,41 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 import { IdentitiesService } from '@sailpoint/angular-sdk/identities';
 
 @Component({
-  imports: [AsyncPipe],
-  providers: [IdentitiesService],
-  template: `
-    <button (click)="getIdentities.set(true)" [disabled]="getIdentities()">Fetch</button>
-    @if (loading()) { <p>Loading…</p> }
-    @if (error()) { <pre>{{ error() }}</pre> }
-    @if (getIdentities()) {
-      @if (identities$ | async; as list) {
-        <pre>{{ list | json }}</pre>
-      }
-    }
-  `,
+	imports: [AsyncPipe],
+	providers: [IdentitiesService],
+	template: `
+		<button (click)="getIdentities.set(true)" [disabled]="getIdentities()">Fetch</button>
+		@if (loading()) {
+			<p>Loading…</p>
+		}
+		@if (error()) {
+			<pre>{{ error() }}</pre>
+		}
+		@if (getIdentities()) {
+			@if (identities$ | async; as list) {
+				<pre>{{ list | json }}</pre>
+			}
+		}
+	`,
 })
 export class Example {
-  private readonly svc = inject(IdentitiesService);
+	private readonly svc = inject(IdentitiesService);
 
-  protected readonly getIdentities = signal(false);
-  protected readonly loading = signal(false);
-  protected readonly error = signal('');
+	protected readonly getIdentities = signal(false);
+	protected readonly loading = signal(false);
+	protected readonly error = signal('');
 
-  protected readonly identities$ = this.svc.listIdentitiesV1({ limit: 5 }).pipe(
-    tap(() => { this.loading.set(true); this.error.set(''); }),
-    catchError((err) => { this.error.set(String(err)); return EMPTY; }),
-    finalize(() => this.loading.set(false)),
-  );
+	protected readonly identities$ = this.svc.listIdentitiesV1({ limit: 5 }).pipe(
+		tap(() => {
+			this.loading.set(true);
+			this.error.set('');
+		}),
+		catchError((err) => {
+			this.error.set(String(err));
+			return EMPTY;
+		}),
+		finalize(() => this.loading.set(false)),
+	);
 }
 ```
 
@@ -241,7 +251,7 @@ For capabilities not wrapped by the service, `plugin.sdk` exposes the underlying
 
 ```ts
 const unsubscribe = this.plugin.sdk.events.onViewportChange(({ width, height }) => {
-  // react to host viewport changes
+	// react to host viewport changes
 });
 // call unsubscribe() when done
 ```
@@ -250,10 +260,16 @@ const unsubscribe = this.plugin.sdk.events.onViewportChange(({ width, height }) 
 
 ## Design tokens / theming
 
-**Component library:** [PrimeNG](https://primeng.org/) is the chosen component library for SailPoint UI plugins. It is included in this starter's `package.json`.
+**Component library:** [PrimeNG](https://primeng.org/) is the chosen component library for SailPoint UI plugins. It is included in this starter's `package.json`. It is configured in `src/app/app.config.ts` to use the SailPoint Design System theme preset.
 
-**ISC design tokens:** _TBD._ ISC-compatible design tokens and PrimeNG theme configuration will be delivered by the SailPoint Design System package. `provideSds()` will be a thin wrapper around `providePrimeNG()` that applies the ISC theme preset automatically. A placeholder comment in `src/app/app.config.ts` marks where `provideSds()` will be added. Until that package ships, PrimeNG is installed but not explicitly configured — add `providePrimeNG()` at that location manually if you need component customization in the interim.
+**ISC design tokens:** ISC-compatible design tokens and PrimeNG theme configuration will be delivered by the SailPoint Design System package. `provideSpds()` will be a thin wrapper around `providePrimeNG()` that applies the ISC theme preset automatically.
+
+For early development, this starter contains the preset in `src/app/core/spds-prime-theme.ts` and `providePrimeNG()` is already configured in `src/app/app.config.ts`. The PrimeNG preset injects primitive and semantic level design tokens as CSS variables when the application is loaded. Component level design tokens are injected once an instance of that component is used.
+
+Refer to the PrimeNG documentation for more information on design tokens and theming.
+
+**Typography:** The preset injects global heading styles with the application. Native `h1`–`h6` use the bold heading tokens (xlarge through xxsmall). Matching utility classes apply the same sizes on any element: `.spds-h1`–`.spds-h6` (bold) and `.spds-h1--semibold`–`.spds-h6--semibold`.
 
 **Icons:** Font Awesome icons are the standard for SailPoint UI plugins. Bundling mechanism _TBD_.
 
-**CSS isolation:** The plugin iframe has its own CSS scope. Any styles, including PrimeNG theme styles, must be imported in `src/styles.scss`. They are not inherited from the host page.
+**CSS isolation:** The plugin iframe has its own CSS scope. Any global styles must be imported in `src/styles.scss`. PrimeNG theme styles configured for this application are injected into the `head` tag of the iframe. They are not inherited from the host page.
