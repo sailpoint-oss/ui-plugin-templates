@@ -16,7 +16,14 @@ describe('App', () => {
         // reads the `context` and `status` signals.
         {
           provide: SailpointPluginService,
-          useValue: { context: signal(null), status: signal('pending') },
+          useValue: {
+            context: signal({
+              tenant: { org: 'acme' },
+              user: { displayName: 'Test User', email: 'test@acme.com' },
+              page: { route: 'https://acme.identitysoon.com/ui/plugin/starter' },
+            }),
+            status: signal('ready'),
+          },
         },
       ],
     }).compileComponents();
@@ -27,10 +34,37 @@ describe('App', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders the plugin title', () => {
+  it('renders the plugin title in content header', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, starter');
+    expect(compiled.querySelector('.shell-content__header h1')?.textContent).toContain('UI Plugin Starter');
+  });
+
+  it('renders the handshake status badge', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.shell-content__meta p-tag')).toBeTruthy();
+  });
+
+  it('renders tenant and user context', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const context = compiled.querySelector('.shell-content__context');
+    expect(context?.textContent).toContain('acme');
+    expect(context?.textContent).toContain('Test User');
+  });
+
+  it('renders sidebar navigation links', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const links = compiled.querySelectorAll('.shell-sidenav__link');
+    expect(links.length).toBe(3);
+    expect(links[0].textContent).toContain('Overview');
+    expect(links[1].textContent).toContain('Workflows');
+    expect(links[2].textContent).toContain('API Examples');
   });
 });

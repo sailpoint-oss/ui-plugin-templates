@@ -1,0 +1,69 @@
+<section>
+  <h2 class="spds-h4">API Examples</h2>
+  <p>
+    The SailPoint Angular SDK provides typed services for calling ISC APIs. This
+    page demonstrates two patterns: <strong>Observable</strong> (for reactive
+    pipelines and template binding) and <strong>Promise</strong> (for event
+    handlers and sequential chains).
+  </p>
+
+  <div class="example-section">
+    <h3 class="spds-h5">Observable Pattern</h3>
+    <p>
+      <code>IdentitiesService.listIdentitiesV1()</code> returns an Observable.
+      Use it with <code>AsyncPipe</code> for automatic subscription management.
+      A gate signal controls when the Observable is subscribed.
+    </p>
+    <p class="hint">
+      Prefer Observables when: binding results directly to templates, chaining
+      multiple async operations reactively, or when you need cancellation on
+      component destroy.
+    </p>
+    <p-button
+      label="List Identities (Observable)"
+      (onClick)="loadIdentities()"
+      [loading]="identitiesLoading()"
+      [disabled]="getIdentities() || !apiReady()"
+    />
+    @if (identitiesLoading()) {
+      <p>Loading identities…</p>
+    }
+    @if (identitiesError()) {
+      <pre class="error">{{ identitiesError() }}</pre>
+    }
+    @if (getIdentities()) {
+      @if (identities$ | async; as identities) {
+        <pre class="result">{{ identities | json }}</pre>
+      }
+    }
+  </div>
+
+  <div class="example-section">
+    <h3 class="spds-h5">Promise Pattern</h3>
+    <p>
+      <code>TenantService.getTenantV1()</code> wrapped with
+      <code>firstValueFrom()</code> converts the Observable to a Promise.
+      Useful for event handlers and <code>async/await</code> chains.
+    </p>
+    <p class="hint">
+      Prefer Promises when: responding to user actions in event handlers,
+      writing sequential async logic, or integrating with Promise-based
+      libraries.
+    </p>
+    <p-button
+      label="Get Tenant (Promise)"
+      (onClick)="promiseApiCall()"
+      [loading]="tenantLoading()"
+      [disabled]="tenantLoading() || tenant() || tenantError() || !apiReady()"
+    />
+    @if (tenantLoading()) {
+      <p>Loading tenant…</p>
+    }
+    @if (tenantError()) {
+      <pre class="error">{{ tenantError() }}</pre>
+    }
+    @if (tenant(); as tenantData) {
+      <pre class="result">{{ tenantData | json }}</pre>
+    }
+  </div>
+</section>

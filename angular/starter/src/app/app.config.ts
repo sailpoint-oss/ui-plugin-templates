@@ -4,7 +4,7 @@ import {
   provideAppInitializer,
   provideBrowserGlobalErrorListeners
 } from '@angular/core';
-import { provideRouter, withDisabledInitialNavigation } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 import { provideSailPoint } from '@sailpoint/angular-sdk';
 import { providePrimeNG } from 'primeng/config';
 
@@ -16,11 +16,11 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    // Prod iframe URL is …/index.html?parentOrigin=…; initial
-    // navigation would try to match the "index.html" segment against
-    // our empty route table (NG04002). With no routes yet skip
-    // syncing the router to the browser URL on bootstrap.
-    provideRouter(routes, withDisabledInitialNavigation()),
+    // Hash-based routing (#/, #/workflows, #/api-examples) works reliably in an
+    // iframe without server-side rewrite rules. Multiple routes eliminate the
+    // NG04002 issue that required withDisabledInitialNavigation() when the route
+    // table was empty.
+    provideRouter(routes, withHashLocation()),
     // provideSailPoint() wires up HttpClient and an auth interceptor that reads
     // window.sailpointConfig() on every request. No params here — the plugin
     // host registers that function after the COIP handshake completes below.

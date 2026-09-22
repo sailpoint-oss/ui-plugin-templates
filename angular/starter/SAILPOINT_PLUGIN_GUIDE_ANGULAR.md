@@ -258,6 +258,114 @@ const unsubscribe = this.plugin.sdk.events.onViewportChange(({ width, height }) 
 
 `plugin.whenReady()` exists only so the app initializer can gate bootstrap on the handshake. Components read the `context` / `status` signals instead of calling it.
 
+## Routing
+
+UI plugins support Angular routing with the **hash location strategy** (`#/`, `#/workflows`, etc.). Hash-based URLs work reliably in an iframe without server-side rewrite rules.
+
+### Configuration
+
+The starter is configured with `withHashLocation()` in `app.config.ts`:
+
+```ts
+import { provideRouter, withHashLocation } from '@angular/router';
+import { routes } from './app.routes';
+
+provideRouter(routes, withHashLocation());
+```
+
+### Route definitions
+
+Define routes in `app.routes.ts`. Use `loadComponent` for lazy loading:
+
+```ts
+export const routes: Routes = [
+	{ path: '', loadComponent: () => import('./features/overview/overview.component').then(m => m.OverviewComponent) },
+	{ path: 'workflows', loadComponent: () => import('./features/workflows/workflows.component').then(m => m.WorkflowsComponent) },
+	{ path: 'api-examples', loadComponent: () => import('./features/api-examples/api-examples.component').then(m => m.ApiExamplesComponent) },
+];
+```
+
+### Sidebar navigation (ISC pattern)
+
+ISC apps use a left sidebar for section navigation. The starter demonstrates this layout with a vertical nav linked to routes:
+
+```html
+<div class="shell-body">
+	<nav class="shell-sidenav">
+		<ul class="shell-sidenav__list">
+			<li>
+				<a routerLink="/" routerLinkActive="shell-sidenav__link--active" [routerLinkActiveOptions]="{ exact: true }" class="shell-sidenav__link">
+					Overview
+				</a>
+			</li>
+			<li>
+				<a routerLink="/workflows" routerLinkActive="shell-sidenav__link--active" class="shell-sidenav__link">
+					Workflows
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<main class="shell-content">
+		<div class="shell-content__card">
+			<router-outlet />
+		</div>
+	</main>
+</div>
+```
+
+Key layout elements:
+
+- **Sidebar** — white background flowing from header, with rounded bottom-right corner
+- **Active state** — blue background + left border accent
+- **Content card** — white panel with rounded corners and shadow on gray page background
+
+Import `RouterLink` and `RouterLinkActive` in the component. The `routerLinkActive` directive applies the active class when the route matches.
+
+## Launchers API
+
+UI plugins can start SailPoint Workflows through the Launchers API. The starter's Workflows tab demonstrates this pattern.
+
+### User-assigned launchers
+
+To list launchers assigned to the signed-in user (the same list Launchpad shows), use the `my/assigned` endpoint:
+
+```ts
+const response = await this.plugin.get<{ items?: Launcher[] }>(
+	'/beta/launchers/my/assigned?limit=100&sorters=name'
+);
+const launchers = response.items ?? [];
+```
+
+The Angular SDK's `LaunchersService.getLaunchersV1()` returns **all tenant launchers** (admin scope). If you need only the user's assigned launchers, use `plugin.get()` as shown above.
+
+### Starting a launcher
+
+```ts
+const response = await this.plugin.post<{ interactiveProcessId?: string }>(
+	`/beta/launchers/${encodeURIComponent(launcherId)}/launch`,
+	{}
+);
+const processId = response.interactiveProcessId;
+```
+
+The workflow runs server-side. The returned Interactive Process ID is the handle the user needs to complete any interactive steps in the Launchpad.
+
+### Linking to Launchpad
+
+The plugin runs in an iframe and cannot render workflow interactive forms itself. After starting a launcher, link the user to the Launchpad:
+
+```ts
+function buildInteractiveProcessUrl(pageRoute: string, processId: string): string {
+	const origin = new URL(pageRoute).origin;
+	return `${origin}/ui/d/launchpad/interactive-processes/${encodeURIComponent(processId)}`;
+}
+
+// Usage:
+const url = buildInteractiveProcessUrl(plugin.context()?.page.route, processId);
+```
+
+The `page.route` from the plugin context provides the tenant origin.
+
 ## Design tokens / theming
 
 **Component library:** [PrimeNG](https://primeng.org/) is the chosen component library for SailPoint UI plugins. It is included in this starter's `package.json`. It is configured in `src/app/app.config.ts` to use the SailPoint Design System theme preset.
