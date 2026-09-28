@@ -381,3 +381,19 @@ Refer to the PrimeNG documentation for more information on design tokens and the
 **Icons:** Font Awesome icons are the standard for SailPoint UI plugins. Bundling mechanism _TBD_.
 
 **CSS isolation:** The plugin iframe has its own CSS scope. Any global styles must be imported in `src/styles.scss`. PrimeNG theme styles configured for this application are injected into the `head` tag of the iframe. They are not inherited from the host page.
+
+## Translations (i18n)
+
+**Stack:** Translations use [ngx-translate](https://ngx-translate.org/) (`@ngx-translate/core` + `@ngx-translate/http-loader`). Language catalogs are plain JSON files under `public/i18n/`, loaded at runtime over HTTP and rendered through the `translate` pipe. Setup lives in `src/app/app.config.ts` via `provideTranslateService({ fallbackLang: 'en', loader: provideTranslateHttpLoader({ prefix: 'i18n/', suffix: '.json', useHttpBackend: true }) })`, and an app initializer calls `translate.use(navigator.language)` so the plugin renders in the viewer's browser language. `useHttpBackend` makes catalog requests skip the SailPoint auth interceptor, since the catalogs are same-origin static assets rather than API calls.
+
+**Adding or updating a label:**
+
+1. Add or edit the key in `public/i18n/en.json`. Nested objects are addressed with dots, e.g. `nav.overview`.
+2. Reference it in a template: `{{ 'nav.overview' | translate }}`. For strings that contain inline markup (`<code>`, `<strong>`), bind with `[innerHTML]="'some.key' | translate"` instead.
+3. Import `TranslatePipe` from `@ngx-translate/core` in the component's `imports` array.
+
+**Adding a language:** Drop a new catalog into `public/i18n/` named for the locale the browser reports — the starter requests the catalog matching `navigator.language` verbatim. Missing keys, and unmatched locales, fall back to `en`. No code change is needed.
+
+**More documentation:** ngx-translate is well documented — prefer its [official docs](https://ngx-translate.org/) for the `translate` pipe, the `TranslateService` API, parameterized messages, and advanced loaders.
+
+**ISC parity:** ISC's fallback language is English (`en`), and ISC supports 22 languages. To mirror ISC exactly, provide a catalog for each and keep `en` as the fallback: `en` (English, fallback), `cs` (Czech), `da` (Danish), `de` (German), `es` (Spanish), `fi` (Finnish), `fr` (French), `hu` (Hungarian), `it` (Italian), `ja` (Japanese), `ko` (Korean), `lt` (Lithuanian), `nl` (Dutch), `no` (Norwegian), `pl` (Polish), `pt` (Portuguese), `ru` (Russian), `sv` (Swedish), `th` (Thai), `tr` (Turkish), `zh-CN` (Chinese, Simplified), `zh-TW` (Chinese, Traditional).

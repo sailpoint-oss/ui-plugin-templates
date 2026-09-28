@@ -2,14 +2,14 @@
   display: block;
 }
 
-// Brand colors. Kept as literals: a deliberately bespoke accent, and the SPDS
-// token set exposes no magenta/teal. Sampled from SailPoint's own marketing
-// gradient (black -> deep navy -> violet -> magenta) plus the brand blue used
-// for the constellation nodes and links.
+// Brand colors kept as literals. The dark gradient (black -> deep navy ->
+// violet -> magenta) is sampled from SailPoint's marketing artwork, and the
+// sky-blue node/link accent and the teal node have no close SPDS primitive, so
+// they stay bespoke. The magenta node instead uses --spds-pink-500 directly
+// (see .c-node--magenta), which is an exact match.
 $hero-ink: #04060f;
 $hero-navy: #071233;
 $hero-blue-bright: #3d9bff;
-$hero-magenta: #cc27b0;
 $hero-teal: #00b3a4;
 
 .hero {
@@ -148,11 +148,13 @@ $hero-teal: #00b3a4;
   }
 }
 
-.c-node--magenta {
-  fill: $hero-magenta;
+// Scoped with the parent class so these win over `.c-nodes circle`, which
+// otherwise outranks a lone variant class and would keep the accents blue.
+.c-nodes circle.c-node--magenta {
+  fill: var(--spds-pink-500, #cc27b0);
 }
 
-.c-node--teal {
+.c-nodes circle.c-node--teal {
   fill: $hero-teal;
 }
 
