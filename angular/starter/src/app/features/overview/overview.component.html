@@ -1,31 +1,17 @@
 <app-hero />
 
 <section>
-  <h2 class="spds-h4">Build native experiences inside Identity Security Cloud</h2>
-  <p>
-    Your plugin renders as a micro-frontend right inside Identity Security Cloud.
-    It rides the tenant's session and security model, so there is no separate
-    login, no external hosting, and nothing extra to secure.
-  </p>
+  <h2 class="spds-h4">{{ 'overview.heading' | translate }}</h2>
+  <p>{{ 'overview.intro' | translate }}</p>
 
-  <h3 class="spds-h5">What can you build?</h3>
+  <h3 class="spds-h5">{{ 'overview.whatHeading' | translate }}</h3>
   <ul>
-    <li>Dashboards that bring together data from any Identity Security Cloud API</li>
-    <li>One-click workflow launchers that kick off your business processes</li>
-    <li>Admin tools tuned to your organization's governance needs</li>
+    <li>{{ 'overview.whatItem1' | translate }}</li>
+    <li>{{ 'overview.whatItem2' | translate }}</li>
+    <li>{{ 'overview.whatItem3' | translate }}</li>
   </ul>
-  <p>
-    The pages in this template show the patterns you will use every day: reading
-    plugin context, calling Identity Security Cloud APIs with typed SDK services,
-    and launching workflows through the Launchers API.
-  </p>
+  <p>{{ 'overview.patterns' | translate }}</p>
 
-  <h3 class="spds-h5">Getting started</h3>
-  <p>
-    This template is yours to reshape. The SDK wiring in <code>core/</code>
-    handles the App Shell handshake, so components simply read signals and call
-    services. Open the <strong>Workflows</strong> tab to see how to list and
-    start launchers, and the <strong>API Examples</strong> tab for the Observable
-    and Promise patterns when calling Identity Security Cloud APIs.
-  </p>
+  <h3 class="spds-h5">{{ 'overview.gettingStartedHeading' | translate }}</h3>
+  <p [innerHTML]="'overview.gettingStartedBody' | translate"></p>
 </section>

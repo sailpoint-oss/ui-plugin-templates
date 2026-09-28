@@ -6,7 +6,10 @@ import {
 } from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { provideSailPoint } from '@sailpoint/angular-sdk';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { providePrimeNG } from 'primeng/config';
+import { firstValueFrom } from 'rxjs';
 
 import { SailpointPluginService } from '@core';
 // These will be imported from the SailPoint Design System package when available.
@@ -37,6 +40,21 @@ export const appConfig: ApplicationConfig = {
       },
     }),
 
+    // ngx-translate: fetch the active catalog (public/i18n/<lang>.json) at
+    // runtime and drive the `translate` pipe. useHttpBackend issues the request
+    // through HttpBackend so it bypasses the SailPoint auth interceptor — these
+    // catalogs are same-origin static assets, not API calls, and must load even
+    // before the plugin handshake publishes window.sailpointConfig(). Setting
+    // fallbackLang loads en.json up front, so an unknown locale still renders.
+    provideTranslateService({
+      fallbackLang: 'en',
+      loader: provideTranslateHttpLoader({
+        prefix: 'i18n/',
+        suffix: '.json',
+        useHttpBackend: true,
+      }),
+    }),
+
     // Resolve the COIP handshake + plugin context once, before the app renders,
     // so window.sailpointConfig() is available for the first SDK request.
     // so api.get/post calls never race the handshake.
@@ -47,6 +65,18 @@ export const appConfig: ApplicationConfig = {
         // Standalone dev (no App Shell parent / unresolvable origin) or a handshake
         // failure — let bootstrap proceed so UI iteration isn't blocked.
         console.warn('[plugin] App Shell handshake did not complete during startup.', err);
+      }
+    }),
+
+    // Load the catalog for the browser's language before the first paint, so
+    // labels never flash their translation keys. Unknown locales fall back to
+    // `en` via fallbackLang above.
+    provideAppInitializer(async () => {
+      const translate = inject(TranslateService);
+      try {
+        await firstValueFrom(translate.use(navigator.language));
+      } catch (err) {
+        console.warn('[plugin] Failed to load translations during startup.', err);
       }
     })
   ]

@@ -2,12 +2,13 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SailpointPluginService } from '@core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { TagModule } from 'primeng/tag';
 import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, TagModule],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, TagModule, TranslatePipe],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

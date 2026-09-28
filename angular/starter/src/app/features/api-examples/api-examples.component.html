@@ -1,26 +1,13 @@
 <section>
-  <h2 class="spds-h4">API Examples</h2>
-  <p>
-    The SailPoint Angular SDK provides typed services for calling ISC APIs. This
-    page demonstrates two patterns: <strong>Observable</strong> (for reactive
-    pipelines and template binding) and <strong>Promise</strong> (for event
-    handlers and sequential chains).
-  </p>
+  <h2 class="spds-h4">{{ 'apiExamples.heading' | translate }}</h2>
+  <p [innerHTML]="'apiExamples.intro' | translate"></p>
 
   <div class="example-section">
-    <h3 class="spds-h5">Observable Pattern</h3>
-    <p>
-      <code>IdentitiesService.listIdentitiesV1()</code> returns an Observable.
-      Use it with <code>AsyncPipe</code> for automatic subscription management.
-      A gate signal controls when the Observable is subscribed.
-    </p>
-    <p class="hint">
-      Prefer Observables when: binding results directly to templates, chaining
-      multiple async operations reactively, or when you need cancellation on
-      component destroy.
-    </p>
+    <h3 class="spds-h5">{{ 'apiExamples.observableHeading' | translate }}</h3>
+    <p [innerHTML]="'apiExamples.observableBody' | translate"></p>
+    <p class="hint">{{ 'apiExamples.observableHint' | translate }}</p>
     <p-button
-      label="List Identities (Observable)"
+      [label]="'apiExamples.observableButton' | translate"
       (onClick)="loadIdentities()"
       [loading]="identitiesLoading()"
       [disabled]="getIdentities() || !apiReady()"
@@ -36,19 +23,11 @@
   </div>
 
   <div class="example-section">
-    <h3 class="spds-h5">Promise Pattern</h3>
-    <p>
-      <code>TenantService.getTenantV1()</code> wrapped with
-      <code>firstValueFrom()</code> converts the Observable to a Promise. Useful
-      for event handlers and <code>async/await</code> chains.
-    </p>
-    <p class="hint">
-      Prefer Promises when: responding to user actions in event handlers,
-      writing sequential async logic, or integrating with Promise-based
-      libraries.
-    </p>
+    <h3 class="spds-h5">{{ 'apiExamples.promiseHeading' | translate }}</h3>
+    <p [innerHTML]="'apiExamples.promiseBody' | translate"></p>
+    <p class="hint">{{ 'apiExamples.promiseHint' | translate }}</p>
     <p-button
-      label="Get Tenant (Promise)"
+      [label]="'apiExamples.promiseButton' | translate"
       (onClick)="promiseApiCall()"
       [loading]="tenantLoading()"
       [disabled]="tenantLoading() || tenant() || tenantError() || !apiReady()"

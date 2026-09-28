@@ -5,6 +5,7 @@ import {
   ElementRef,
   inject,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import {
   CONSTELLATION_EDGES,
@@ -32,6 +33,7 @@ const FRAME_INTERVAL_MS = 1000 / 30;
 @Component({
   selector: 'app-hero',
   standalone: true,
+  imports: [TranslatePipe],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })

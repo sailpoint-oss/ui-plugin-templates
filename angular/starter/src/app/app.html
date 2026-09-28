@@ -4,17 +4,17 @@
       <ul class="shell-sidenav__list">
         <li>
           <a routerLink="/" routerLinkActive="shell-sidenav__link--active" [routerLinkActiveOptions]="{ exact: true }" class="shell-sidenav__link">
-            Overview
+            {{ 'nav.overview' | translate }}
           </a>
         </li>
         <li>
           <a routerLink="/workflows" routerLinkActive="shell-sidenav__link--active" class="shell-sidenav__link">
-            Workflows
+            {{ 'nav.workflows' | translate }}
           </a>
         </li>
         <li>
           <a routerLink="/api-examples" routerLinkActive="shell-sidenav__link--active" class="shell-sidenav__link">
-            API Examples
+            {{ 'nav.apiExamples' | translate }}
           </a>
         </li>
       </ul>
@@ -22,9 +22,9 @@
 
     <main class="shell-content">
       <header class="shell-content__header">
-        <h1 class="spds-h4">UI Plugin Starter</h1>
+        <h1 class="spds-h4">{{ 'app.title' | translate }}</h1>
         <div class="shell-content__meta">
-          <p-tag [value]="status()" [severity]="handshakeSeverity[status()]" />
+          <p-tag [value]="'status.' + status() | translate" [severity]="handshakeSeverity[status()]" />
           @if (context(); as ctx) {
             <span class="shell-content__context">
               {{ ctx.tenant.org }} &middot; {{ ctx.user.displayName }}

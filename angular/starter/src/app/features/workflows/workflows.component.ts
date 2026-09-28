@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { SailpointPluginService } from '@core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { LauncherService, type Launcher } from './launcher.service';
@@ -8,7 +9,7 @@ import { buildInteractiveProcessUrl } from './interactive-process-link';
 @Component({
   selector: 'app-workflows',
   standalone: true,
-  imports: [ButtonModule, TagModule],
+  imports: [ButtonModule, TagModule, TranslatePipe],
   templateUrl: './workflows.component.html',
   styleUrl: './workflows.component.scss',
 })

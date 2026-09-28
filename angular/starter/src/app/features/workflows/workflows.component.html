@@ -1,14 +1,9 @@
 <section>
-  <h2 class="spds-h4">Workflow Launchers</h2>
-  <p>
-    UI plugins can start SailPoint Workflows through the Launchers API. This page
-    lists launchers assigned to you (via Launchpad) and lets you start one. The
-    workflow runs server-side; the plugin receives an Interactive Process ID that
-    links to the Launchpad for any interactive steps.
-  </p>
+  <h2 class="spds-h4">{{ 'workflows.heading' | translate }}</h2>
+  <p>{{ 'workflows.intro' | translate }}</p>
 
   <p-button
-    label="Load My Launchers"
+    [label]="'workflows.loadButton' | translate"
     (onClick)="loadLaunchers()"
     [loading]="loading()"
     [disabled]="loading() || !apiReady()"
@@ -19,21 +14,21 @@
   }
 
   @if (launchers().length > 0) {
-    <h3 class="spds-h5">Available Launchers</h3>
+    <h3 class="spds-h5">{{ 'workflows.availableHeading' | translate }}</h3>
     <ul class="launcher-list">
       @for (launcher of launchers(); track launcher.id) {
         <li class="launcher-item">
           <div class="launcher-item__info">
             <strong>{{ launcher.name }}</strong>
             @if (launcher.disabled) {
-              <p-tag value="Disabled" severity="secondary" />
+              <p-tag [value]="'workflows.disabled' | translate" severity="secondary" />
             }
             @if (launcher.description) {
               <p class="launcher-item__description">{{ launcher.description }}</p>
             }
           </div>
           <p-button
-            label="Start"
+            [label]="'workflows.startButton' | translate"
             severity="secondary"
             [loading]="startingId() === launcher.id"
             [disabled]="launcher.disabled || startingId() !== null || !apiReady()"
@@ -43,11 +38,7 @@
       }
     </ul>
   } @else if (!loading() && !error()) {
-    <p class="empty-state">
-      No launchers found. Launchers are assigned to users through the Launchpad
-      configuration in Identity Security Cloud. If you expect to see launchers
-      here, verify your Launchpad assignments.
-    </p>
+    <p class="empty-state">{{ 'workflows.emptyState' | translate }}</p>
   }
 
   @if (startError()) {
@@ -56,15 +47,15 @@
 
   @if (interactiveProcessId()) {
     <div class="launch-result">
-      <h3 class="spds-h5">Launcher Started</h3>
+      <h3 class="spds-h5">{{ 'workflows.startedHeading' | translate }}</h3>
       <p>
-        <strong>Interactive Process ID:</strong>
+        <strong>{{ 'workflows.processIdLabel' | translate }}</strong>
         <code>{{ interactiveProcessId() }}</code>
       </p>
       @if (interactiveProcessUrl(); as url) {
         <p>
           <a [href]="url" target="_blank" rel="noopener">
-            Open in Launchpad →
+            {{ 'workflows.openInLaunchpad' | translate }}
           </a>
         </p>
       }
