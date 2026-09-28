@@ -25,9 +25,6 @@
       [loading]="identitiesLoading()"
       [disabled]="getIdentities() || !apiReady()"
     />
-    @if (identitiesLoading()) {
-      <p>Loading identities…</p>
-    }
     @if (identitiesError()) {
       <pre class="error">{{ identitiesError() }}</pre>
     }
@@ -42,8 +39,8 @@
     <h3 class="spds-h5">Promise Pattern</h3>
     <p>
       <code>TenantService.getTenantV1()</code> wrapped with
-      <code>firstValueFrom()</code> converts the Observable to a Promise.
-      Useful for event handlers and <code>async/await</code> chains.
+      <code>firstValueFrom()</code> converts the Observable to a Promise. Useful
+      for event handlers and <code>async/await</code> chains.
     </p>
     <p class="hint">
       Prefer Promises when: responding to user actions in event handlers,
@@ -56,9 +53,6 @@
       [loading]="tenantLoading()"
       [disabled]="tenantLoading() || tenant() || tenantError() || !apiReady()"
     />
-    @if (tenantLoading()) {
-      <p>Loading tenant…</p>
-    }
     @if (tenantError()) {
       <pre class="error">{{ tenantError() }}</pre>
     }

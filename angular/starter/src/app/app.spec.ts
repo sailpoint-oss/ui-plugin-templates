@@ -20,9 +20,11 @@ describe('App', () => {
             context: signal({
               tenant: { org: 'acme' },
               user: { displayName: 'Test User', email: 'test@acme.com' },
-              page: { route: 'https://acme.identitysoon.com/ui/plugin/starter' },
+              page: { route: 'https://acme.identitysoon.com/ui/plugin/starter', subPath: '' },
             }),
             status: signal('ready'),
+            apiReady: () => false,
+            setRoute: () => Promise.resolve(),
           },
         },
       ],

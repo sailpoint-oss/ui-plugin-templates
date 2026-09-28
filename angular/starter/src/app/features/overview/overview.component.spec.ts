@@ -19,15 +19,17 @@ describe('OverviewComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders the welcome heading', () => {
-    expect(compiled.querySelector('h2')?.textContent).toContain('Welcome to Your UI Plugin');
+  it('renders the section heading', () => {
+    expect(compiled.querySelector('h2')?.textContent).toContain(
+      'Build native experiences inside Identity Security Cloud'
+    );
   });
 
   it('lists what users can build', () => {
     const items = compiled.querySelectorAll('li');
     expect(items.length).toBe(3);
-    expect(items[0].textContent).toContain('Custom dashboards');
-    expect(items[1].textContent).toContain('Workflow launchers');
-    expect(items[2].textContent).toContain('Administrative tools');
+    expect(items[0].textContent).toContain('Dashboards');
+    expect(items[1].textContent).toContain('workflow launchers');
+    expect(items[2].textContent).toContain('Admin tools');
   });
 });

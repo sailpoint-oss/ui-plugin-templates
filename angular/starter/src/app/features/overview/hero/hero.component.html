@@ -1,0 +1,43 @@
+<div class="hero">
+  <div class="hero__backdrop" aria-hidden="true"></div>
+
+  <svg
+    class="hero__constellation"
+    viewBox="0 0 600 320"
+    preserveAspectRatio="xMaxYMid slice"
+    aria-hidden="true"
+  >
+    <g class="c-edges">
+      @for (edge of edges; track $index) {
+        <line
+          [attr.x1]="nodes[edge[0]].x"
+          [attr.y1]="nodes[edge[0]].y"
+          [attr.x2]="nodes[edge[1]].x"
+          [attr.y2]="nodes[edge[1]].y"
+        />
+      }
+    </g>
+    <g class="c-nodes">
+      @for (node of nodes; track $index) {
+        <circle
+          [attr.cx]="node.x"
+          [attr.cy]="node.y"
+          [attr.r]="node.r"
+          [class.c-node--magenta]="node.variant === 'magenta'"
+          [class.c-node--teal]="node.variant === 'teal'"
+        />
+      }
+    </g>
+  </svg>
+
+  <div class="hero__content">
+    <span class="hero__eyebrow">SailPoint UI Plugin</span>
+    <p class="hero__title">Welcome to Your UI Plugin</p>
+    <p class="hero__subtitle">
+      Your plugin renders as a native micro-frontend inside Identity Security
+      Cloud; it rides the tenant's session and security model, so there is no
+      separate login and nothing extra to host. Explore the examples, then make
+      it your own.
+    </p>
+  </div>
+</div>
