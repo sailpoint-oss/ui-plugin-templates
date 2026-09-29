@@ -5,6 +5,7 @@ import { SailpointPluginService } from '@core';
 import { IdentitiesService } from '@sailpoint/angular-sdk/identities';
 import { TenantService } from '@sailpoint/angular-sdk/tenant';
 import { ApiExamplesComponent } from './api-examples.component';
+import { activateTranslations, provideTranslateTesting } from '../../testing/i18n.testing';
 
 describe('ApiExamplesComponent', () => {
   let fixture: ComponentFixture<ApiExamplesComponent>;
@@ -15,6 +16,7 @@ describe('ApiExamplesComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ApiExamplesComponent],
       providers: [
+        provideTranslateTesting(),
         {
           provide: SailpointPluginService,
           useValue: { apiReady: signal(true) },
@@ -30,6 +32,7 @@ describe('ApiExamplesComponent', () => {
       ],
     }).compileComponents();
 
+    activateTranslations();
     fixture = TestBed.createComponent(ApiExamplesComponent);
     component = fixture.componentInstance;
     compiled = fixture.nativeElement;
@@ -53,12 +56,12 @@ describe('ApiExamplesComponent', () => {
 
   it('renders Observable pattern button', () => {
     const buttons = compiled.querySelectorAll('p-button');
-    expect(buttons[0].getAttribute('label')).toBe('List Identities (Observable)');
+    expect(buttons[0].textContent).toContain('List Identities (Observable)');
   });
 
   it('renders Promise pattern button', () => {
     const buttons = compiled.querySelectorAll('p-button');
-    expect(buttons[1].getAttribute('label')).toBe('Get Tenant (Promise)');
+    expect(buttons[1].textContent).toContain('Get Tenant (Promise)');
   });
 
   it('exposes apiReady signal for button state', () => {

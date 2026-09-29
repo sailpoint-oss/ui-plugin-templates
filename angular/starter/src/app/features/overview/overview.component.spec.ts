@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OverviewComponent } from './overview.component';
+import { activateTranslations, provideTranslateTesting } from '../../testing/i18n.testing';
 
 describe('OverviewComponent', () => {
   let fixture: ComponentFixture<OverviewComponent>;
@@ -8,8 +9,10 @@ describe('OverviewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [OverviewComponent],
+      providers: [provideTranslateTesting()],
     }).compileComponents();
 
+    activateTranslations();
     fixture = TestBed.createComponent(OverviewComponent);
     fixture.detectChanges();
     compiled = fixture.nativeElement;

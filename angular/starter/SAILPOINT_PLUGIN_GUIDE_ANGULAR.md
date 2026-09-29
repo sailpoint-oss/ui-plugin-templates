@@ -48,6 +48,28 @@
 
 The `build` section is local only. If you change manifest security fields after `create`, run `push-manifest`. Then run `link` again so the CLI refreshes `angular.json` with updated `devDocumentHeaders`.
 
+## Prerequisites
+
+Install a current Node.js and npm before you install dependencies.
+
+| Tool    | Minimum | Notes                                                                                                                   |
+| ------- | ------- | ----------------------------------------------------------------------------------------------------------------------- |
+| npm     | 11.12   | Required if you install with npm. Older npm (11.5 and earlier, including the npm bundled with every Node 22 release and with Node 24.7 and earlier) fails during dependency resolution. |
+| Node.js | 24.15   | Ships npm 11.12. Any Node that provides npm 11.12 or newer works.                                                       |
+
+If you install with npm and see this error:
+
+```
+npm error Cannot read properties of null (reading 'edgesOut')
+```
+
+your npm is too old. This is a known bug in npm's dependency resolver, not a problem with this project. The error appears before npm checks any version requirement, so it cannot be prevented with a `package.json` `engines` field. Fix it one of two ways:
+
+- Upgrade npm in place, keeping your current Node: `npm install -g npm@latest`, then run `npm install` again.
+- Or switch to a Node version that bundles npm 11.12 or newer (Node 24.15 or later).
+
+This is an npm-specific error. Other package managers (yarn, pnpm, bun) use their own dependency resolvers and are not expected to hit it.
+
 ## Local development
 
 ```bash
