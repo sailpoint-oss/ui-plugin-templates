@@ -258,6 +258,114 @@ const unsubscribe = this.plugin.sdk.events.onViewportChange(({ width, height }) 
 
 `plugin.whenReady()` exists only so the app initializer can gate bootstrap on the handshake. Components read the `context` / `status` signals instead of calling it.
 
+## Routing
+
+UI plugins support Angular routing with the **hash location strategy** (`#/`, `#/workflows`, etc.). Hash-based URLs work reliably in an iframe without server-side rewrite rules.
+
+### Configuration
+
+The starter is configured with `withHashLocation()` in `app.config.ts`:
+
+```ts
+import { provideRouter, withHashLocation } from '@angular/router';
+import { routes } from './app.routes';
+
+provideRouter(routes, withHashLocation());
+```
+
+### Route definitions
+
+Define routes in `app.routes.ts`. Use `loadComponent` for lazy loading:
+
+```ts
+export const routes: Routes = [
+	{ path: '', loadComponent: () => import('./features/overview/overview.component').then(m => m.OverviewComponent) },
+	{ path: 'workflows', loadComponent: () => import('./features/workflows/workflows.component').then(m => m.WorkflowsComponent) },
+	{ path: 'api-examples', loadComponent: () => import('./features/api-examples/api-examples.component').then(m => m.ApiExamplesComponent) },
+];
+```
+
+### Sidebar navigation (ISC pattern)
+
+ISC apps use a left sidebar for section navigation. The starter demonstrates this layout with a vertical nav linked to routes:
+
+```html
+<div class="shell-body">
+	<nav class="shell-sidenav">
+		<ul class="shell-sidenav__list">
+			<li>
+				<a routerLink="/" routerLinkActive="shell-sidenav__link--active" [routerLinkActiveOptions]="{ exact: true }" class="shell-sidenav__link">
+					Overview
+				</a>
+			</li>
+			<li>
+				<a routerLink="/workflows" routerLinkActive="shell-sidenav__link--active" class="shell-sidenav__link">
+					Workflows
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<main class="shell-content">
+		<div class="shell-content__card">
+			<router-outlet />
+		</div>
+	</main>
+</div>
+```
+
+Key layout elements:
+
+- **Sidebar** — white background flowing from header, with rounded bottom-right corner
+- **Active state** — blue background + left border accent
+- **Content card** — white panel with rounded corners and shadow on gray page background
+
+Import `RouterLink` and `RouterLinkActive` in the component. The `routerLinkActive` directive applies the active class when the route matches.
+
+## Launchers API
+
+UI plugins can start SailPoint Workflows through the Launchers API. The starter's Workflows tab demonstrates this pattern.
+
+### User-assigned launchers
+
+To list launchers assigned to the signed-in user (the same list Launchpad shows), use the `my/assigned` endpoint:
+
+```ts
+const response = await this.plugin.get<{ items?: Launcher[] }>(
+	'/beta/launchers/my/assigned?limit=100&sorters=name'
+);
+const launchers = response.items ?? [];
+```
+
+The Angular SDK's `LaunchersService.getLaunchersV1()` returns **all tenant launchers** (admin scope). If you need only the user's assigned launchers, use `plugin.get()` as shown above.
+
+### Starting a launcher
+
+```ts
+const response = await this.plugin.post<{ interactiveProcessId?: string }>(
+	`/beta/launchers/${encodeURIComponent(launcherId)}/launch`,
+	{}
+);
+const processId = response.interactiveProcessId;
+```
+
+The workflow runs server-side. The returned Interactive Process ID is the handle the user needs to complete any interactive steps in the Launchpad.
+
+### Linking to Launchpad
+
+The plugin runs in an iframe and cannot render workflow interactive forms itself. After starting a launcher, link the user to the Launchpad:
+
+```ts
+function buildInteractiveProcessUrl(pageRoute: string, processId: string): string {
+	const origin = new URL(pageRoute).origin;
+	return `${origin}/ui/d/launchpad/interactive-processes/${encodeURIComponent(processId)}`;
+}
+
+// Usage:
+const url = buildInteractiveProcessUrl(plugin.context()?.page.route, processId);
+```
+
+The `page.route` from the plugin context provides the tenant origin.
+
 ## Design tokens / theming
 
 **Component library:** [PrimeNG](https://primeng.org/) is the chosen component library for SailPoint UI plugins. It is included in this starter's `package.json`. It is configured in `src/app/app.config.ts` to use the SailPoint Design System theme preset.
@@ -273,3 +381,19 @@ Refer to the PrimeNG documentation for more information on design tokens and the
 **Icons:** Font Awesome icons are the standard for SailPoint UI plugins. Bundling mechanism _TBD_.
 
 **CSS isolation:** The plugin iframe has its own CSS scope. Any global styles must be imported in `src/styles.scss`. PrimeNG theme styles configured for this application are injected into the `head` tag of the iframe. They are not inherited from the host page.
+
+## Translations (i18n)
+
+**Stack:** Translations use [ngx-translate](https://ngx-translate.org/) (`@ngx-translate/core` + `@ngx-translate/http-loader`). Language catalogs are plain JSON files under `public/i18n/`, loaded at runtime over HTTP and rendered through the `translate` pipe. Setup lives in `src/app/app.config.ts` via `provideTranslateService({ fallbackLang: 'en', loader: provideTranslateHttpLoader({ prefix: 'i18n/', suffix: '.json', useHttpBackend: true }) })`, and an app initializer calls `translate.use(navigator.language)` so the plugin renders in the viewer's browser language. `useHttpBackend` makes catalog requests skip the SailPoint auth interceptor, since the catalogs are same-origin static assets rather than API calls.
+
+**Adding or updating a label:**
+
+1. Add or edit the key in `public/i18n/en.json`. Nested objects are addressed with dots, e.g. `nav.overview`.
+2. Reference it in a template: `{{ 'nav.overview' | translate }}`. For strings that contain inline markup (`<code>`, `<strong>`), bind with `[innerHTML]="'some.key' | translate"` instead.
+3. Import `TranslatePipe` from `@ngx-translate/core` in the component's `imports` array.
+
+**Adding a language:** Drop a new catalog into `public/i18n/` named for the locale the browser reports — the starter requests the catalog matching `navigator.language` verbatim. Missing keys, and unmatched locales, fall back to `en`. No code change is needed.
+
+**More documentation:** ngx-translate is well documented — prefer its [official docs](https://ngx-translate.org/) for the `translate` pipe, the `TranslateService` API, parameterized messages, and advanced loaders.
+
+**ISC parity:** ISC's fallback language is English (`en`), and ISC supports 22 languages. To mirror ISC exactly, provide a catalog for each and keep `en` as the fallback: `en` (English, fallback), `cs` (Czech), `da` (Danish), `de` (German), `es` (Spanish), `fi` (Finnish), `fr` (French), `hu` (Hungarian), `it` (Italian), `ja` (Japanese), `ko` (Korean), `lt` (Lithuanian), `nl` (Dutch), `no` (Norwegian), `pl` (Polish), `pt` (Portuguese), `ru` (Russian), `sv` (Swedish), `th` (Thai), `tr` (Turkish), `zh-CN` (Chinese, Simplified), `zh-TW` (Chinese, Traditional).

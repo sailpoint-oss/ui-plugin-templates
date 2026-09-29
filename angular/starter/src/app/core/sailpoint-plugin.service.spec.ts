@@ -41,7 +41,7 @@ const CONTEXT: PluginContext = {
     email: 'test@example.com',
     capabilities: CAPABILITIES,
   },
-  page: { route: 'https://acme.identitynow.com/plugins/example' },
+  page: { route: 'https://acme.identitynow.com/plugins/example', subPath: '' },
   slot: {},
   pluginConfiguration: { pluginId: 'plugin-1' },
 };

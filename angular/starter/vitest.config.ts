@@ -29,6 +29,7 @@ function stripSdkSourceMapComments(): Plugin {
 export default defineConfig({
   plugins: [stripSdkSourceMapComments()],
   test: {
+    setupFiles: ['src/test-setup.ts'],
     server: {
       deps: {
         inline: ['@sailpoint/ui-plugin-sdk'],

@@ -1,75 +1,66 @@
-import { Component, inject, signal } from '@angular/core';
-import { AsyncPipe, JsonPipe } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SailpointPluginService } from '@core';
-import { IdentitiesService } from '@sailpoint/angular-sdk/identities';
-import { TenantService, type Tenant } from '@sailpoint/angular-sdk/tenant';
-import { ButtonModule } from 'primeng/button';
+import { TranslatePipe } from '@ngx-translate/core';
 import { TagModule } from 'primeng/tag';
-import { EMPTY, firstValueFrom } from 'rxjs';
-import { catchError, finalize, tap } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [AsyncPipe, JsonPipe, RouterOutlet, ButtonModule, TagModule],
-  providers: [IdentitiesService, TenantService],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, TagModule, TranslatePipe],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
+export class App implements OnInit {
   private readonly plugin = inject(SailpointPluginService);
-  private readonly identitiesSvc = inject(IdentitiesService);
-  private readonly tenantSvc = inject(TenantService);
-
-  protected readonly title = signal('starter');
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
   protected readonly context = this.plugin.context;
   protected readonly status = this.plugin.status;
-  protected readonly apiReady = this.plugin.apiReady;
   protected readonly handshakeSeverity = {
     pending: 'warn',
     ready: 'success',
     failed: 'danger',
   } as const;
 
-  /** Observable example: IdentitiesService with AsyncPipe and a gate signal. */
-  protected readonly identitiesLoading = signal(false);
-  protected readonly identitiesError = signal('');
-  protected readonly getIdentities = signal(false);
-  protected readonly identities$ = this.identitiesSvc
-    .listIdentitiesV1({ limit: 5 })
-    .pipe(
-      tap(() => {
-        this.identitiesLoading.set(true);
-        this.identitiesError.set('');
-      }),
-      catchError((err) => {
-        this.identitiesError.set(this.formatApiError(err));
-        return EMPTY;
-      }),
-      finalize(() => this.identitiesLoading.set(false)),
-    );
+  ngOnInit(): void {
+    // The host may have deep-linked to a sub-route (e.g. after a reload of
+    // /ui/plugin/starter/workflows). The SDK derives that plugin-relative route
+    // as `page.subPath`; adopt it instead of broadcasting our default start
+    // route back, which would replace the host URL and drop the suffix.
+    const initialSubPath = this.plugin.context()?.page.subPath ?? '';
+    let initialNavigationHandled = false;
 
-  /** Promise example: TenantService via firstValueFrom(). */
-  protected readonly tenantLoading = signal(false);
-  protected readonly tenantError = signal('');
-  protected readonly tenant = signal<Tenant | undefined>(undefined);
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((event) => {
+        // Hash routes look like '/#/workflows' — extract the path after '#/'
+        const hashPath = event.urlAfterRedirects.replace(/^\/#?\/?/, '');
 
-  protected async promiseApiCall(): Promise<void> {
-    this.tenantLoading.set(true);
-    this.tenantError.set('');
+        if (!initialNavigationHandled) {
+          initialNavigationHandled = true;
+          // Restore the host's route on first load and suppress the broadcast
+          // for this initial navigation, so the empty start route never
+          // overwrites a deep-linked host URL.
+          if (initialSubPath && initialSubPath !== hashPath) {
+            this.router.navigateByUrl(`/${initialSubPath}`);
+          }
+          return;
+        }
 
-    try {
-      const tenantData = await firstValueFrom(this.tenantSvc.getTenantV1());
-      this.tenant.set(tenantData);
-    } catch (err) {
-      this.tenantError.set(this.formatApiError(err));
-    } finally {
-      this.tenantLoading.set(false);
-    }
-  }
-
-  private formatApiError(err: unknown): string {
-    return err instanceof Error ? `${err.name}: ${err.message}` : String(err);
+        // Report the route to the host via the SDK so it mirrors it in the
+        // browser URL. Only meaningful once the handshake is ready; standalone
+        // dev has no App Shell to talk to.
+        if (this.plugin.apiReady()) {
+          this.plugin.setRoute(hashPath).catch((err) => {
+            console.warn('[plugin] Failed to report route change to the host.', err);
+          });
+        }
+      });
   }
 }

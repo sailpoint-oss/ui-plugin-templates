@@ -1,128 +1,40 @@
-<style>
-  :host {
-    display: block;
-    box-sizing: border-box;
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: 1.5rem;
-  }
+<div class="shell">
+  <div class="shell-body">
+    <nav class="shell-sidenav">
+      <ul class="shell-sidenav__list">
+        <li>
+          <a routerLink="/" routerLinkActive="shell-sidenav__link--active" [routerLinkActiveOptions]="{ exact: true }" class="shell-sidenav__link">
+            {{ 'nav.overview' | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/workflows" routerLinkActive="shell-sidenav__link--active" class="shell-sidenav__link">
+            {{ 'nav.workflows' | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/api-examples" routerLinkActive="shell-sidenav__link--active" class="shell-sidenav__link">
+            {{ 'nav.apiExamples' | translate }}
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-  dl {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: 0.25rem 1rem;
-    margin: 0;
-  }
-
-  dt {
-    font-weight: 600;
-  }
-
-  dd {
-    margin: 0;
-  }
-
-  code {
-    padding: 0.1rem 0.35rem;
-    border-radius: 0.25rem;
-    background: #f1f1f5;
-    font-size: 0.9em;
-  }
-</style>
-
-<main>
-  <header>
-    <h1>Hello, {{ title() }}</h1>
-    <p>
-      This whole template is a starting point — replace everything in
-      <code>app.html</code> with your own UI. Nothing here needs to be kept. The
-      sections below confirm the plugin is connected and show the SDK pattern to
-      follow.
-    </p>
-  </header>
-
-  <section aria-labelledby="connection-heading">
-    <h2 id="connection-heading">App Shell connection</h2>
-    <p>
-      Handshake status:
-      <p-tag [value]="status()" [severity]="handshakeSeverity[status()]" />
-    </p>
-
-    @if (context(); as ctx) {
-      <dl>
-        <dt>Tenant</dt>
-        <dd>{{ ctx.tenant.org }}</dd>
-        <dt>User</dt>
-        <dd>{{ ctx.user.displayName }} ({{ ctx.user.email }})</dd>
-        <dt>Route</dt>
-        <dd>
-          <code>{{ ctx.page.route }}</code>
-        </dd>
-      </dl>
-    } @else if (status() === 'failed') {
-      <p>
-        The plugin could not complete the App Shell handshake. Open it inside SailPoint Identity Security
-        with <code>?spPluginDev=&lt;alias&gt;</code>.
-      </p>
-    } @else {
-      <p>Connecting to the App Shell…</p>
-    }
-  </section>
-
-  <section aria-labelledby="build-heading">
-    <h2 id="build-heading">Build your plugin</h2>
-    <p>
-      Inject <code>SailpointPluginService</code> and read its <code>context</code>,
-      <code>tenant</code>, <code>user</code>, and <code>status</code> signals. Use
-      <code>IdentitiesService</code>, <code>TenantService</code> (and any other
-      partition service) from <code>@sailpoint/angular-sdk</code> for typed API calls,
-      or <code>get()</code> and <code>post()</code> on the plugin service for simple requests.
-    </p>
-
-    <h3>Observable: <code>IdentitiesService</code></h3>
-    <p>
-      <code>identities$</code> lists identities with <code>IdentitiesService.listIdentitiesV1()</code>.
-      A gate signal starts the stream; the template binds the result with <code>AsyncPipe</code>.
-    </p>
-    <p-button
-      type="button"
-      label="List identities (Observable)"
-      (onClick)="getIdentities.set(true)"
-      [disabled]="getIdentities() || !apiReady()"
-    />
-    @if (identitiesLoading()) {
-      <p>Loading identities…</p>
-    }
-    @if (identitiesError()) {
-      <pre>{{ identitiesError() }}</pre>
-    }
-    @if (getIdentities()) {
-      @if (identities$ | async; as identities) {
-        <pre style="height: 250px; overflow-x: auto;">{{ identities | json }}</pre>
-      }
-    }
-
-    <h3>Promise: <code>TenantService</code></h3>
-    <p>
-      <code>promiseApiCall()</code> loads tenant metadata with
-      <code>TenantService.getTenantV1()</code> and <code>firstValueFrom()</code>.
-    </p>
-    <p-button
-      type="button"
-      label="Call tenant API (Promise)"
-      (onClick)="promiseApiCall()"
-      [disabled]="tenantLoading() || tenant() || tenantError() || !apiReady()"
-    />
-    @if (tenantLoading()) {
-      <p>Loading tenant…</p>
-    }
-    @if (tenantError()) {
-      <pre>{{ tenantError() }}</pre>
-    }
-    @if (tenant(); as tenantData) {
-      <pre style="height: 250px; overflow-x: auto;">{{ tenantData | json }}</pre>
-    }
-  </section>
-
-  <router-outlet />
-</main>
+    <main class="shell-content">
+      <header class="shell-content__header">
+        <h1 class="spds-h4">{{ 'app.title' | translate }}</h1>
+        <div class="shell-content__meta">
+          <p-tag [value]="'status.' + status() | translate" [severity]="handshakeSeverity[status()]" />
+          @if (context(); as ctx) {
+            <span class="shell-content__context">
+              {{ ctx.tenant.org }} &middot; {{ ctx.user.displayName }}
+            </span>
+          }
+        </div>
+      </header>
+      <div class="shell-content__card">
+        <router-outlet />
+      </div>
+    </main>
+  </div>
+</div>
