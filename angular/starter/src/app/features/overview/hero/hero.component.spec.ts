@@ -1,11 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { HeroComponent } from './hero.component';
+import { activateTranslations, provideTranslateTesting } from '../../../testing/i18n.testing';
 
 describe('HeroComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HeroComponent],
+      providers: [provideTranslateTesting()],
     }).compileComponents();
+
+    activateTranslations();
   });
 
   it('creates the component', () => {

@@ -1,9 +1,9 @@
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-
 import { App } from './app';
 import { SailpointPluginService } from '@core';
+import { activateTranslations, provideTranslateTesting } from './testing/i18n.testing';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -11,6 +11,7 @@ describe('App', () => {
       imports: [App],
       providers: [
         provideRouter([]),
+        provideTranslateTesting(),
         // Stub the plugin service so the component does not build a real SDK or
         // attempt an App Shell handshake during the test. The component only
         // reads the `context` and `status` signals.
@@ -29,6 +30,8 @@ describe('App', () => {
         },
       ],
     }).compileComponents();
+
+    activateTranslations();
   });
 
   it('creates the app', () => {
@@ -40,7 +43,9 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.shell-content__header h1')?.textContent).toContain('UI Plugin Starter');
+    // The plugin name below is a sentinel: `sail ui-plugins init` rewrites it,
+    // together with the matching title signal in app.ts, to the chosen name.
+    expect(compiled.querySelector('.shell-content__header h1')?.textContent).toContain('Hello, starter');
   });
 
   it('renders the handshake status badge', () => {

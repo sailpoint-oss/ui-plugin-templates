@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SailpointPluginService } from '@core';
@@ -17,6 +17,10 @@ export class App implements OnInit {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
 
+  // Plugin display name. The SailPoint CLI (`sail ui-plugins init`) rewrites the
+  // 'starter' literal to the alias the user provides. It is the plugin's own
+  // name, not UI copy, so it is intentionally not translated.
+  protected readonly title = signal('starter');
   protected readonly context = this.plugin.context;
   protected readonly status = this.plugin.status;
   protected readonly handshakeSeverity = {

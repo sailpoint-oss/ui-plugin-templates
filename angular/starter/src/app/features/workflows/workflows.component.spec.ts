@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SailpointPluginService } from '@core';
 import { WorkflowsComponent } from './workflows.component';
 import { LauncherService, type Launcher } from './launcher.service';
+import { activateTranslations, provideTranslateTesting } from '../../testing/i18n.testing';
 
 function makeLauncher(overrides: Partial<Launcher> = {}): Launcher {
   return {
@@ -35,6 +36,7 @@ describe('WorkflowsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [WorkflowsComponent],
       providers: [
+        provideTranslateTesting(),
         {
           provide: SailpointPluginService,
           useValue: { context: mockContext, apiReady: signal(true) },
@@ -49,6 +51,7 @@ describe('WorkflowsComponent', () => {
       ],
     }).compileComponents();
 
+    activateTranslations();
     fixture = TestBed.createComponent(WorkflowsComponent);
     component = fixture.componentInstance;
     compiled = fixture.nativeElement;

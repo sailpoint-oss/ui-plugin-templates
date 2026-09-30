@@ -1,7 +1,4 @@
 {
-  "app": {
-    "title": "UI Plugin Starter"
-  },
   "nav": {
     "overview": "Overview",
     "workflows": "Workflows",
