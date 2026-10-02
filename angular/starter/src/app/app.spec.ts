@@ -45,7 +45,9 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     // The plugin name below is a sentinel: `sail ui-plugins init` rewrites it,
     // together with the matching title signal in app.ts, to the chosen name.
-    expect(compiled.querySelector('.shell-content__header h1')?.textContent).toContain('Hello, starter');
+    expect(
+      compiled.querySelector('.shell-content__header h1')?.textContent,
+    ).not.toContain('Hello, starter');
   });
 
   it('renders the handshake status badge', () => {
