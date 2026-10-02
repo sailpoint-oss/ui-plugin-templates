@@ -15,6 +15,7 @@ ui-plugin-templates/
   angular/
     starter/                               # canonical Angular starter — what `init` scaffolds from
       SAILPOINT_PLUGIN_GUIDE_ANGULAR.md    # Angular-specific plugin guide
+      .claude/skills/                      # agent skills scaffolded into every new workspace
 ```
 
 Each framework lives in its own top-level folder. Today only Angular is provided. Additional frameworks can be added over time. Within a framework, `starter/` is the minimal, prewired baseline.
@@ -47,6 +48,16 @@ Two complete, self-contained plugin guides are provided. Each stands on its own.
 
 - [`SAILPOINT_PLUGIN_GUIDE.md`](SAILPOINT_PLUGIN_GUIDE.md) — framework-agnostic guide for wiring the SDK into an existing project (`sail ui-plugins init --path`) or by hand: SDK install, HTTPS/dev-server setup, manifest updates, and design-token setup.
 - [`angular/starter/SAILPOINT_PLUGIN_GUIDE_ANGULAR.md`](angular/starter/SAILPOINT_PLUGIN_GUIDE_ANGULAR.md) — Angular-specific guide, matching what `sail ui-plugins init` scaffolds from the Angular starter.
+
+## Agent skills
+
+The Angular starter ships three agent skills in `angular/starter/.claude/skills/`, so every workspace scaffolded by `sail ui-plugins init` gets them. Claude Code and Cursor load skills from `.claude/skills/` automatically, and any other coding agent can read them as Markdown.
+
+- `building-ui-plugins`: sandbox and CSP limits, the `sp-ui-plugin.json` contract, SDK usage, calling ISC APIs (with a reference of request shapes), routing, theming, and sparse tenants.
+- `deploying-ui-plugins`: create privately, build, upload, review, then share, plus platform limits and a troubleshooting table.
+- `verifying-ui-plugins`: unit tests with the starter's translation helpers, using the build as a type-check, and checks inside a real tenant.
+
+The skills complement the plugin guides rather than repeat them. Projects set up with `init --path` can copy the `.claude/skills/` folder from `angular/starter/`; most of the content applies to any framework.
 
 ## Contributing
 
