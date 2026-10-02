@@ -36,9 +36,9 @@ Use `sail ui-plugins disable` to take a plugin offline without deleting it, and 
 |---|---|
 | `JWT validation failed: JWT is expired` on upload | The CLI's session expired. Retry once, since the CLI refreshes its token. If it fails again, sign in again with `sail env`. |
 | `output directory ... contains no files to upload` | The build failed, or another build cleared `outDir` while the upload ran. Fix the build, then upload once. |
-| `npm install` fails with `Cannot read properties of null (reading 'edgesOut')` | npm is older than the version in `package.json` `engines`. Upgrade npm, or run `npm install --legacy-peer-deps` as a stopgap. |
+| `npm install` fails with `Cannot read properties of null (reading 'edgesOut')` | npm is older than the version in `package.json` `engines`. Use Node 24, which ships a new enough npm. `npm install --legacy-peer-deps` works as a stopgap. |
 | Only you can see the plugin | It is still private. Run `push-manifest` from a manifest without `restrictToUsers`. |
 | `create` or `list` returns 404 | The tenant may not have the UI plugin author license, or the feature is not enabled for the tenant. Ask your SailPoint admin. |
-| The iframe shows `Forbidden` in Safari | Known issue: Safari blocks the third-party cookie that authorizes plugin assets. Use Chrome or Edge until it's fixed. |
+| The iframe shows `Forbidden` in Safari or a Chrome incognito window | Known issue: the browser blocks the third-party cookie that authorizes plugin assets. Use a regular Chrome or Edge window until it's fixed. |
 | Blank iframe or 404s for JS and CSS after upload | Absolute asset paths. Keep `baseHref` and `deployUrl` at `./`. |
 | `sail env list` keeps printing "Press Enter to continue" | The command expects a terminal. Read `~/.sailpoint/config.yaml` instead. |
