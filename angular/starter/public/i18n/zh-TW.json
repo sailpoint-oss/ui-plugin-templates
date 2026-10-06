@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API 範例",
+		"intro": "SailPoint Angular SDK 提供具型別的服務，用於呼叫 ISC API。此頁面示範兩種模式：<strong>Observable</strong> (用於反應式管道和範本繫結) 和 <strong>Promise</strong> (用於事件處理常式和循序鏈)。",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> 會傳回 Observable。搭配 <code>AsyncPipe</code> 使用，可自動管理訂閱。閘道訊號控制 Observable 的訂閱時機。",
+		"observableButton": "列出身分 (Observable)",
+		"observableHeading": "Observable 模式",
+		"observableHint": "在以下情況建議使用 Observable：將結果直接繫結至範本、以反應式方式鏈結多個非同步作業，或需要在元件銷毀時取消訂閱。",
+		"promiseBody": "<code>TenantService.getTenantV1()</code> 以 <code>firstValueFrom()</code> 包裝，可將 Observable 轉換為 Promise。適用於事件處理常式和 <code>async/await</code> 鏈結。",
+		"promiseButton": "取得租用戶 (Promise)",
+		"promiseHeading": "Promise 模式",
+		"promiseHint": "在以下情況優先使用 Promise：在事件處理常式中回應使用者動作、撰寫循序非同步邏輯，或與以 Promise 為基礎的程式庫整合。"
+	},
+	"app": {
+		"title": "UI 外掛程式入門"
+	},
+	"hero": {
+		"eyebrow": "SailPoint UI 外掛程式",
+		"subtitle": "您的外掛程式以原生微前端的形式在身分安全雲中呈現；它使用租用戶的工作階段與安全性模型，因此無需另行登入，也無需額外託管。探索範例，然後依需求自訂。",
+		"title": "歡迎使用您的 UI 外掛程式"
+	},
+	"nav": {
+		"apiExamples": "API 範例",
+		"overview": "概覽",
+		"workflows": "工作流程"
+	},
+	"overview": {
+		"gettingStartedBody": "此範本可由您自行調整。<code>core/</code> 中的 SDK 連接程式碼處理 App Shell 交握，因此元件只需讀取訊號並呼叫服務。開啟<strong>工作流程</strong>索引標籤，即可查看如何列出及啟動啟動器；開啟 <strong>API 範例</strong>索引標籤，了解呼叫 Identity Security Cloud API 時的 Observable 與 Promise 模式。",
+		"gettingStartedHeading": "開始使用",
+		"heading": "在身分安全雲中建立原生體驗",
+		"intro": "您的外掛程式以微前端的形式直接在身分安全雲中呈現。它使用租用戶的工作階段與安全性模型，因此無需另行登入、無需外部託管，也無需額外的安全防護。",
+		"patterns": "此範本中的頁面展示您每天會用到的模式：讀取外掛程式上下文、使用具型別的 SDK 服務呼叫 Identity Security Cloud API，以及透過 Launchers API 啟動工作流程。",
+		"whatHeading": "您可以建立什麼？",
+		"whatItem1": "整合任何身分安全雲 API 資料的儀表板",
+		"whatItem2": "一鍵啟動工作流程啟動器，快速啟動您的業務流程",
+		"whatItem3": "針對組織治理需求量身打造的管理員工具"
+	},
+	"status": {
+		"failed": "失敗",
+		"pending": "待處理",
+		"ready": "就緒"
+	},
+	"workflows": {
+		"availableHeading": "可用的啟動器",
+		"disabled": "已停用",
+		"emptyState": "找不到啟動器。啟動器是透過 Identity Security Cloud 中的 Launchpad 設定指派給使用者。若您預期此處應顯示啟動器，請驗證您的 Launchpad 指派。",
+		"heading": "工作流程啟動程式",
+		"intro": "UI 外掛程式可透過 Launchers API 啟動 SailPoint 工作流程。此頁面列出指派給您的啟動器 (透過 Launchpad)，並可讓您啟動其中一個。工作流程在伺服器端執行；外掛程式會收到一個互動式程序 ID，該 ID 會連結至 Launchpad 以執行任何互動步驟。",
+		"loadButton": "載入我的啟動器",
+		"openInLaunchpad": "在 Launchpad 中開啟 →",
+		"processIdLabel": "互動式程序 ID：",
+		"startButton": "開始",
+		"startedHeading": "啟動器已啟動"
+	}
+}

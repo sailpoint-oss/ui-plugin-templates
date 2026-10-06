@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API-exempel",
+		"intro": "SailPoint Angular SDK tillhandahåller typade tjänster för att anropa ISC API:er. Den här sidan demonstrerar två mönster: <strong>Observable</strong> (för reaktiva pipelines och mallbindning) och <strong>Promise</strong> (för händelsehanterare och sekventiella kedjor).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> returnerar ett Observable. Använd det med <code>AsyncPipe</code> för automatisk prenumerationshantering. En getsignal styr när Observable prenumereras.",
+		"observableButton": "Lista identiteter (Observable)",
+		"observableHeading": "Observable-mönster",
+		"observableHint": "Föredra Observables när: du binder resultat direkt till mallar, kopplar samman flera asynkrona åtgärder reaktivt, eller när du behöver avbryta prenumerationen när komponenten förstörs.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code> omsluten med <code>firstValueFrom()</code> konverterar Observable till ett Promise. Användbart för händelsehanterare och <code>async/await</code>-kedjor.",
+		"promiseButton": "Hämta klientorganisation (Promise)",
+		"promiseHeading": "Promise-mönster",
+		"promiseHint": "Föredra Promises när: du svarar på användaråtgärder i händelsehanterare, skriver sekventiell asynkron logik eller integrerar med Promise-baserade bibliotek."
+	},
+	"app": {
+		"title": "Startpaket för UI-plugin-program"
+	},
+	"hero": {
+		"eyebrow": "SailPoint UI-plugin-program",
+		"subtitle": "Ditt plugin-program renderas som ett inbyggt mikrogränssnitt i Identity Security Cloud. Det använder klientorganisationens session och säkerhetsmodell, vilket innebär att det inte krävs någon separat inloggning och inget extra att driftsätta. Utforska exemplen och anpassa sedan efter dina behov.",
+		"title": "Välkommen till ditt UI-plugin-program"
+	},
+	"nav": {
+		"apiExamples": "API-exempel",
+		"overview": "Översikt",
+		"workflows": "Arbetsflöden"
+	},
+	"overview": {
+		"gettingStartedBody": "Den här mallen är din att forma om. SDK-kopplingen i <code>core/</code> hanterar App Shell-handskakningen, så att komponenter enkelt kan läsa signaler och anropa tjänster. Öppna fliken <strong>Arbetsflöden</strong> för att se hur du listar och startar startare, och fliken <strong>API-exempel</strong> för Observable- och Promise-mönstren när du anropar Identity Security Cloud API:er.",
+		"gettingStartedHeading": "Kom igång",
+		"heading": "Skapa inbyggda upplevelser i Identity Security Cloud",
+		"intro": "Ditt plugin-program renderas som ett mikrogränssnitt direkt i Identity Security Cloud. Det använder klientorganisationens session och säkerhetsmodell, vilket innebär att det inte krävs någon separat inloggning, ingen extern driftsättning och inget extra att säkra.",
+		"patterns": "Sidorna i den här mallen visar de mönster du kommer att använda dagligen: läsa plugin-kontext, anropa Identity Security Cloud API:er med typade SDK-tjänster och starta arbetsflöden via Launchers API.",
+		"whatHeading": "Vad kan du bygga?",
+		"whatItem1": "Instrumentpaneler som samlar data från valfritt Identity Security Cloud API",
+		"whatItem2": "Startprogram för arbetsflöden med ett klick som sätter igång dina affärsprocesser",
+		"whatItem3": "Administratörsverktyg anpassade efter din organisations styrningsbehov"
+	},
+	"status": {
+		"failed": "Misslyckades",
+		"pending": "Under behandling",
+		"ready": "Klar"
+	},
+	"workflows": {
+		"availableHeading": "Tillgängliga startprogram",
+		"disabled": "Inaktiverad",
+		"emptyState": "Inga startprogram hittades. Startprogram tilldelas användare via Launchpad-konfigurationen i Identity Security Cloud. Om du förväntar dig att se startprogram här, verifiera dina Launchpad-tilldelningar.",
+		"heading": "Startprogram för arbetsflöden",
+		"intro": "UI-plugin-program kan starta SailPoint-arbetsflöden via Launchers API. Den här sidan listar startprogram som tilldelats dig (via startytan) och låter dig starta ett. Arbetsflödet körs på serversidan och plugin-programmet tar emot ett ID för interaktiv process som är kopplat till startytan för eventuella interaktiva steg.",
+		"loadButton": "Ladda mina startprogram",
+		"openInLaunchpad": "Öppna i Launchpad →",
+		"processIdLabel": "ID för interaktiv process:",
+		"startButton": "Starta",
+		"startedHeading": "Startprogram startat"
+	}
+}

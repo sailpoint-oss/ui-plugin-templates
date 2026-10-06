@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "Exemplos de API",
+		"intro": "O SDK Angular da SailPoint fornece serviços tipados para chamar APIs do ISC. Esta página demonstra dois padrões: <strong>Observable</strong> (para pipelines reativos e vinculação a modelos) e <strong>Promise</strong> (para manipuladores de eventos e cadeias sequenciais).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> retorna um Observable. Use-o com <code>AsyncPipe</code> para o gerenciamento automático de assinaturas. Um sinal de controle determina quando o Observable é assinado.",
+		"observableButton": "Listar identidades (Observable)",
+		"observableHeading": "Padrão Observable",
+		"observableHint": "Dê preferência a Observables quando: estiver vinculando resultados diretamente a modelos, encadeando várias operações assíncronas de forma reativa ou quando precisar de cancelamento na destruição do componente.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code> encapsulado com <code>firstValueFrom()</code> converte o Observable em uma Promise. Útil para manipuladores de eventos e cadeias <code>async/await</code>.",
+		"promiseButton": "Obter locatário (Promise)",
+		"promiseHeading": "Padrão Promise",
+		"promiseHint": "Dê preferência a Promises quando: estiver respondendo a ações do usuário em manipuladores de eventos, escrevendo lógica assíncrona sequencial ou integrando-se com bibliotecas baseadas em Promises."
+	},
+	"app": {
+		"title": "Introdução aos plugins de interface do usuário"
+	},
+	"hero": {
+		"eyebrow": "Plugin de interface do usuário da SailPoint",
+		"subtitle": "Seu plugin é renderizado como um microfrontend nativo dentro do Identity Security Cloud. Ele utiliza a sessão e o modelo de segurança do locatário, portanto não há necessidade de entrar separadamente nem de hospedar nada adicional. Explore os exemplos e personalize-o.",
+		"title": "Boas-vindas ao seu plugin de interface do usuário"
+	},
+	"nav": {
+		"apiExamples": "Exemplos de API",
+		"overview": "Visão geral",
+		"workflows": "Fluxos de trabalho"
+	},
+	"overview": {
+		"gettingStartedBody": "Este modelo é seu para remodelar. A integração do SDK em <code>core/</code> lida com o handshake do App Shell, de modo que os componentes simplesmente leem os sinais e chamam os serviços. Abra a aba <strong>Fluxos de trabalho</strong> para ver como listar e iniciar lançadores e a aba <strong>Exemplos de API</strong> para os padrões Observable e Promise ao chamar as APIs do Identity Security Cloud.",
+		"gettingStartedHeading": "Primeiros passos",
+		"heading": "Crie experiências nativas dentro do Identity Security Cloud",
+		"intro": "Seu plugin é renderizado como um microfrontend diretamente dentro do Identity Security Cloud. Ele utiliza a sessão e o modelo de segurança do locatário, portanto não há necessidade de entrar separadamente, hospedagem externa nem nada adicional para proteger.",
+		"patterns": "As páginas deste modelo mostram os padrões que você usará todos os dias: leitura do contexto do plugin, chamadas às APIs do Identity Security Cloud com serviços SDK tipados e início de fluxos de trabalho por meio da API de lançadores.",
+		"whatHeading": "O que você pode criar?",
+		"whatItem1": "Painéis que reúnem dados de qualquer API do Identity Security Cloud",
+		"whatItem2": "Lançadores de fluxo de trabalho com um clique que iniciam seus processos de negócios",
+		"whatItem3": "Ferramentas de Admin adaptadas às necessidades de governança da sua organização"
+	},
+	"status": {
+		"failed": "Com falha",
+		"pending": "Pendente",
+		"ready": "Pronta"
+	},
+	"workflows": {
+		"availableHeading": "Lançadores disponíveis",
+		"disabled": "Desativado",
+		"emptyState": "Nenhum lançador encontrado. Os lançadores são atribuídos aos usuários por meio da configuração da Barra de lançamento no Identity Security Cloud. Se espera ver lançadores aqui, verifique suas atribuições da Barra de lançamento.",
+		"heading": "Inicializadores de fluxo de trabalho",
+		"intro": "Os plugins de interface do usuário podem começar fluxos de trabalho da SailPoint por meio da API de lançadores. Esta página lista os lançadores atribuídos a você, por meio da Barra de lançamento, e permite começar um deles. O fluxo de trabalho é executado no servidor; o plugin recebe um ID de Processo interativo que leva a Barra de lançamento para quaisquer etapas interativas.",
+		"loadButton": "Carregar meus lançadores",
+		"openInLaunchpad": "Abrir no Launchpad →",
+		"processIdLabel": "ID do Processo interativo:",
+		"startButton": "Iniciar",
+		"startedHeading": "Lançador iniciado"
+	}
+}
