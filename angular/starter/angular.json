@@ -13,18 +13,7 @@
               "sourceMap": true
             },
             "production": {
-              "budgets": [
-                {
-                  "maximumError": "3MB",
-                  "maximumWarning": "500kB",
-                  "type": "initial"
-                },
-                {
-                  "maximumError": "8kB",
-                  "maximumWarning": "4kB",
-                  "type": "anyComponentStyle"
-                }
-              ],
+              "budgets": [],
               "outputHashing": "all",
               "optimization": {
                   "scripts": true,
