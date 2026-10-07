@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API 示例",
+		"intro": "SailPoint Angular SDK 提供用于调用 ISC API 的类型化服务。此页面演示了两种模式：<strong>Observable</strong>（用于响应式管道和模板绑定）和 <strong>Promise</strong>（用于事件处理程序和顺序链）。",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> 返回一个 Observable。将其与 <code>AsyncPipe</code> 配合使用，以实现自动订阅管理。门控信号控制 Observable 的订阅时机。",
+		"observableButton": "列出身份（Observable）",
+		"observableHeading": "Observable 模式",
+		"observableHint": "在以下情况下优先使用 Observable：将结果直接绑定到模板、以响应式方式串联多个异步操作，或需要在组件销毁时取消操作。",
+		"promiseBody": "使用 <code>firstValueFrom()</code> 封装 <code>TenantService.getTenantV1()</code> 可将 Observable 转换为 Promise。适用于事件处理程序和 <code>async/await</code> 链。",
+		"promiseButton": "获取租户（Promise）",
+		"promiseHeading": "Promise 模式",
+		"promiseHint": "在以下情况下优先使用 Promise：在事件处理程序中响应用户操作、编写顺序异步逻辑，或与基于 Promise 的库集成。"
+	},
+	"app": {
+		"title": "UI 插件入门"
+	},
+	"hero": {
+		"eyebrow": "SailPoint UI 插件",
+		"subtitle": "您的插件作为原生微前端呈现在 Identity Security Cloud 中；它依托租户的会话和安全模型，因此无需单独登录，也无需额外托管任何内容。浏览这些示例，然后根据自己的需要进行定制。",
+		"title": "欢迎使用您的 UI 插件"
+	},
+	"nav": {
+		"apiExamples": "API 示例",
+		"overview": "概览",
+		"workflows": "工作流程"
+	},
+	"overview": {
+		"gettingStartedBody": "您可以按自己的需要重塑此模板。<code>core/</code> 中的 SDK 连接负责处理应用程序 Shell 握手，因此组件只需读取信号并调用服务。打开<strong>工作流程</strong>选项卡，了解如何列出并启动启动器；打开 <strong>API 示例</strong>选项卡，查看调用 Identity Security Cloud API 时使用的 Observable 和 Promise 模式。",
+		"gettingStartedHeading": "入门",
+		"heading": "在 Identity Security Cloud 中构建原生体验",
+		"intro": "您的插件作为微前端直接呈现在 Identity Security Cloud 中。它依托租户的会话和安全模型，因此无需单独登录、无需外部托管，也无需额外保护任何内容。",
+		"patterns": "此模板中的页面展示了您每天都会使用的模式：读取插件上下文、使用类型化 SDK 服务调用 Identity Security Cloud API，以及通过启动器 API 启动工作流程。",
+		"whatHeading": "您可以构建什么？",
+		"whatItem1": "整合任意 Identity Security Cloud API 数据的仪表板",
+		"whatItem2": "一键式工作流程启动器，用于启动您的业务流程",
+		"whatItem3": "根据您组织的治理需求定制的管理员工具"
+	},
+	"status": {
+		"failed": "失败",
+		"pending": "待处理",
+		"ready": "就绪"
+	},
+	"workflows": {
+		"availableHeading": "可用启动器",
+		"disabled": "已禁用",
+		"emptyState": "未找到启动器。启动器通过 Identity Security Cloud 中的启动板配置分配给用户。如果您预计在此处看到启动器，请验证您的启动板分配情况。",
+		"heading": "工作流启动器",
+		"intro": "UI 插件可通过启动器 API 启动 SailPoint 工作流程。此页面会列出（通过启动板）分配给您的启动器，并允许您启动其中一个。工作流程在服务器端运行；插件会收到一个交互式流程 ID，该 ID 会链接到启动板，以便执行任何交互步骤。",
+		"loadButton": "加载我的启动器",
+		"openInLaunchpad": "在启动板中打开 →",
+		"processIdLabel": "交互式流程 ID：",
+		"startButton": "开始",
+		"startedHeading": "启动器已启动"
+	}
+}

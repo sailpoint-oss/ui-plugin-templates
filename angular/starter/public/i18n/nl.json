@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API-voorbeelden",
+		"intro": "De SailPoint Angular SDK biedt getypeerde services voor het aanroepen van ISC-API's. Deze pagina demonstreert twee patronen: <strong>Observable</strong> voor reactieve pijplijnen en sjabloonbinding, en <strong>Promise</strong> voor gebeurtenisafhandelaars en sequentiële ketens.",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> retourneert een Observable. Gebruik deze met <code>AsyncPipe</code> voor automatisch abonnementsbeheer. Een gatesignaal bepaalt wanneer er een abonnement op de Observable wordt genomen.",
+		"observableButton": "Identiteiten weergeven (Observable)",
+		"observableHeading": "Observable-patroon",
+		"observableHint": "Gebruik bij voorkeur Observables wanneer u resultaten rechtstreeks aan sjablonen koppelt, meerdere asynchrone bewerkingen reactief koppelt of annulering nodig hebt wanneer een component wordt verwijderd.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code>, verpakt met <code>firstValueFrom()</code>, converteert de Observable naar een Promise. Dit is nuttig voor gebeurtenisafhandelaars en <code>async/await</code>-ketens.",
+		"promiseButton": "Tenant ophalen (Promise)",
+		"promiseHeading": "Promise-patroon",
+		"promiseHint": "Gebruik bij voorkeur Promises wanneer u reageert op gebruikersacties in gebeurtenisafhandelaars, sequentiële asynchrone logica schrijft of integreert met bibliotheken die op Promises zijn gebaseerd."
+	},
+	"app": {
+		"title": "UI Plugin-starter"
+	},
+	"hero": {
+		"eyebrow": "SailPoint UI-plugin",
+		"subtitle": "Uw plugin wordt weergegeven als een native micro-frontend binnen Identiteit Security Cloud. De plugin gebruikt de sessie en het beveiligingsmodel van de tenant, dus er is geen afzonderlijke aanmelding en niets extra's om te hosten. Verken de voorbeelden en maak de plugin vervolgens helemaal eigen.",
+		"title": "Welkom bij uw UI-plugin"
+	},
+	"nav": {
+		"apiExamples": "API-voorbeelden",
+		"overview": "Overzicht",
+		"workflows": "Workflows"
+	},
+	"overview": {
+		"gettingStartedBody": "U kunt deze sjabloon naar eigen inzicht aanpassen. De SDK-integratie in <code>core/</code> verwerkt de App Shell-handshake, zodat componenten alleen signalen lezen en services aanroepen. Open het tabblad <strong>Workflows</strong> om te zien hoe u launchers kunt weergeven en starten, en het tabblad <strong>API-voorbeelden</strong> voor de Observable- en Promise-patronen bij het aanroepen van Identity Security Cloud-API's.",
+		"gettingStartedHeading": "Aan de slag",
+		"heading": "Bouw native ervaringen binnen Identity Security Cloud",
+		"intro": "Uw plugin wordt als micro-frontend rechtstreeks binnen Identiteit Security Cloud weergegeven. De plugin gebruikt de sessie en het beveiligingsmodel van de tenant, dus er is geen afzonderlijke aanmelding, geen externe hosting en niets extra's om te beveiligen.",
+		"patterns": "De pagina's in deze sjabloon tonen de patronen die u elke dag zult gebruiken: plugincontext lezen, Identity Security Cloud-API's aanroepen met getypeerde SDK-services en workflows starten via de Launchers-API.",
+		"whatHeading": "Wat kunt u bouwen?",
+		"whatItem1": "Dashboards die gegevens van elke Identity Security Cloud-API samenbrengen",
+		"whatItem2": "Workflowlaunchers met één klik die uw bedrijfsprocessen starten",
+		"whatItem3": "Beheerderstools afgestemd op de governancebehoeften van uw organisatie"
+	},
+	"status": {
+		"failed": "Mislukt",
+		"pending": "In behandeling",
+		"ready": "Klaar"
+	},
+	"workflows": {
+		"availableHeading": "Beschikbare launchers",
+		"disabled": "Uitgeschakeld",
+		"emptyState": "Geen launchers gevonden. Launchers worden aan gebruikers toegewezen via de Launchpad-configuratie in Identity Security Cloud. Als u verwacht hier launchers te zien, verifieer dan uw Launchpad-toewijzingen.",
+		"heading": "Workflowlaunchers",
+		"intro": "UI-plugins kunnen SailPoint Workflows starten via de Launchers-API. Deze pagina toont de launchers die aan u zijn toegewezen via Launchpad en stelt u in staat er één te starten. De workflow wordt uitgevoerd op de server. De plugin ontvangt een interactief proces-id dat naar Launchpad verwijst voor eventuele interactieve stappen.",
+		"loadButton": "Mijn launchers laden",
+		"openInLaunchpad": "Openen in Launchpad →",
+		"processIdLabel": "Interactief proces-id:",
+		"startButton": "Beginnen",
+		"startedHeading": "Launcher gestart"
+	}
+}

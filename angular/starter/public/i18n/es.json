@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "Ejemplos de API",
+		"intro": "El SDK de Angular de SailPoint proporciona servicios tipados para llamar a las API de ISC. Esta página muestra dos patrones: <strong>Observable</strong> (para canalizaciones reactivas y vinculación a plantillas) y <strong>Promise</strong> (para controladores de eventos y cadenas secuenciales).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> devuelve un Observable. Úselo con <code>AsyncPipe</code> para gestionar automáticamente las suscripciones. Una señal de control determina cuándo se realiza la suscripción al Observable.",
+		"observableButton": "Enumerar identidades (Observable)",
+		"observableHeading": "Patrón observable",
+		"observableHint": "Prefiera los Observables cuando: vincule los resultados directamente a las plantillas, encadene de forma reactiva varias operaciones asíncronas o necesite cancelar la operación al destruir el componente.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code>, envuelto con <code>firstValueFrom()</code>, convierte el Observable en una Promise. Es útil para controladores de eventos y cadenas de <code>async/await</code>.",
+		"promiseButton": "Obtener tenant (promesa)",
+		"promiseHeading": "Patrón Promise",
+		"promiseHint": "Prefiera las Promises cuando: responda a acciones del usuario en controladores de eventos, escriba lógica asíncrona secuencial o se integre con bibliotecas basadas en Promise."
+	},
+	"app": {
+		"title": "Inicio del complemento de IU"
+	},
+	"hero": {
+		"eyebrow": "Plugin de interfaz de usuario de SailPoint",
+		"subtitle": "Su complemento se muestra como un microfrontend nativo dentro de Identity Security Cloud; aprovecha la sesión y el modelo de seguridad del tenant, por lo que no hay un inicio de sesión independiente ni nada adicional que alojar. Explore los ejemplos y, luego, adáptelos a sus necesidades.",
+		"title": "Te damos la bienvenida a tu complemento de IU"
+	},
+	"nav": {
+		"apiExamples": "Ejemplos de API",
+		"overview": "Resumen",
+		"workflows": "Flujos de trabajo"
+	},
+	"overview": {
+		"gettingStartedBody": "Esta plantilla es suya para modificarla. La configuración del SDK en <code>core/</code> gestiona el protocolo de enlace con App Shell, por lo que los componentes simplemente leen señales y llaman a servicios. Abra la pestaña <strong>Flujos de trabajo</strong> para ver cómo enumerar e iniciar lanzadores, y la pestaña <strong>Ejemplos de API</strong> para consultar los patrones Observable y Promise al llamar a las API de Identity Security Cloud.",
+		"gettingStartedHeading": "Cómo empezar",
+		"heading": "Cree experiencias nativas dentro de Identity Security Cloud",
+		"intro": "Su complemento se muestra como un microfrontend directamente dentro de Identity Security Cloud. Aprovecha la sesión y el modelo de seguridad del tenant, por lo que no hay un inicio de sesión independiente, alojamiento externo ni nada adicional que proteger.",
+		"patterns": "Las páginas de esta plantilla muestran los patrones que utilizará todos los días: leer el contexto del complemento, llamar a las API de Identity Security Cloud con servicios SDK tipados e iniciar flujos de trabajo mediante la API de Launcher (lanzador).",
+		"whatHeading": "¿Qué puede crear?",
+		"whatItem1": "Paneles que reúnen datos de cualquier API de Identity Security Cloud",
+		"whatItem2": "Lanzadores de flujos de trabajo con un solo clic que inician sus procesos empresariales",
+		"whatItem3": "Herramientas de Admin adaptadas a las necesidades de gobierno de su organización"
+	},
+	"status": {
+		"failed": "Error",
+		"pending": "Pendiente",
+		"ready": "Listo"
+	},
+	"workflows": {
+		"availableHeading": "Lanzadores disponibles",
+		"disabled": "Deshabilitada",
+		"emptyState": "No se encontraron lanzadores. Los lanzadores se asignan a los usuarios mediante la configuración de Launchpad (panel de lanzadores) en Identity Security Cloud. Si espera ver lanzadores aquí, verifique sus asignaciones de Launchpad (panel de lanzadores).",
+		"heading": "Lanzadores de flujos de trabajo",
+		"intro": "Los complementos de UI pueden iniciar flujos de trabajo de SailPoint mediante la API de Launcher (lanzador). Esta página enumera los lanzadores que tiene asignados, a través de Launchpad (panel de lanzadores), y le permite iniciar uno. El flujo de trabajo se ejecuta en el servidor; el complemento recibe un ID de proceso interactivo que se vincula a Launchpad (panel de lanzadores) para cualquier paso interactivo.",
+		"loadButton": "Cargar mis lanzadores",
+		"openInLaunchpad": "Abrir en Launchpad (panel de lanzadores) →",
+		"processIdLabel": "ID de proceso interactivo:",
+		"startButton": "Iniciar",
+		"startedHeading": "Lanzador iniciado"
+	}
+}
