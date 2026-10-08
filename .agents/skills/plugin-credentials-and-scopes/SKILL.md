@@ -37,4 +37,4 @@ A plugin starts a SailPoint Workflow through the Launchers API:
 
 - Plugin authentication architecture — scoped tokens, mint-time scope enforcement: Confluence page `4732190936`.
 - SailPoint Workflows: https://documentation.sailpoint.com/saas/help/workflows/index.html
-- `SAILPOINT_PLUGIN_GUIDE.md` in the project root for manifest and SDK basics.
+- The plugin guide in the project root (`SAILPOINT_PLUGIN_GUIDE.md`, or `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the Angular starter) for manifest and SDK basics.

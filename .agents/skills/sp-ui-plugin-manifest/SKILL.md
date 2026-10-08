@@ -5,7 +5,7 @@ description: Use when editing `sp-ui-plugin.json`, choosing a plugin alias, decl
 
 # The `sp-ui-plugin.json` manifest
 
-`sp-ui-plugin.json` is the source of truth for the plugin's identity and security posture — treat it as the contract with the backend. Read "The configuration file" section of `SAILPOINT_PLUGIN_GUIDE.md` (or the Angular guide) in the project root for the annotated example.
+`sp-ui-plugin.json` is the source of truth for the plugin's identity and security posture — treat it as the contract with the backend. This skill is the field reference; the plugin guide in the project root (`SAILPOINT_PLUGIN_GUIDE.md`, or `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the Angular starter) gives the surrounding context.
 
 ## Two sections
 
