@@ -15,6 +15,7 @@ ui-plugin-templates/
   angular/
     starter/                               # canonical Angular starter — what `init` scaffolds from
       SAILPOINT_PLUGIN_GUIDE_ANGULAR.md    # Angular-specific plugin guide
+      .claude/skills/                      # agent skills scaffolded into every new workspace
 ```
 
 Each framework lives in its own top-level folder. Today only Angular is provided. Additional frameworks can be added over time. Within a framework, `starter/` is the minimal, prewired baseline.
@@ -47,6 +48,14 @@ Two complete, self-contained plugin guides are provided. Each stands on its own.
 
 - [`SAILPOINT_PLUGIN_GUIDE.md`](SAILPOINT_PLUGIN_GUIDE.md) — framework-agnostic guide for wiring the SDK into an existing project (`sail ui-plugins init --path`) or by hand: SDK install, HTTPS/dev-server setup, manifest updates, and design-token setup.
 - [`angular/starter/SAILPOINT_PLUGIN_GUIDE_ANGULAR.md`](angular/starter/SAILPOINT_PLUGIN_GUIDE_ANGULAR.md) — Angular-specific guide, matching what `sail ui-plugins init` scaffolds from the Angular starter.
+
+## Agent skills
+
+The Angular starter ships agent skills in `angular/starter/.claude/skills/`, so every workspace scaffolded by `sail ui-plugins init` gets them. Claude Code and Cursor load skills from `.claude/skills/` automatically, and any other coding agent can read them as Markdown.
+
+- `animating-ui-plugins`: Angular view-encapsulation pitfalls with imperative DOM and component `@keyframes`, animations that play under `ng serve` but freeze in the production build, and verifying animations against a built bundle.
+
+These skills are Angular-specific; they complement `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` rather than repeat it.
 
 ## Contributing
 
