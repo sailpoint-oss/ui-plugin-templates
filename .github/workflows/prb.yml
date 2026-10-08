@@ -43,3 +43,74 @@ jobs:
       - name: Build
         working-directory: ${{ matrix.path }}
         run: npm run build
+
+  skill-collisions:
+    name: Skill name collisions
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fail if a repo-wide skill would overwrite a framework skill
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # At `sail ui-plugins init`, the repo-wide (framework-agnostic) skills
+          # in /.agents/skills/ are merged into the scaffolded project's
+          # .agents/skills/ alongside the framework starter's own skills. A skill
+          # folder present in BOTH would overwrite on merge, so that combination
+          # is forbidden. Two DIFFERENT frameworks may reuse a name — they never
+          # scaffold into the same project — so only root-vs-framework counts.
+          #
+          # Exception: a repo-wide skill whose frontmatter sets
+          # `metadata.sailpoint-merge: path-only` is NOT merged into framework
+          # starters (it ships only to `init --path` projects), so it can never
+          # collide with a framework skill and is excluded below. Absence of the
+          # flag means "merge into every framework" — the default.
+
+          all="$(mktemp)"
+          find . -path '*/.agents/skills/*' -name SKILL.md -not -path './node_modules/*' \
+            | grep -E '/\.agents/skills/[^/]+/SKILL\.md$' | sort -u > "$all" || true
+
+          # Repo-wide skill names that WILL merge into frameworks. A skill marked
+          # `metadata.sailpoint-merge: path-only` ships only to `init --path`, so
+          # it never reaches a framework and is excluded from the comparison.
+          root_names="$(mktemp)"
+          : > "$root_names"
+          while IFS= read -r md; do
+            [ -z "$md" ] && continue
+            # Extract the YAML frontmatter (between the first two `---` lines).
+            fm="$(awk 'NR==1 && /^---[[:space:]]*$/ {f=1; next} f && /^---[[:space:]]*$/ {exit} f {print}' "$md")"
+            if printf '%s\n' "$fm" | grep -Eq '^[[:space:]]*sailpoint-merge:[[:space:]]*path-only[[:space:]]*$'; then
+              echo "note: ${md#./} is marked sailpoint-merge: path-only — excluded from framework-collision checks"
+              continue
+            fi
+            printf '%s\n' "$md" | sed -E 's#^\./\.agents/skills/([^/]+)/SKILL\.md$#\1#' >> "$root_names"
+          done < <(grep -E '^\./\.agents/skills/[^/]+/SKILL\.md$' "$all")
+          sort -u -o "$root_names" "$root_names"
+
+          # Distinct framework skill locations: everything else that has a
+          # .agents/skills/ (for example ./angular/starter/.agents/skills/).
+          locs="$(mktemp)"
+          grep -vE '^\./\.agents/skills/[^/]+/SKILL\.md$' "$all" \
+            | sed -E 's#(/\.agents/skills/)[^/]+/SKILL\.md$#\1#' | sort -u > "$locs" || true
+
+          collisions=0
+          while IFS= read -r loc; do
+            [ -z "$loc" ] && continue
+            fw_names="$(mktemp)"
+            find "$loc" -mindepth 2 -maxdepth 2 -name SKILL.md 2>/dev/null \
+              | sed -E 's#.*/([^/]+)/SKILL\.md$#\1#' | sort -u > "$fw_names"
+            while IFS= read -r name; do
+              [ -z "$name" ] && continue
+              echo "::error::Skill '$name' exists in both ./.agents/skills/ (repo-wide) and ${loc#./} (framework). These merge into one .agents/skills/ at \`init\` and would overwrite — rename one."
+              collisions=$((collisions + 1))
+            done < <(comm -12 "$root_names" "$fw_names")
+          done < "$locs"
+
+          if [ "$collisions" -ne 0 ]; then
+            echo "Found $collisions repo-wide/framework skill name collision(s)." >&2
+            exit 1
+          fi
+          echo "No repo-wide/framework skill name collisions."

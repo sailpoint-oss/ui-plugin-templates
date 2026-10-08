@@ -1,6 +1,6 @@
 # SailPoint UI Plugin Guide
 
-> Framework-agnostic guide for building a SailPoint Identity Security UI plugin and wiring the SDK into your own project. It is intentionally self-contained so both humans and AI coding assistants have full context without external lookups.
+> Framework-agnostic guide for building a SailPoint Identity Security UI plugin and wiring the SDK into your own project. It covers the high-level workflow and the SDK and bundler specifics that apply to any framework; the manifest contract, the CLI lifecycle, and credentials/scopes are covered in depth by the agent skills under `.agents/skills/`, which this guide points to.
 >
 > Using the Angular starter? See the Angular-specific guide instead (`angular/starter/SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the `ui-plugin-templates` repository). You only need the one guide that matches how you started.
 
@@ -11,51 +11,19 @@
 - Network calls to SailPoint APIs use a **scoped token** limited to the `apiScopes` declared in `sp-ui-plugin.json`. A call to an undeclared scope fails the same way locally as in production.
 - `sp-ui-plugin.json` is the source of truth for the plugin's identity and security posture. Treat it as the contract with the backend.
 - Build tooling is your framework's own. The SailPoint CLI orchestrates registration and deployment. The CLI does not replace your bundler.
+- Framework-agnostic agent skills live under `.agents/skills/` (for example `plugin-credentials-and-scopes`, covering credentials, API scopes, and elevated access). Compatible coding agents load them automatically from `.agents/skills/`; otherwise read each `SKILL.md` directly before related work.
 
-## The configuration file: `sp-ui-plugin.json`
+## Configuration: `sp-ui-plugin.json`
 
-```jsonc
-{
-    "version": 1,
-    "manifest": {
-        "alias": "",                    // tenant-unique, path-safe key (lowercase,
-                                        // alphanumeric + dashes, 3-63 chars)
-        "name": { "en": "" },           // localized display name
-        "description": { "en": "" },    // localized description
-        "apiScopes": ["sp:scopes:all"], // SailPoint API scopes the plugin may use
-        "permissionPolicy": {},         // Permissions-Policy directives
-        "iframeAllow": {},              // iframe `allow` directives (object form)
-        "contentSecurityPolicies": {},  // CSP directives for the plugin's assets
-        "slots": [{ "slotId": "full-page" }]
-    },
-    "build": {
-        "outDir": "./dist/<your-build-output>", // compiled assets uploaded on deploy
-        "port": 4200                            // local dev server port
-    }
-}
-```
+`sp-ui-plugin.json` is the plugin's identity and security contract with the backend. The `manifest` section is sent to the tenant; the `build` section (`outDir`, `port`) stays local — set `build.outDir` to your framework's compiled output directory and `build.port` to your dev server's port. The **alias** is a stable, environment-independent key, so the same code promotes across tenants. The CLI generates the file on `init` / `init --path`.
 
-- **`manifest`** is sent verbatim to the backend. **`build`** is local-only and is not sent to the backend.
-- Set **`build.outDir`** to your framework's compiled output directory, and **`build.port`** to the port your local dev server listens on.
-- Security fields (`permissionPolicy`, `iframeAllow`, `contentSecurityPolicies`) are declarative — edit them by hand as your plugin needs them. The CLI validates the file against the expected schema before deploying.
-- The **alias** is a stable, environment-independent key. The same alias maps to a different plugin instance in each tenant, so you can deploy the same code to staging and production without juggling GUIDs.
-
-### Updating the manifest
-
-The SailPoint CLI generates `sp-ui-plugin.json` when you run `init` (default scaffold or `init --path`). Review the file and edit it as your plugin needs.
-
-| When you edit | What to do |
-|---|---|
-| After `init`, before `create` | Edit `sp-ui-plugin.json`. Then run `sail ui-plugins create`. |
-| After `create` | Edit `sp-ui-plugin.json`. Then run `sail ui-plugins push-manifest` (alias `update`) to send the updated `manifest` section to the tenant. |
-
-The `build` section is local only. It is never sent to the backend. If you change manifest security fields after `create`, run `push-manifest`. Then run `link` again if you need refreshed `devDocumentHeaders` for local dev.
+For the field reference, alias rules, `apiScopes`, the declarative security fields, and when an edit needs `push-manifest`, see the **`sp-ui-plugin-manifest`** skill.
 
 ## Quick start (existing project)
 
 Use this checklist when you add plugin support to a project that already exists. The steps apply to any framework and any bundler.
 
-1. Run `sail ui-plugins init --path <dir> --out-dir <build-output> --port <port>` to generate `sp-ui-plugin.json` and this guide. If you do not use the CLI, add `sp-ui-plugin.json` at the project root yourself. Review `build.outDir` and `build.port` and match them to your bundler (see [Updating the manifest](#updating-the-manifest)).
+1. Run `sail ui-plugins init --path <dir> --out-dir <build-output> --port <port>` to generate `sp-ui-plugin.json` and this guide. If you do not use the CLI, add `sp-ui-plugin.json` at the project root yourself. Review `build.outDir` and `build.port` and match them to your bundler (see the `sp-ui-plugin-manifest` skill).
 2. Install `@sailpoint/ui-plugin-sdk` and `sailpoint-api-client` (see [SDK setup](#sdk-setup)).
 3. Create one SDK singleton. Start `getContext()` once at startup (see [Reference singleton](#reference-singleton)).
 4. Expose `status` and `context` through your app's state mechanism (see [Plugin bootstrap contract](#plugin-bootstrap-contract)).
@@ -67,15 +35,7 @@ Import SailPoint design tokens when you want host styling (see [Design tokens / 
 
 ## Local development
 
-The SailPoint CLI registers your plugin and links your local server for in-tenant development (see [SailPoint CLI](#sailpoint-cli)). The development loop is:
-
-1. Register the plugin with your tenant.
-2. Start your framework's dev server over HTTPS on `build.port`.
-3. Link your local server to your identity. Open the returned developer URL (`?spPluginDev=<alias>`). If you are authorized, the host loads your local code inside the live tenant with a local-dev badge. You get a real handshake, a real scoped token, and live data.
-
-Because local dev uses a real scoped token from your declared `apiScopes`, an endpoint you did not declare fails locally the same way it fails in production. Add scopes to `sp-ui-plugin.json` before you need them. If you already ran `create`, run `push-manifest` after you add scopes.
-
-For plugin-document security headers during local dev, see [Local dev document headers](#local-dev-document-headers).
+The SailPoint CLI registers your plugin and links your local server into the live tenant; opening the developer URL (`?spPluginDev=<alias>`) gives you a real handshake, a scoped token, and live data. Because local dev uses a real scoped token, an endpoint you did not declare in `apiScopes` fails locally exactly as in production. See the **`plugin-lifecycle-cli`** skill for the full loop and the "which command after a manifest edit?" decisions, and [Local dev document headers](#local-dev-document-headers) for CSP parity.
 
 ### Expected behavior: standalone vs in-tenant
 
@@ -160,7 +120,7 @@ If you scaffolded with the default `sail ui-plugins init` flow (Angular template
 
 ### Manifest security fields
 
-`sp-ui-plugin.json` `contentSecurityPolicies` and `permissionPolicy` do **not** directly configure dev-server headers. If you change manifest security fields after `create`, run `push-manifest`. UMS merges those changes with the platform baseline. Then create/link returns updated `devDocumentHeaders` for you to apply to your dev server. On the Angular path, the CLI writes them into `angular.json`.
+`sp-ui-plugin.json` `contentSecurityPolicies` and `permissionPolicy` do **not** directly configure dev-server headers; UMS merges them with the platform baseline and create/link returns updated `devDocumentHeaders` to apply. See the **`sp-ui-plugin-manifest`** and **`plugin-lifecycle-cli`** skills.
 
 ## Building and deploying
 
