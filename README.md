@@ -52,7 +52,7 @@ Two complete, self-contained plugin guides are provided. Each stands on its own.
 
 ## Agent skills
 
-Agent skills live in `.agents/skills/` — the cross-client convention, so compatible coding agents load them automatically and any other agent can read them as Markdown. Framework-agnostic skills live at the repository root; Angular-specific skills live under `angular/starter/` and are scaffolded into every workspace by `sail ui-plugins init`.
+Agent skills live in `.agents/skills/` — the cross-client convention, so compatible coding agents load them automatically and any other agent can read them as Markdown. Framework-agnostic skills live at the repository root; framework-specific skills live under each framework's starter (today, `angular/starter/`). See [How skills are delivered](#how-skills-are-delivered) for how they reach a scaffolded project and how to change that.
 
 **Framework-agnostic** (`/.agents/skills/`):
 
@@ -69,6 +69,29 @@ Agent skills live in `.agents/skills/` — the cross-client convention, so compa
 - `animating-ui-plugins`: Angular view-encapsulation pitfalls with imperative DOM and component `@keyframes`, animations that play under `ng serve` but freeze in the production build, and verifying animations against a built bundle.
 
 The skills complement the plugin guides rather than repeat them.
+
+### How skills are delivered
+
+`sail ui-plugins init` assembles a project's `.agents/skills/` from two sources:
+
+- **Framework skills** (for example `angular/starter/.agents/skills/`) ship as part of the starter that `init` scaffolds. They reach a project only when you scaffold that framework.
+- **Repo-wide skills** (`/.agents/skills/`) are merged into the scaffolded workspace on top of the framework skills, and are also delivered to existing projects by `sail ui-plugins init --path`.
+
+So a new Angular workspace gets the Angular skills **plus** the repo-wide skills; an `init --path` project gets the repo-wide skills **only** (no framework skills, since the target may be any framework).
+
+**No name collisions.** A repo-wide skill and a framework skill must not use the same folder name — at `init` they would merge into one `.agents/skills/` and overwrite each other. CI (the `Skill name collisions` check in the PRB workflow) fails the build if this happens. Two different frameworks may reuse a name, because they never scaffold into the same project.
+
+**Changing the merge strategy.** By default every repo-wide skill is merged into every framework starter. A skill that should *not* reach framework starters — for example a framework-agnostic skill whose guidance would be wrong inside a specific framework, where a framework-specific version is authored instead — opts out in its `SKILL.md` frontmatter:
+
+```yaml
+metadata:
+  sailpoint-merge: path-only
+```
+
+- **Absent (default):** merged into every framework starter and into `init --path` projects.
+- **`path-only`:** not merged into framework starters; delivered only by `init --path`.
+
+Both the CLI merge and the collision check read this flag, so a `path-only` skill may safely share a name with a framework skill (they never land in the same project).
 
 ## Contributing
 

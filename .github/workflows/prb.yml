@@ -62,15 +62,33 @@ jobs:
           # folder present in BOTH would overwrite on merge, so that combination
           # is forbidden. Two DIFFERENT frameworks may reuse a name — they never
           # scaffold into the same project — so only root-vs-framework counts.
+          #
+          # Exception: a repo-wide skill whose frontmatter sets
+          # `metadata.sailpoint-merge: path-only` is NOT merged into framework
+          # starters (it ships only to `init --path` projects), so it can never
+          # collide with a framework skill and is excluded below. Absence of the
+          # flag means "merge into every framework" — the default.
 
           all="$(mktemp)"
           find . -path '*/.agents/skills/*' -name SKILL.md -not -path './node_modules/*' \
             | grep -E '/\.agents/skills/[^/]+/SKILL\.md$' | sort -u > "$all" || true
 
-          # Repo-wide skill names: ./.agents/skills/<name>/SKILL.md
+          # Repo-wide skill names that WILL merge into frameworks. A skill marked
+          # `metadata.sailpoint-merge: path-only` ships only to `init --path`, so
+          # it never reaches a framework and is excluded from the comparison.
           root_names="$(mktemp)"
-          grep -E '^\./\.agents/skills/[^/]+/SKILL\.md$' "$all" \
-            | sed -E 's#^\./\.agents/skills/([^/]+)/SKILL\.md$#\1#' | sort -u > "$root_names" || true
+          : > "$root_names"
+          while IFS= read -r md; do
+            [ -z "$md" ] && continue
+            # Extract the YAML frontmatter (between the first two `---` lines).
+            fm="$(awk 'NR==1 && /^---[[:space:]]*$/ {f=1; next} f && /^---[[:space:]]*$/ {exit} f {print}' "$md")"
+            if printf '%s\n' "$fm" | grep -Eq '^[[:space:]]*sailpoint-merge:[[:space:]]*path-only[[:space:]]*$'; then
+              echo "note: ${md#./} is marked sailpoint-merge: path-only — excluded from framework-collision checks"
+              continue
+            fi
+            printf '%s\n' "$md" | sed -E 's#^\./\.agents/skills/([^/]+)/SKILL\.md$#\1#' >> "$root_names"
+          done < <(grep -E '^\./\.agents/skills/[^/]+/SKILL\.md$' "$all")
+          sort -u -o "$root_names" "$root_names"
 
           # Distinct framework skill locations: everything else that has a
           # .agents/skills/ (for example ./angular/starter/.agents/skills/).
