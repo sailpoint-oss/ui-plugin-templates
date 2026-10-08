@@ -12,10 +12,11 @@ UI plugins are JavaScript applications. SailPoint Identity Security runs them in
 ui-plugin-templates/
   README.md
   SAILPOINT_PLUGIN_GUIDE.md                # generic, framework-agnostic plugin guide
+  .agents/skills/                          # framework-agnostic agent skills (shared across templates)
   angular/
     starter/                               # canonical Angular starter — what `init` scaffolds from
       SAILPOINT_PLUGIN_GUIDE_ANGULAR.md    # Angular-specific plugin guide
-      .claude/skills/                      # agent skills scaffolded into every new workspace
+      .agents/skills/                      # Angular-specific agent skills, scaffolded by `init`
 ```
 
 Each framework lives in its own top-level folder. Today only Angular is provided. Additional frameworks can be added over time. Within a framework, `starter/` is the minimal, prewired baseline.
@@ -51,11 +52,23 @@ Two complete, self-contained plugin guides are provided. Each stands on its own.
 
 ## Agent skills
 
-The Angular starter ships agent skills in `angular/starter/.claude/skills/`, so every workspace scaffolded by `sail ui-plugins init` gets them. Claude Code and Cursor load skills from `.claude/skills/` automatically, and any other coding agent can read them as Markdown.
+Agent skills live in `.agents/skills/` — the cross-client convention, so compatible coding agents load them automatically and any other agent can read them as Markdown. Framework-agnostic skills live at the repository root; Angular-specific skills live under `angular/starter/` and are scaffolded into every workspace by `sail ui-plugins init`.
 
+**Framework-agnostic** (`/.agents/skills/`):
+
+- `plugin-credentials-and-scopes`: why embedding a PAT, API key, or secret is unsafe; using manifest `apiScopes` to act on behalf of the signed-in user (scope only narrows, never grants); and triggering a workflow via the Launchers API for elevated actions.
+- `sp-ui-plugin-manifest`: the `sp-ui-plugin.json` contract — alias rules, `apiScopes`, security fields, manifest-vs-build, and when a change needs `push-manifest`.
+- `plugin-lifecycle-cli`: the `sail ui-plugins` lifecycle (init, create, link, build, deploy) and which command to run after a manifest change.
+
+**Angular** (`angular/starter/.agents/skills/`):
+
+- `calling-sailpoint-apis-angular`: `SailpointPluginService` context signals, `@sailpoint/angular-sdk` services, `plugin.get()`/`post()`, Observable vs `firstValueFrom`, and handshake gating.
+- `plugin-theming-primeng`: PrimeNG + SailPoint Design System theme preset, design tokens, typography utilities, icons, and iframe CSS isolation.
+- `plugin-translations-i18n`: ngx-translate setup, adding labels and languages, and ISC's 22-language parity.
+- `plugin-routing-angular`: hash location strategy, lazy `loadComponent` routes, and the ISC sidebar pattern.
 - `animating-ui-plugins`: Angular view-encapsulation pitfalls with imperative DOM and component `@keyframes`, animations that play under `ng serve` but freeze in the production build, and verifying animations against a built bundle.
 
-These skills are Angular-specific; they complement `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` rather than repeat it.
+The skills complement the plugin guides rather than repeat them.
 
 ## Contributing
 
