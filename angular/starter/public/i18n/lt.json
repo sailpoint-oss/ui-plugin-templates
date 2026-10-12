@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API pavyzdžiai",
+		"intro": "SailPoint Angular SDK teikia tipizuotas paslaugas ISC API iškviesti. Šiame puslapyje pateikiami du šablonai: <strong>Observable</strong> (reaktyviosioms sekoms ir susiejimui su šablonais) ir <strong>Promise</strong> (įvykių tvarkytuvėms ir nuosekliosioms sekoms).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> grąžina Observable. Naudokite jį su <code>AsyncPipe</code>, kad prenumeratos būtų valdomos automatiškai. Valdymo signalas kontroliuoja, kada prenumeruojamas Observable.",
+		"observableButton": "Tapatybių sąrašas (Observable)",
+		"observableHeading": "Stebimas šablonas",
+		"observableHint": "Pirmenybę teikite Observable, kai rezultatus tiesiogiai susiejate su šablonais, reaktyviai sujungiate kelias asinchronines operacijas arba kai reikia atšaukimo sunaikinant komponentą.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code>, apgaubtas <code>firstValueFrom()</code>, konvertuoja Observable į Promise. Naudinga įvykių tvarkytuvėms ir <code>async/await</code> sekoms.",
+		"promiseButton": "Gauti nuomotoją (Promise)",
+		"promiseHeading": "Promise šablonas",
+		"promiseHint": "Pirmenybę teikite Promise, kai reaguojate į naudotojo veiksmus įvykių tvarkytuvėse, rašote nuoseklią asinchroninę logiką arba integruojate su Promise pagrįstomis bibliotekomis."
+	},
+	"app": {
+		"title": "UI papildinio pradinis šablonas"
+	},
+	"hero": {
+		"eyebrow": "SailPoint UI papildinys",
+		"subtitle": "Jūsų papildinys pateikiamas kaip vietinė mikrosąsaja „Identity Security Cloud“ sistemoje; jis naudoja nuomotojo seansą ir saugos modelį, todėl nereikia atskiro prisijungimo ar papildomo prieglobos sprendimo. Peržiūrėkite pavyzdžius, tada pritaikykite jį savo poreikiams.",
+		"title": "Sveiki atvykę į savo UI papildinį"
+	},
+	"nav": {
+		"apiExamples": "API pavyzdžiai",
+		"overview": "Peržiūra",
+		"workflows": "Darbo eigos"
+	},
+	"overview": {
+		"gettingStartedBody": "Šį šabloną galite pertvarkyti pagal savo poreikius. SDK sąranka, esanti <code>core/</code>, tvarko Programos apvalkalo susiejimą, todėl komponentai tiesiog nuskaito signalus ir iškviečia paslaugas. Atidarykite skirtuką <strong>Darbo eigos</strong>, kad sužinotumėte, kaip pateikti paleidyklių sąrašą ir jas pradėti, o skirtuką <strong>API pavyzdžiai</strong> - kad peržiūrėtumėte Observable ir Promise šablonus, skirtus Tapatybės saugumo debesijos API iškviesti.",
+		"gettingStartedHeading": "Pradžia",
+		"heading": "Kurkite vietines funkcijas „Identity Security Cloud“ sistemoje",
+		"intro": "Jūsų papildinys pateikiamas kaip mikrosąsaja tiesiogiai „Identity Security Cloud“ sistemoje. Jis naudoja nuomotojo seansą ir saugos modelį, todėl nereikia atskiro prisijungimo, išorinės prieglobos ar papildomų saugos priemonių.",
+		"patterns": "Šio šablono puslapiuose rodomi kasdien naudojami šablonai: papildinio konteksto nuskaitymas, Tapatybės saugumo debesijos API iškvietimas naudojant tipizuotas SDK paslaugas ir darbo eigų paleidimas naudojant Paleidyklių API.",
+		"whatHeading": "Ką galite sukurti?",
+		"whatItem1": "Ataskaitų sritys, apjungiančios duomenis iš bet kurios Tapatybės saugumo debesijos API",
+		"whatItem2": "Vienu spustelėjimu paleidžiamos darbo eigos, kurios pradeda jūsų verslo procesus",
+		"whatItem3": "Administratoriaus įrankiai, pritaikyti jūsų organizacijos valdymo poreikiams"
+	},
+	"status": {
+		"failed": "Nepavyko",
+		"pending": "Laukiama",
+		"ready": "Paruošta"
+	},
+	"workflows": {
+		"availableHeading": "Galimos paleidyklės",
+		"disabled": "Išjungta",
+		"emptyState": "Paleidyklių nerasta. Paleidyklės naudotojams priskiriamos naudojant Paleidimo srities konfigūraciją Tapatybės saugumo debesijoje. Jei tikitės čia matyti paleidykles, patvirtinkite Paleidimo srities priskyrimus.",
+		"heading": "Darbo srauto paleidimo programos",
+		"intro": "UI papildiniai gali pradėti SailPoint darbo eigas per Paleidyklių API. Šiame puslapyje pateikiamos jums priskirtos paleidyklės (per Paleidimo sritį) ir galite pradėti vieną iš jų. Darbo eiga vykdoma serverio pusėje; papildinys gauna Sąveikiojo proceso ID, kuris susieja su Paleidimo sritimi, skirta visiems sąveikiems veiksmams.",
+		"loadButton": "Įkelti mano paleidyklės",
+		"openInLaunchpad": "Atidaryti Paleidimo srityje →",
+		"processIdLabel": "Sąveikiojo proceso ID:",
+		"startButton": "Pradėti",
+		"startedHeading": "Paleidyklė pradėta"
+	}
+}

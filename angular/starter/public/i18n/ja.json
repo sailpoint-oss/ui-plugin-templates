@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "APIの例",
+		"intro": "SailPoint Angular SDKは、ISC APIを呼び出すための型指定されたサービスを提供します。このページでは、<strong>Observable</strong>（リアクティブパイプラインおよびテンプレートバインディング用）と<strong>Promise</strong>（イベントハンドラーおよび順次チェーン用）の2つのパターンを示します。",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code>はObservableを返します。自動サブスクリプション管理には、<code>AsyncPipe</code>とともに使用します。ゲートシグナルによって、Observableをサブスクライブするタイミングを制御します。",
+		"observableButton": "アイデンティティを一覧表示（Observable）",
+		"observableHeading": "Observableパターン",
+		"observableHint": "次の場合はObservableを優先します。結果をテンプレートに直接バインドする場合、複数の非同期操作をリアクティブに連結する場合、またはコンポーネント破棄時にキャンセルが必要な場合。",
+		"promiseBody": "<code>firstValueFrom()</code>でラップされた<code>TenantService.getTenantV1()</code>は、ObservableをPromiseに変換します。イベントハンドラーおよび<code>async/await</code>チェーンに役立ちます。",
+		"promiseButton": "テナントを取得（Promise）",
+		"promiseHeading": "Promiseパターン",
+		"promiseHint": "次の場合はPromiseを優先します。イベントハンドラーでユーザーアクションに応答する場合、順次非同期ロジックを記述する場合、またはPromiseベースのライブラリと統合する場合。"
+	},
+	"app": {
+		"title": "UIプラグイン スターター"
+	},
+	"hero": {
+		"eyebrow": "SailPoint UIプラグイン",
+		"subtitle": "プラグインは、Identity Security Cloud内でネイティブのマイクロフロントエンドとしてレンダリングされます。テナントのセッションとセキュリティモデルを利用するため、個別のログインや追加のホスティングは必要ありません。例を確認し、独自のものにしてください。",
+		"title": "UIプラグインへようこそ"
+	},
+	"nav": {
+		"apiExamples": "APIの例",
+		"overview": "概要",
+		"workflows": "ワークフロー"
+	},
+	"overview": {
+		"gettingStartedBody": "このテンプレートは自由に変更できます。<code>core/</code>のSDK接続はApp Shellハンドシェイクを処理するため、コンポーネントはシグナルを読み取り、サービスを呼び出すだけです。ランチャーを一覧表示して開始する方法は<strong>ワークフロー</strong>タブで確認でき、Identity Security Cloud APIを呼び出す際のObservableおよびPromiseパターンは<strong>APIの例</strong>タブで確認できます。",
+		"gettingStartedHeading": "はじめに",
+		"heading": "Identity Security Cloud内でネイティブのエクスペリエンスを構築",
+		"intro": "プラグインは、Identity Security Cloud内でマイクロフロントエンドとしてレンダリングされます。テナントのセッションとセキュリティモデルを利用するため、個別のログイン、外部ホスティング、追加で保護するものは必要ありません。",
+		"patterns": "このテンプレートのページでは、プラグインコンテキストの読み取り、型指定されたSDKサービスを使用したIdentity Security Cloud APIの呼び出し、Launchers APIを介したワークフローの開始という、日常的に使用するパターンを示します。",
+		"whatHeading": "何を構築できますか？",
+		"whatItem1": "任意のIdentity Security Cloud APIのデータを統合するダッシュボード",
+		"whatItem2": "ビジネスプロセスを開始するワンクリックのワークフローランチャー",
+		"whatItem3": "組織のガバナンスニーズに合わせて調整された管理者ツール"
+	},
+	"status": {
+		"failed": "失敗",
+		"pending": "保留中",
+		"ready": "準備完了"
+	},
+	"workflows": {
+		"availableHeading": "利用可能なランチャー",
+		"disabled": "無効化済み",
+		"emptyState": "ランチャーが見つかりません。ランチャーは、Identity Security CloudのLaunchpad構成を通じてユーザーに割り当てられます。ここにランチャーが表示されるはずの場合は、Launchpadの割り当てを検証してください。",
+		"heading": "ワークフローランチャー",
+		"intro": "UIプラグインは、Launchers APIを介してSailPointワークフローを開始できます。このページには、あなたに割り当てられた（Launchpad経由の）ランチャーが一覧表示され、いずれかを開始できます。ワークフローはサーバー側で実行されます。プラグインは、インタラクティブな手順のためにLaunchpadにリンクするインタラクティブ プロセスIDを受け取ります。",
+		"loadButton": "私のランチャーを読み込む",
+		"openInLaunchpad": "Launchpadで開く →",
+		"processIdLabel": "インタラクティブ プロセスID:",
+		"startButton": "開始",
+		"startedHeading": "ランチャーを開始しました"
+	}
+}
