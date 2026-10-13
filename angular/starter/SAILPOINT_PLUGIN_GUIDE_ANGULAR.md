@@ -9,7 +9,7 @@
 - Network calls to SailPoint APIs use a **scoped token** limited to the `apiScopes` declared in `sp-ui-plugin.json`. A call to an undeclared scope fails the same way locally as in production.
 - `sp-ui-plugin.json` is the source of truth for the plugin's identity and security posture. Treat it as the contract with the backend.
 - Build tooling is the Angular CLI. The SailPoint CLI orchestrates registration and deployment. The CLI does not replace `ng`.
-- Agent skills live under `.agents/skills/` — for example `animating-ui-plugins` (Angular view encapsulation, `@keyframes` in production builds, verifying animations), plus shared skills such as `plugin-credentials-and-scopes`. Compatible coding agents load them automatically from `.agents/skills/`; otherwise read each `SKILL.md` directly before related work.
+- Agent skills live under `.agents/skills/` — for example `animating-ui-plugins` (Angular view encapsulation, `@keyframes` in production builds, verifying animations), plus shared skills such as `plugin-secrets-and-scopes`. Compatible coding agents load them automatically from `.agents/skills/`; otherwise read each `SKILL.md` directly before related work.
 
 ## Configuration: `sp-ui-plugin.json`
 
@@ -58,7 +58,7 @@ UI plugins use Angular routing with the default **path location strategy** and `
 
 ## Launchers API (starting workflows)
 
-A plugin can start a SailPoint Workflow through the Launchers API and hand interactive steps off to Launchpad (the iframe cannot render workflow forms). This is also the only way to perform an action that needs more access than the signed-in user has. See the **`plugin-credentials-and-scopes`** skill for the endpoints and the elevated-access rationale.
+A plugin can start a SailPoint Workflow through the Launchers API and hand interactive steps off to Launchpad (the iframe cannot render workflow forms). This is also the only way to perform an action that needs more access than the signed-in user has. See the **`plugin-secrets-and-scopes`** skill for the endpoints and the elevated-access rationale.
 
 ## Design tokens / theming
 

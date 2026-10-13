@@ -11,7 +11,7 @@
 - Network calls to SailPoint APIs use a **scoped token** limited to the `apiScopes` declared in `sp-ui-plugin.json`. A call to an undeclared scope fails the same way locally as in production.
 - `sp-ui-plugin.json` is the source of truth for the plugin's identity and security posture. Treat it as the contract with the backend.
 - Build tooling is your framework's own. The SailPoint CLI orchestrates registration and deployment. The CLI does not replace your bundler.
-- Framework-agnostic agent skills live under `.agents/skills/` (for example `plugin-credentials-and-scopes`, covering credentials, API scopes, and elevated access). Compatible coding agents load them automatically from `.agents/skills/`; otherwise read each `SKILL.md` directly before related work.
+- Framework-agnostic agent skills live under `.agents/skills/` (for example `plugin-secrets-and-scopes`, covering secrets, API scopes, external-service access, and Parameter Storage). Compatible coding agents load them automatically from `.agents/skills/`; otherwise read each `SKILL.md` directly before related work.
 
 ## Configuration: `sp-ui-plugin.json`
 

@@ -28,7 +28,7 @@ The CLI validates the file against the schema before deploying.
 
 The minted token is scoped and acts **on behalf of the signed-in user**: it can only narrow the user's access, never grant more, and declaring a scope does not guarantee the user holds it — a call still fails when the user lacks that access.
 
-Because loading is never gated by access, the plugin owns its own access-denied experience. Read the signed-in user's capabilities from the COIP handshake context (`user.capabilities`, e.g. `isOrgAdmin`) and render the right view — a privileged view, a regular-user view, or an explicit error/empty state — rather than assuming a declared scope means the user is privileged. See the `plugin-credentials-and-scopes` skill before trying to widen access or embed a credential.
+Because loading is never gated by access, the plugin owns its own access-denied experience. Read the signed-in user's capabilities from the COIP handshake context (`user.capabilities`, e.g. `isOrgAdmin`) and render the right view — a privileged view, a regular-user view, or an explicit error/empty state — rather than assuming a declared scope means the user is privileged. See the `plugin-secrets-and-scopes` skill before trying to widen access or embed a credential.
 
 ## When a change needs `push-manifest`
 

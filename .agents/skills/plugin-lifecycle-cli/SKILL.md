@@ -10,7 +10,7 @@ The `sail ui-plugins` CLI registers, links, builds, and deploys a plugin. This s
 - `sail ui-plugins --help` and `sail ui-plugins <command> --help`
 - CLI docs: <https://developer.sailpoint.com/docs/tools/cli>
 
-See the plugin guide in the project root (`SAILPOINT_PLUGIN_GUIDE.md`, or `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the Angular starter) for the surrounding detail, and the `sp-ui-plugin-manifest` and `plugin-credentials-and-scopes` skills for the manifest contract and scopes.
+See the plugin guide in the project root (`SAILPOINT_PLUGIN_GUIDE.md`, or `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the Angular starter) for the surrounding detail, and the `sp-ui-plugin-manifest` and `plugin-secrets-and-scopes` skills for the manifest contract and scopes.
 
 The `sail ui-plugins` commands are identical for every framework. Only the config-file locations called out inline below — the dev-server header config and the relative-path build setting — differ per framework; use the example that matches your stack.
 

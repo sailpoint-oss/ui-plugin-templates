@@ -54,4 +54,4 @@ const unsubscribe = this.plugin.sdk.events.onTokenUpdate((token) => { /* … */ 
 
 ## Scopes
 
-Every call uses the `apiScopes` in `sp-ui-plugin.json`; an undeclared scope fails identically in local dev and production. Add the scope before you call the endpoint, and run `sail ui-plugins push-manifest` if you already ran `create`. See the `sp-ui-plugin-manifest` and `plugin-credentials-and-scopes` skills — a plugin's token only narrows the signed-in user's access and never grants more.
+Every call uses the `apiScopes` in `sp-ui-plugin.json`; an undeclared scope fails identically in local dev and production. Add the scope before you call the endpoint, and run `sail ui-plugins push-manifest` if you already ran `create`. See the `sp-ui-plugin-manifest` and `plugin-secrets-and-scopes` skills — a plugin's token only narrows the signed-in user's access and never grants more.

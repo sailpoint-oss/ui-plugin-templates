@@ -56,7 +56,7 @@ Agent skills live in `.agents/skills/` — the cross-client convention, so compa
 
 **Framework-agnostic** (`/.agents/skills/`):
 
-- `plugin-credentials-and-scopes`: why embedding a PAT, API key, or secret is unsafe; using manifest `apiScopes` to act on behalf of the signed-in user (scope only narrows, never grants); and triggering a workflow via the Launchers API for elevated actions.
+- `plugin-secrets-and-scopes`: why embedding a password, PAT, API key, or secret is unsafe; using manifest `apiScopes` to act on behalf of the signed-in user (scope only narrows, never grants); reaching external services and performing elevated actions through a workflow (Launchers API); and storing credentials securely in SailPoint Parameter Storage.
 - `sp-ui-plugin-manifest`: the `sp-ui-plugin.json` contract — alias rules, `apiScopes`, security fields, manifest-vs-build, and when a change needs `push-manifest`.
 - `plugin-lifecycle-cli`: the `sail ui-plugins` lifecycle (init, create, link, build, deploy) and which command to run after a manifest change.
 
