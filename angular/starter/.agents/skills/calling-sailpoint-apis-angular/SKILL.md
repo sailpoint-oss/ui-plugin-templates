@@ -7,8 +7,6 @@ description: Use when calling a SailPoint API from an Angular UI plugin, reading
 
 All access goes through `SailpointPluginService` (`src/app/core/`, import via the `@core` alias). It owns a single SDK instance, runs the COIP handshake exactly once, and exposes context as signals. The app initializer in `app.config.ts` awaits the handshake before the app renders, so context is available before any component loads. Never create a second SDK instance or manage the handshake yourself.
 
-Read `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the project root for the full SDK setup. This skill is the task-level summary.
-
 ## Reading context
 
 Inject the service and read its signals — no promises or setup:

@@ -5,7 +5,7 @@ description: Use when styling a SailPoint Angular UI plugin, using PrimeNG compo
 
 # Theming an Angular plugin (PrimeNG + SPDS)
 
-[PrimeNG](https://primeng.org/) is the component library for SailPoint UI plugins. It is in the starter's `package.json` and configured in `src/app/app.config.ts` with the SailPoint Design System theme preset. Read the "Design tokens / theming" section of `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the project root for the full context.
+[PrimeNG](https://primeng.org/) is the component library for SailPoint UI plugins. It is in the starter's `package.json` and configured in `src/app/app.config.ts` with the SailPoint Design System theme preset.
 
 ## Design tokens
 

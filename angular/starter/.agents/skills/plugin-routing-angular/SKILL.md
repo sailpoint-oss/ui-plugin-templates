@@ -5,7 +5,7 @@ description: Use when adding routes, navigation, lazy-loaded pages, or page stru
 
 # Routing in an Angular plugin
 
-UI plugins use Angular routing with the default **path location strategy** (`/`, `/workflows`). The iframe document is always the plugin's `index.html`, so a route path never reaches a server — navigation stays in memory, and the host App Shell URL is mirrored over COIP via the SDK (`navigation.setRoute` out, `page.subPath` in). Read the "Routing" section of `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the project root for full context.
+UI plugins use Angular routing with the default **path location strategy** (`/`, `/workflows`). The iframe document is always the plugin's `index.html`, so a route path never reaches a server — navigation stays in memory, and the host App Shell URL is mirrored over COIP via the SDK (`navigation.setRoute` out, `page.subPath` in).
 
 ## Configuration
 

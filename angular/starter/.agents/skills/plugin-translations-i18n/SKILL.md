@@ -5,7 +5,7 @@ description: Use when adding or editing user-facing text, translating a SailPoin
 
 # Translations (i18n) in an Angular plugin
 
-Translations use [ngx-translate](https://ngx-translate.org/) (`@ngx-translate/core` + `@ngx-translate/http-loader`). Catalogs are plain JSON under `public/i18n/`, loaded at runtime over HTTP and rendered through the `translate` pipe. Read the "Translations (i18n)" section of `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the project root for full context, and prefer the [ngx-translate docs](https://ngx-translate.org/) for the pipe/service API and parameterized messages.
+Translations use [ngx-translate](https://ngx-translate.org/) (`@ngx-translate/core` + `@ngx-translate/http-loader`). Catalogs are plain JSON under `public/i18n/`, loaded at runtime over HTTP and rendered through the `translate` pipe. Prefer the [ngx-translate docs](https://ngx-translate.org/) for the pipe/service API and parameterized messages.
 
 ## Setup (already wired)
 
