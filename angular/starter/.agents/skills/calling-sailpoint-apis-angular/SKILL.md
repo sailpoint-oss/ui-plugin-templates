@@ -43,10 +43,12 @@ await this.plugin.post('/v3/some-resource', { name: 'example' });
 
 ## Raw SDK and events
 
-For capabilities the service doesn't wrap, `plugin.sdk` exposes the underlying SDK, including events:
+For capabilities the service doesn't wrap, `plugin.sdk` exposes the underlying SDK — the raw `events` (`onTokenUpdate`, `onViewportChange`) and `navigation` (see the `plugin-routing-angular` skill). Reach for it only when neither `get()`/`post()` nor a typed partition service fits.
+
+Event subscriptions return an unsubscribe function — call it when the component is destroyed:
 
 ```ts
-const unsubscribe = this.plugin.sdk.events.onViewportChange(({ width, height }) => { /* … */ });
+const unsubscribe = this.plugin.sdk.events.onTokenUpdate((token) => { /* … */ });
 // call unsubscribe() when done
 ```
 
