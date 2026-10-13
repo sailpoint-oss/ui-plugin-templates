@@ -4,7 +4,7 @@ import {
   provideAppInitializer,
   provideBrowserGlobalErrorListeners
 } from '@angular/core';
-import { provideRouter, withHashLocation } from '@angular/router';
+import { provideRouter, withDisabledInitialNavigation } from '@angular/router';
 import { provideSailPoint } from '@sailpoint/angular-sdk';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -19,11 +19,13 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    // Hash-based routing (#/, #/workflows, #/api-examples) works reliably in an
-    // iframe without server-side rewrite rules. Multiple routes eliminate the
-    // NG04002 issue that required withDisabledInitialNavigation() when the route
-    // table was empty.
-    provideRouter(routes, withHashLocation()),
+    // Path-based routing (/, /workflows, /api-examples). The iframe document is
+    // always the plugin's index.html, so its own path never reaches a server —
+    // navigation stays in memory and the host URL is mirrored over COIP (see
+    // app.ts). Initial navigation is disabled because the document loads at
+    // `index.html`, which matches no route (NG04002); app.ts performs the first
+    // navigation explicitly, restoring any deep-linked route from `page.subPath`.
+    provideRouter(routes, withDisabledInitialNavigation()),
     // provideSailPoint() wires up HttpClient and an auth interceptor that reads
     // window.sailpointConfig() on every request. No params here — the plugin
     // host registers that function after the COIP handshake completes below.
