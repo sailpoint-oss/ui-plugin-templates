@@ -46,7 +46,6 @@ A plugin starts a SailPoint Workflow through the Launchers API. These are `beta`
 
 ## References
 
-- Plugin authentication architecture — scoped tokens, mint-time scope enforcement: Confluence page `4732190936`.
 - SailPoint Parameter Storage: https://documentation.sailpoint.com/saas/help/parameter_storage/index.html
 - SailPoint Privileged Task Automation (building PTA workflows): https://documentation.sailpoint.com/saas/help/privilege/privileged_task_automation.html#building-privileged-task-automation-workflows
 - SailPoint Workflows: https://documentation.sailpoint.com/saas/help/workflows/index.html
