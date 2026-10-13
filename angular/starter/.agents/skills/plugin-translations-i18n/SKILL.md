@@ -32,4 +32,4 @@ Drop a new catalog into `public/i18n/` named for the locale the browser reports 
 
 ## ISC parity
 
-ISC's fallback language is `en` and ISC supports 22 languages. To mirror ISC, provide a catalog for each and keep `en` as the fallback: `en`, `cs`, `da`, `de`, `es`, `fi`, `fr`, `hu`, `it`, `ja`, `ko`, `lt`, `nl`, `no`, `pl`, `pt`, `ru`, `sv`, `th`, `tr`, `zh-CN`, `zh-TW`.
+ISC's fallback language is `en` and ISC supports the languages listed at https://documentation.sailpoint.com/saas/user-help/getting_started/supported_languages.html. To configure a different fallback language, change `fallbackLang` in the `provideTranslateService` call in `app.config.ts` and add the matching catalog under `public/i18n/`.
