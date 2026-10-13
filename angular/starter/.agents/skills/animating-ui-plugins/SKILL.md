@@ -7,7 +7,7 @@ description: Use when building, changing, or debugging animations or CSS visual 
 
 Angular's emulated view encapsulation rewrites a component's CSS: class selectors and `@keyframes` names get a per-component suffix. Two of the three traps below come from DOM or CSS the rewrite never reaches; the third is a dev-versus-production difference. An animation can look perfect under `ng serve` and freeze once the plugin is built and served from the CDN.
 
-Read `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the project root for the basics. This skill adds the animation-specific failures that are easy to miss.
+This skill adds the animation-specific failures that are easy to miss.
 
 ## View encapsulation and imperative DOM
 
