@@ -54,7 +54,7 @@ Typed calls use the `@sailpoint/angular-sdk` partition services; `plugin.get()` 
 
 ## Routing
 
-UI plugins use Angular routing with the **hash location strategy** (`withHashLocation()`), which works in the iframe with no server rewrites. Routes live in `app.routes.ts` with `loadComponent` lazy loading, and the starter demonstrates the ISC left-sidebar pattern. See the **`plugin-routing-angular`** skill.
+UI plugins use Angular routing with the default **path location strategy** and `withDisabledInitialNavigation()`. The iframe document is always `index.html`, so route paths never reach a server; `app.ts` performs the first navigation explicitly and mirrors the plugin route to the host App Shell URL over COIP (`navigation.setRoute` / `page.subPath`). Routes live in `app.routes.ts` with `loadComponent` lazy loading, and the starter demonstrates the ISC left-sidebar pattern. See the **`plugin-routing-angular`** skill.
 
 ## Launchers API (starting workflows)
 

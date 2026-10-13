@@ -65,7 +65,7 @@ Agent skills live in `.agents/skills/` — the cross-client convention, so compa
 - `calling-sailpoint-apis-angular`: `SailpointPluginService` context signals, `@sailpoint/angular-sdk` services, `plugin.get()`/`post()`, Observable vs `firstValueFrom`, and handshake gating.
 - `plugin-theming-primeng`: PrimeNG + SailPoint Design System theme preset, design tokens, typography utilities, icons, and iframe CSS isolation.
 - `plugin-translations-i18n`: ngx-translate setup, adding labels and languages, and ISC's 22-language parity.
-- `plugin-routing-angular`: hash location strategy, lazy `loadComponent` routes, and the ISC sidebar pattern.
+- `plugin-routing-angular`: path location strategy with disabled initial navigation, host URL mirroring over COIP, lazy `loadComponent` routes, and the ISC sidebar pattern.
 - `animating-ui-plugins`: Angular view-encapsulation pitfalls with imperative DOM and component `@keyframes`, animations that play under `ng serve` but freeze in the production build, and verifying animations against a built bundle.
 
 The skills complement the plugin guides rather than repeat them.

@@ -1,22 +1,22 @@
 ---
 name: plugin-routing-angular
-description: Use when adding routes, navigation, lazy-loaded pages, or page structure to a SailPoint Angular UI plugin. Covers why the hash location strategy is required inside the sandboxed iframe, lazy `loadComponent` route definitions, and the ISC left-sidebar navigation pattern with `routerLinkActive`. Use it for any routing or in-plugin navigation work.
+description: Use when adding routes, navigation, lazy-loaded pages, or page structure to a SailPoint Angular UI plugin. Covers the path location strategy with disabled initial navigation inside the sandboxed iframe, how the plugin route is mirrored to the host URL over COIP, lazy `loadComponent` route definitions, and the ISC left-sidebar navigation pattern with `routerLinkActive`. Use it for any routing or in-plugin navigation work.
 ---
 
 # Routing in an Angular plugin
 
-UI plugins use Angular routing with the **hash location strategy** (`#/`, `#/workflows`). Hash URLs work reliably in an iframe with no server-side rewrite rules. Read the "Routing" section of `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the project root for full context.
+UI plugins use Angular routing with the default **path location strategy** (`/`, `/workflows`). The iframe document is always the plugin's `index.html`, so a route path never reaches a server — navigation stays in memory, and the host App Shell URL is mirrored over COIP via the SDK (`navigation.setRoute` out, `page.subPath` in). Read the "Routing" section of `SAILPOINT_PLUGIN_GUIDE_ANGULAR.md` in the project root for full context.
 
 ## Configuration
 
-The starter configures `withHashLocation()` in `app.config.ts`:
+The starter configures `withDisabledInitialNavigation()` in `app.config.ts`:
 
 ```ts
-import { provideRouter, withHashLocation } from '@angular/router';
-provideRouter(routes, withHashLocation());
+import { provideRouter, withDisabledInitialNavigation } from '@angular/router';
+provideRouter(routes, withDisabledInitialNavigation());
 ```
 
-Do not switch to path location — absolute paths break inside the iframe.
+Initial navigation is disabled because the document loads at `index.html`, which matches no route (`NG04002`). `app.ts` performs the first navigation explicitly — restoring a deep-linked route from `page.subPath`, or the start route otherwise — and reports later route changes to the host with `plugin.setRoute(...)`.
 
 ## Route definitions
 
