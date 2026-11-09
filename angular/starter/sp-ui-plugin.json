@@ -13,6 +13,7 @@
         ],
         "permissionPolicy": {},
         "iframeAllow": {},
+        "iframeSandbox":[],
         "contentSecurityPolicies": {},
         "slots": [{
             "slotId": "full-page"
