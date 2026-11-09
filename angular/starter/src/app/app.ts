@@ -32,8 +32,9 @@ export class App implements OnInit {
   ngOnInit(): void {
     // The host may have deep-linked to a sub-route (e.g. after a reload of
     // /ui/plugin/starter/workflows). The SDK derives that plugin-relative route
-    // as `page.subPath`; adopt it instead of broadcasting our default start
-    // route back, which would replace the host URL and drop the suffix.
+    // as `page.subPath`; the explicit navigation below restores it. Initial
+    // navigation is disabled in app.config so the router never tries to match
+    // the iframe's index.html path, so this is the plugin's first route.
     const initialSubPath = this.plugin.context()?.page.subPath ?? '';
     let initialNavigationHandled = false;
 
@@ -43,17 +44,14 @@ export class App implements OnInit {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((event) => {
-        // Hash routes look like '/#/workflows' — extract the path after '#/'
-        const hashPath = event.urlAfterRedirects.replace(/^\/#?\/?/, '');
+        // Path routes look like '/workflows' — strip the leading slash to get
+        // the plugin-relative sub-path the host expects ('' for the start route).
+        const subPath = event.urlAfterRedirects.replace(/^\//, '');
 
         if (!initialNavigationHandled) {
+          // Suppress the broadcast for the restore navigation, so the route we
+          // just adopted never overwrites the deep-linked host URL it came from.
           initialNavigationHandled = true;
-          // Restore the host's route on first load and suppress the broadcast
-          // for this initial navigation, so the empty start route never
-          // overwrites a deep-linked host URL.
-          if (initialSubPath && initialSubPath !== hashPath) {
-            this.router.navigateByUrl(`/${initialSubPath}`);
-          }
           return;
         }
 
@@ -61,10 +59,16 @@ export class App implements OnInit {
         // browser URL. Only meaningful once the handshake is ready; standalone
         // dev has no App Shell to talk to.
         if (this.plugin.apiReady()) {
-          this.plugin.setRoute(hashPath).catch((err) => {
+          this.plugin.setRoute(subPath).catch((err) => {
             console.warn('[plugin] Failed to report route change to the host.', err);
           });
         }
       });
+
+    // Perform the first navigation now that the listener is wired, restoring a
+    // deep-linked sub-path or falling back to the start route.
+    this.router.navigateByUrl(`/${initialSubPath}`).catch((err) => {
+      console.warn('[plugin] Failed to perform the initial route navigation.', err);
+    });
   }
 }
