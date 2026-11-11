@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "Příklady API",
+		"intro": "SailPoint Angular SDK poskytuje typované služby pro volání ISC API. Tato stránka demonstruje dva vzory: <strong>Observable</strong> (pro reaktivní kanály a vázání šablon) a <strong>Promise</strong> (pro obslužné rutiny událostí a sekvenční řetězce).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> vrací Observable. Použijte jej s <code>AsyncPipe</code> pro automatickou správu odběrů. Signál brány řídí, kdy je Observable přihlášen k odběru.",
+		"observableButton": "Zobrazit seznam identit (Observable)",
+		"observableHeading": "Vzor Observable",
+		"observableHint": "Upřednostněte Observable v těchto případech: přímé vázání výsledků na šablony, řetězení více asynchronních operací reaktivně nebo pokud potřebujete zrušení při zničení komponenty.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code> zabalený pomocí <code>firstValueFrom()</code> převede Observable na Promise. Užitečné pro obslužné rutiny událostí a řetězce <code>async/await</code>.",
+		"promiseButton": "Získat tenant (Promise)",
+		"promiseHeading": "Vzor Promise",
+		"promiseHint": "Upřednostněte Promise v těchto případech: reakce na akce uživatele v obslužných rutinách událostí, zápis sekvenční asynchronní logiky nebo integrace s knihovnami založenými na Promise."
+	},
+	"app": {
+		"title": "Startér pluginu uživatelského rozhraní"
+	},
+	"hero": {
+		"eyebrow": "Plugin uživatelského rozhraní SailPoint",
+		"subtitle": "Váš plugin se vykresluje jako nativní mikrofrontend v rámci Identity Security Cloud; využívá relaci a bezpečnostní model tenantu, takže není potřeba samostatné přihlášení ani žádné další hostování. Prozkoumejte příklady a přizpůsobte si plugin podle svých potřeb.",
+		"title": "Vítejte ve svém pluginu uživatelského rozhraní"
+	},
+	"nav": {
+		"apiExamples": "Příklady API",
+		"overview": "Přehled",
+		"workflows": "Pracovní postupy"
+	},
+	"overview": {
+		"gettingStartedBody": "Tato šablona je připravena k přizpůsobení. Propojení SDK v části <code>core/</code> zajišťuje handshake s App Shell, takže komponenty jednoduše čtou signály a volají služby. Otevřete kartu <strong>Pracovní postupy</strong> a zjistěte, jak zobrazit seznam spouštěčů a jak je spustit. Na kartě <strong>Příklady API</strong> najdete vzory Observable a Promise pro volání API Identity Security Cloud.",
+		"gettingStartedHeading": "Začínáme",
+		"heading": "Vytvářejte nativní prostředí v rámci Identity Security Cloud",
+		"intro": "Váš plugin se vykresluje jako mikrofrontend přímo v rámci Identity Security Cloud. Využívá relaci a bezpečnostní model tenantu, takže není potřeba samostatné přihlášení, externí hostování ani žádné další zabezpečení.",
+		"patterns": "Stránky v této šabloně ukazují vzory, které budete používat každý den: čtení kontextu pluginu, volání API Identity Security Cloud pomocí typovaných služeb SDK a spouštění pracovních postupů prostřednictvím API Spouštěče.",
+		"whatHeading": "Co můžete vytvořit?",
+		"whatItem1": "Řídicí panely, které sdružují data z libovolného API Identity Security Cloud",
+		"whatItem2": "Spouštěče pracovních postupů na jedno kliknutí, které zahájí vaše obchodní procesy",
+		"whatItem3": "Nástroje správce přizpůsobené potřebám správy přístupu vaší organizace"
+	},
+	"status": {
+		"failed": "Nepodařilo se.",
+		"pending": "Nevyřízeno",
+		"ready": "Připraveno"
+	},
+	"workflows": {
+		"availableHeading": "Dostupné spouštěče",
+		"disabled": "Zakázáno",
+		"emptyState": "Nebyly nalezeny žádné spouštěče. Spouštěče jsou uživatelům přiřazovány prostřednictvím konfigurace Launchpadu v Identity Security Cloud. Pokud očekáváte, že se zde spouštěče zobrazí, ověřte svá přiřazení v Launchpadu.",
+		"heading": "Spouštěče pracovního postupu",
+		"intro": "Pluginy uživatelského rozhraní mohou spouštět pracovní postupy SailPoint prostřednictvím rozhraní Launchers API. Tato stránka zobrazuje spouštěče, které vám byly přiřazeny prostřednictvím Launchpadu, a umožňuje vám některý z nich spustit. Pracovní postup probíhá na straně serveru; plugin obdrží ID interaktivního procesu, které odkazuje na Launchpad pro provedení případných interaktivních kroků.",
+		"loadButton": "Načíst mé spouštěče",
+		"openInLaunchpad": "Otevřít v Launchpadu →",
+		"processIdLabel": "ID interaktivního procesu:",
+		"startButton": "Začít",
+		"startedHeading": "Spouštěč byl spuštěn"
+	}
+}

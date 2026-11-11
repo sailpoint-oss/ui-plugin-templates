@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API-eksempler",
+		"intro": "SailPoint Angular SDK leverer typede tjenester til kald af ISC-API'er. Denne side demonstrerer to mønstre: <strong>Observable</strong> (til reaktive pipelines og skabelonbinding) og <strong>Promise</strong> (til hændelseshåndterere og sekventielle kæder).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> returnerer et Observable. Brug det med <code>AsyncPipe</code> til automatisk abonnementsstyring. Et gate-signal styrer, hvornår Observable abonneres på.",
+		"observableButton": "Vis identiteter (Observable)",
+		"observableHeading": "Observable-mønster",
+		"observableHint": "Foretrækk Observables, når: resultater bindes direkte til skabeloner, flere asynkrone handlinger kædes reaktivt, eller når du har brug for annullering ved komponentdestruktion.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code> pakket med <code>firstValueFrom()</code> konverterer Observable til et Promise. Nyttigt til hændelseshåndterere og <code>async/await</code>-kæder.",
+		"promiseButton": "Hent lejer (Promise)",
+		"promiseHeading": "Promise-mønster",
+		"promiseHint": "Foretrækk Promises, når: der reageres på brugerhandlinger i hændelseshåndterere, sekventiel asynkron logik skrives, eller der integreres med Promise-baserede biblioteker."
+	},
+	"app": {
+		"title": "UI-plugin-starter"
+	},
+	"hero": {
+		"eyebrow": "SailPoint UI-plugin",
+		"subtitle": "Dit plugin gengives som en native mikro-frontend i Identity Security Cloud. Det benytter lejerens session og sikkerhedsmodel, så der er ikke noget separat login og intet ekstra at hoste. Udforsk eksemplerne, og tilpas det derefter til dine behov.",
+		"title": "Velkommen til dit UI-plugin"
+	},
+	"nav": {
+		"apiExamples": "API-eksempler",
+		"overview": "Oversigt",
+		"workflows": "Arbejdsgange"
+	},
+	"overview": {
+		"gettingStartedBody": "Denne skabelon er din at omforme. SDK-koblingen i <code>core/</code> håndterer App Shell-håndtrykket, så komponenter blot læser signaler og kalder tjenester. Åbn fanen <strong>Arbejdsgange</strong> for at se, hvordan du viser og starter startprogrammer, og fanen <strong>API-eksempler</strong> for Observable- og Promise-mønstrene ved kald af Identity Security Cloud-API'er.",
+		"gettingStartedHeading": "Kom godt i gang",
+		"heading": "Byg native oplevelser i Identity Security Cloud",
+		"intro": "Dit plugin gengives som en mikro-frontend direkte i Identity Security Cloud. Det benytter lejerens session og sikkerhedsmodel, så der er ikke noget separat login, ingen ekstern hosting og intet ekstra at sikre.",
+		"patterns": "Siderne i denne skabelon viser de mønstre, du vil bruge hver dag: læsning af plugin-kontekst, kald af Identity Security Cloud-API'er med typede SDK-tjenester og lancering af arbejdsgange via Launchers API.",
+		"whatHeading": "Hvad kan du bygge?",
+		"whatItem1": "Dashboards, der samler data fra enhver Identity Security Cloud API",
+		"whatItem2": "Startprogrammer til arbejdsgange med ét klik, der sætter dine forretningsprocesser i gang",
+		"whatItem3": "Admin-værktøjer tilpasset din organisations styringsbehov"
+	},
+	"status": {
+		"failed": "Mislykket",
+		"pending": "Afventer",
+		"ready": "Klar"
+	},
+	"workflows": {
+		"availableHeading": "Tilgængelige startprogrammer",
+		"disabled": "Deaktiveret",
+		"emptyState": "Ingen startprogrammer fundet. Startprogrammer tildeles brugere via Launchpad-konfigurationen i Identity Security Cloud. Hvis du forventer at se startprogrammer her, skal du verificere dine Launchpad-tildelinger.",
+		"heading": "Startfiler til arbejdsgang",
+		"intro": "UI-plugins kan starte SailPoint-arbejdsgange via Launchers API. Denne side viser startprogrammer, der er tildelt dig (via Launchpad), og giver dig mulighed for at starte et. Arbejdsgangen kører server-side; pluginnet modtager et interaktivt proces-id, der linker til Launchpad for eventuelle interaktive trin.",
+		"loadButton": "Indlæs mine startprogrammer",
+		"openInLaunchpad": "Åbn i Launchpad →",
+		"processIdLabel": "Interaktivt proces-id:",
+		"startButton": "Start",
+		"startedHeading": "Startprogram startet"
+	}
+}

@@ -22,7 +22,7 @@
 
     <main class="shell-content">
       <header class="shell-content__header">
-        <h1 class="spds-h4">Hello, {{ title() }}</h1>
+        <h1 class="spds-h4">{{ 'app.greeting' | translate: { name: title() } }}</h1>
         <div class="shell-content__meta">
           <p-tag [value]="'status.' + status() | translate" [severity]="handshakeSeverity[status()]" />
           @if (context(); as ctx) {

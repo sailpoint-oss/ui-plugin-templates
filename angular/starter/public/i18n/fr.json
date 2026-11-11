@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "Exemples d’API",
+		"intro": "Le SDK Angular SailPoint fournit des services typés pour appeler les API ISC. Cette page présente deux modèles : <strong>Observable</strong> (pour les pipelines réactifs et la liaison de modèles) et <strong>Promise</strong> (pour les gestionnaires d’événements et les chaînes séquentielles).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> renvoie un Observable. Utilisez-le avec <code>AsyncPipe</code> pour gérer automatiquement les abonnements. Un signal de contrôle détermine quand l’Observable est abonné.",
+		"observableButton": "Répertorier les identités (Observable)",
+		"observableHeading": "Modèle Observable",
+		"observableHint": "Préférez les Observables lorsque vous liez directement des résultats à des modèles, enchaînez plusieurs opérations asynchrones de manière réactive ou avez besoin d’une annulation lors de la destruction du composant.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code> encapsulé avec <code>firstValueFrom()</code> convertit l’Observable en Promise. Utile pour les gestionnaires d’événements et les chaînes <code>async/await</code>.",
+		"promiseButton": "Obtenir le tenant (Promise)",
+		"promiseHeading": "Modèle Promise",
+		"promiseHint": "Préférez les Promises lorsque vous répondez à des actions utilisateur dans des gestionnaires d’événements, écrivez une logique asynchrone séquentielle ou intégrez des bibliothèques basées sur les Promises."
+	},
+	"app": {
+		"title": "Kit de démarrage de module complémentaire d’interface utilisateur"
+	},
+	"hero": {
+		"eyebrow": "Module complémentaire d’interface utilisateur SailPoint",
+		"subtitle": "Votre module complémentaire s’affiche sous la forme d’un micro-frontend natif dans Identity Security Cloud ; il utilise la session et le modèle de sécurité du tenant, il n’y a donc pas de connexion distincte ni d’hébergement supplémentaire. Explorez les exemples, puis personnalisez-le.",
+		"title": "Bienvenue dans votre module complémentaire d’interface utilisateur"
+	},
+	"nav": {
+		"apiExamples": "Exemples d’API",
+		"overview": "Vue d'ensemble",
+		"workflows": "Flux de travail"
+	},
+	"overview": {
+		"gettingStartedBody": "Ce modèle est le vôtre, vous pouvez le remodeler. Le câblage du SDK dans <code>core/</code> gère l’échange initial avec l’environnement App Shell, afin que les composants puissent simplement lire les signaux et appeler les services. Ouvrez l’onglet <strong>Flux de travail</strong> pour voir comment répertorier et lancer des lanceurs, et l’onglet <strong>Exemples d’API</strong> pour découvrir les modèles Observable et Promise lors de l’appel des API Identity Security Cloud.",
+		"gettingStartedHeading": "Premiers pas",
+		"heading": "Créez des expériences natives dans Identity Security Cloud",
+		"intro": "Votre module complémentaire s’affiche sous la forme d’un micro-frontend directement dans Identity Security Cloud. Il utilise la session et le modèle de sécurité du tenant ; il n’y a donc pas de connexion distincte, pas d’hébergement externe ni d’élément supplémentaire à sécuriser.",
+		"patterns": "Les pages de ce modèle présentent les schémas que vous utiliserez chaque jour : lecture du contexte du module complémentaire, appel d’API Identity Security Cloud avec des services SDK typés et lancement de flux de travail via l’API des lanceurs.",
+		"whatHeading": "Que pouvez-vous créer ?",
+		"whatItem1": "Tableaux de bord regroupant des données provenant de n’importe quelle API Identity Security Cloud",
+		"whatItem2": "Lanceurs de flux de travail en un clic qui lancent vos processus métier",
+		"whatItem3": "Outils d’administration adaptés aux besoins de gouvernance de votre organisation"
+	},
+	"status": {
+		"failed": "Échec",
+		"pending": "En attente",
+		"ready": "Prêtes"
+	},
+	"workflows": {
+		"availableHeading": "Lanceurs disponibles",
+		"disabled": "Désactivé",
+		"emptyState": "Aucun lanceur trouvé. Les lanceurs sont attribués aux utilisateurs via la configuration du Launchpad dans Identity Security Cloud. Si vous vous attendez à voir des lanceurs ici, vérifiez vos affectations Launchpad.",
+		"heading": "Lanceurs de flux de travail",
+		"intro": "Les modules complémentaires d’interface utilisateur peuvent lancer des flux de travail SailPoint via l’API des lanceurs. Cette page répertorie les lanceurs qui vous sont attribués (via Launchpad) et vous permet d’en lancer un. Le flux de travail s’exécute côté serveur ; le module complémentaire reçoit un id de processus interactif qui renvoie vers Launchpad pour toutes les étapes interactives.",
+		"loadButton": "Charger mes lanceurs",
+		"openInLaunchpad": "Ouvrir dans Launchpad →",
+		"processIdLabel": "id du processus interactif :",
+		"startButton": "Commencer",
+		"startedHeading": "Lanceur lancé"
+	}
+}
