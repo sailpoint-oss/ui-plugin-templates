@@ -55,3 +55,17 @@ const unsubscribe = this.plugin.sdk.events.onTokenUpdate((token) => { /* … */ 
 ## Scopes
 
 Every call uses the `apiScopes` in `sp-ui-plugin.json`; an undeclared scope fails identically in local dev and production. Add the scope before you call the endpoint, and run `sail ui-plugins push-manifest` if you already ran `create`. See the `sp-ui-plugin-manifest` and `plugin-secrets-and-scopes` skills — a plugin's token only narrows the signed-in user's access and never grants more.
+
+### Deriving the scope set with `sail scopes analyze`
+
+Rather than guessing scopes or falling back to `sp:scopes:all`, run `sail scopes analyze` from the plugin directory. It scans your code for `@sailpoint/angular-sdk` calls and lists the smallest set of scopes those calls need, reading the SDK's installed `sailpoint-scopes.json` so the scopes match your SDK version. The interactive walkthrough can write the result straight into `apiScopes`, or use `--update-manifest` to do it without prompts:
+
+```bash
+sail scopes analyze                    # walkthrough: review scopes, offer to update the manifest
+sail scopes analyze --update-manifest  # write apiScopes in sp-ui-plugin.json, no prompts
+sail scopes analyze --scopes-only      # print a comma-separated list only
+```
+
+**Always run `sail ui-plugins push-manifest` afterward** (whether you updated the manifest via `--update-manifest` or the walkthrough prompts) so the new scopes are synced to your tenant — editing `apiScopes` alone does not push them.
+
+**Caveat — it only detects typed SDK methods.** `analyze` finds version-suffixed partition-service calls (e.g. `listIdentitiesV1`); it does **not** detect the `plugin.get()`/`post()` helper calls above. Add the scopes for any `get()`/`post()` endpoints by hand.
