@@ -64,7 +64,7 @@ function getOrCreateSingleton(): PluginSdkSingleton {
   let context: Promise<PluginContext>;
 
   try {
-    sdk = createSDK();
+    sdk = createSDK({ useSpds: true });
     context = sdk.getContext();
   } catch (err) {
     context = Promise.reject(err);
