@@ -1,27 +1,27 @@
 {
-    "version": 1,
-    "manifest": {
-        "alias": "",
-        "name": {
-            "en": ""
-        },
-        "description": {
-            "en": ""
-        },
-        "apiScopes": [
-            "sp:scopes:all"
-        ],
-        "permissionPolicy": {},
-        "iframeAllow": {},
-        "iframeSandbox":[],
-        "contentSecurityPolicies": {},
-        "slots": [{
-            "slotId": "full-page"
-        }],
-        "state": "ENABLED"
+  "version": 1,
+  "manifest": {
+    "alias": "paul-starter",
+    "name": {
+      "en": "paul-starter"
     },
-    "build": {
-        "outDir": "./dist/starter/browser",
-        "port": 4200
-    }
+    "description": {
+      "en": "Angular starter used for testing in the pdavis tenant."
+    },
+    "apiScopes": ["sp:scopes:all"],
+    "permissionPolicy": {},
+    "iframeAllow": {},
+    "iframeSandbox": [],
+    "contentSecurityPolicies": {},
+    "slots": [
+      {
+        "slotId": "full-page"
+      }
+    ],
+    "state": "ENABLED"
+  },
+  "build": {
+    "outDir": "./dist/starter/browser",
+    "port": 4200
+  }
 }
