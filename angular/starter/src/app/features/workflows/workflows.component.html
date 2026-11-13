@@ -1,5 +1,6 @@
+<h1 class="page-title spds-h2">{{ 'workflows.heading' | translate }}</h1>
+
 <section>
-  <h2 class="spds-h4">{{ 'workflows.heading' | translate }}</h2>
   <p>{{ 'workflows.intro' | translate }}</p>
 
   <p-button
@@ -10,11 +11,11 @@
   />
 
   @if (error()) {
-    <p class="error">{{ error() }}</p>
+    <p-message class="feedback" severity="error" [text]="error()" />
   }
 
   @if (launchers().length > 0) {
-    <h3 class="spds-h5">{{ 'workflows.availableHeading' | translate }}</h3>
+    <h2 class="spds-h5">{{ 'workflows.availableHeading' | translate }}</h2>
     <ul class="launcher-list">
       @for (launcher of launchers(); track launcher.id) {
         <li class="launcher-item">
@@ -24,7 +25,9 @@
               <p-tag [value]="'workflows.disabled' | translate" severity="secondary" />
             }
             @if (launcher.description) {
-              <p class="launcher-item__description">{{ launcher.description }}</p>
+              <p class="launcher-item__description">
+                {{ launcher.description }}
+              </p>
             }
           </div>
           <p-button
@@ -38,27 +41,29 @@
       }
     </ul>
   } @else if (!loading() && !error()) {
-    <p class="empty-state">{{ 'workflows.emptyState' | translate }}</p>
+    <p-message class="feedback" severity="secondary" [text]="'workflows.emptyState' | translate" />
   }
 
   @if (startError()) {
-    <p class="error">{{ startError() }}</p>
+    <p-message class="feedback" severity="error" [text]="startError()" />
   }
 
   @if (interactiveProcessId()) {
-    <div class="launch-result">
-      <h3 class="spds-h5">{{ 'workflows.startedHeading' | translate }}</h3>
-      <p>
-        <strong>{{ 'workflows.processIdLabel' | translate }}</strong>
-        <code>{{ interactiveProcessId() }}</code>
-      </p>
-      @if (interactiveProcessUrl(); as url) {
+    <p-message class="feedback" severity="success">
+      <div class="launch-result">
+        <h2 class="spds-h5">{{ 'workflows.startedHeading' | translate }}</h2>
         <p>
-          <a [href]="url" target="_blank" rel="noopener">
-            {{ 'workflows.openInLaunchpad' | translate }}
-          </a>
+          <strong>{{ 'workflows.processIdLabel' | translate }}</strong>
+          <code>{{ interactiveProcessId() }}</code>
         </p>
-      }
-    </div>
+        @if (interactiveProcessUrl(); as url) {
+          <p>
+            <a [href]="url" target="_blank" rel="noopener">
+              {{ 'workflows.openInLaunchpad' | translate }}
+            </a>
+          </p>
+        }
+      </div>
+    </p-message>
   }
 </section>

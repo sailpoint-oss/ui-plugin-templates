@@ -1,5 +1,6 @@
 :host {
   display: block;
+  margin-bottom: 1.5rem;
 }
 
 // Brand colors kept as literals. The dark gradient (black -> deep navy ->
@@ -12,12 +13,19 @@ $hero-navy: #071233;
 $hero-blue-bright: #3d9bff;
 $hero-teal: #00b3a4;
 
+.hero-card {
+  --spds-card-background: #{$hero-ink};
+  --spds-card-body-padding: 0;
+  --spds-card-border-radius: var(--spds-border-radius-lg);
+
+  display: block;
+}
+
 .hero {
   position: relative;
   overflow: hidden;
   min-height: 11rem;
   padding: 2rem 2.25rem;
-  margin-bottom: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--spds-border-radius-lg);
   background: $hero-ink;

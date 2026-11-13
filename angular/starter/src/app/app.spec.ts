@@ -39,39 +39,39 @@ describe('App', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders the plugin title in content header', () => {
+  it('lets routed pages own the content surface', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    // The plugin name below is a sentinel: `sail ui-plugins init` rewrites it,
-    // together with the matching title signal in app.ts, to the chosen name.
-    expect(compiled.querySelector('.shell-content__header h1')?.textContent).toContain('Hello, starter');
+    expect(compiled.querySelector('main.shell-content > router-outlet')).toBeTruthy();
+    expect(compiled.querySelector('.shell-content__card')).toBeNull();
   });
 
-  it('renders the handshake status badge', () => {
+  it('renders the greeting and handshake context above page content', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.shell-content__meta p-tag')).toBeTruthy();
+    expect(compiled.querySelector('.shell-content__title')?.textContent).toContain('Hello, starter');
+    const header = compiled.querySelector('main.shell-content > header.shell-content__header');
+    expect(header?.querySelector('p-tag')).toBeTruthy();
+    expect(header?.textContent).toContain('acme');
+    expect(header?.textContent).toContain('Test User');
   });
 
-  it('renders tenant and user context', () => {
+  it('renders flat PrimeNG Menu navigation', async () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    const context = compiled.querySelector('.shell-content__context');
-    expect(context?.textContent).toContain('acme');
-    expect(context?.textContent).toContain('Test User');
-  });
-
-  it('renders sidebar navigation links', () => {
-    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const links = compiled.querySelectorAll('.shell-sidenav__link');
+    expect(compiled.querySelector('nav')?.getAttribute('aria-label')).toBe('Plugin sections');
+    expect(compiled.querySelector('p-menu')).toBeTruthy();
+    expect(compiled.querySelector('p-panelmenu')).toBeNull();
+    const links = compiled.querySelectorAll('.p-menu-item-link');
     expect(links.length).toBe(3);
     expect(links[0].textContent).toContain('Overview');
     expect(links[1].textContent).toContain('Workflows');
     expect(links[2].textContent).toContain('API Examples');
+    expect(links[0].classList).toContain('p-menu-item-link-active');
   });
 });

@@ -1,10 +1,19 @@
-.example-section {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  border: 1px solid var(--spds-slate-200);
-  border-radius: var(--spds-border-radius-md);
+.api-examples {
+  &__intro {
+    margin: 0;
+    color: var(--spds-text-muted-color);
+    font-size: var(--spds-font-size-md);
+  }
+}
 
-  h3 {
+.example-list {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.example-section {
+  h2 {
     margin: 0 0 0.75rem;
   }
 
@@ -15,13 +24,13 @@
   code {
     padding: 0.1rem 0.35rem;
     border-radius: 0.25rem;
-    background: var(--spds-surface-100);
+    background: var(--spds-surface-200);
     font-size: 0.9em;
   }
 }
 
 .hint {
-  color: var(--spds-zinc-500);
+  color: var(--spds-text-muted-color);
   font-size: 0.875rem;
   font-style: italic;
 }
@@ -31,12 +40,11 @@
   overflow: auto;
   margin-top: 0.75rem;
   padding: 0.75rem;
-  background: var(--spds-surface-100);
+  background: var(--spds-surface-200);
   border-radius: var(--spds-border-radius-md);
   font-size: 0.875rem;
 }
 
-.error {
-  color: var(--spds-red-500);
+.feedback {
   margin: 0.75rem 0;
 }

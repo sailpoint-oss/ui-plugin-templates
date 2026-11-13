@@ -1,40 +1,20 @@
 <div class="shell">
   <div class="shell-body">
-    <nav class="shell-sidenav">
-      <ul class="shell-sidenav__list">
-        <li>
-          <a routerLink="/" routerLinkActive="shell-sidenav__link--active" [routerLinkActiveOptions]="{ exact: true }" class="shell-sidenav__link">
-            {{ 'nav.overview' | translate }}
-          </a>
-        </li>
-        <li>
-          <a routerLink="/workflows" routerLinkActive="shell-sidenav__link--active" class="shell-sidenav__link">
-            {{ 'nav.workflows' | translate }}
-          </a>
-        </li>
-        <li>
-          <a routerLink="/api-examples" routerLinkActive="shell-sidenav__link--active" class="shell-sidenav__link">
-            {{ 'nav.apiExamples' | translate }}
-          </a>
-        </li>
-      </ul>
+    <nav class="shell-sidenav" [attr.aria-label]="'nav.label' | translate">
+      <p-menu [model]="navigationItems" [ariaLabel]="'nav.label' | translate" [style]="{ width: '100%' }" />
     </nav>
 
     <main class="shell-content">
       <header class="shell-content__header">
-        <h1 class="spds-h4">Hello, {{ title() }}</h1>
+        <p class="shell-content__title spds-h4">Hello, {{ title() }}</p>
         <div class="shell-content__meta">
           <p-tag [value]="'status.' + status() | translate" [severity]="handshakeSeverity[status()]" />
           @if (context(); as ctx) {
-            <span class="shell-content__context">
-              {{ ctx.tenant.org }} &middot; {{ ctx.user.displayName }}
-            </span>
+            <span class="shell-content__context"> {{ ctx.tenant.org }} &middot; {{ ctx.user.displayName }} </span>
           }
         </div>
       </header>
-      <div class="shell-content__card">
-        <router-outlet />
-      </div>
+      <router-outlet />
     </main>
   </div>
 </div>

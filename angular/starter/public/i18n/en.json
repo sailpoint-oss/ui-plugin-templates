@@ -1,10 +1,12 @@
 {
   "nav": {
+    "label": "Plugin sections",
     "overview": "Overview",
     "workflows": "Workflows",
     "apiExamples": "API Examples"
   },
   "status": {
+    "label": "Plugin connection",
     "pending": "Pending",
     "ready": "Ready",
     "failed": "Failed"

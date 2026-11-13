@@ -10,7 +10,7 @@
   align-items: flex-start;
   gap: 1rem;
   padding: 1rem;
-  border: 1px solid var(--spds-slate-200);
+  border: 1px solid var(--spds-content-border-color);
   border-radius: var(--spds-border-radius-md);
   margin-bottom: 0.75rem;
 
@@ -27,31 +27,17 @@
 
   &__description {
     margin: 0.5rem 0 0;
-    color: var(--spds-zinc-500);
+    color: var(--spds-text-muted-color);
     font-size: 0.875rem;
   }
 }
 
-.empty-state {
-  padding: 1rem;
-  background: var(--spds-surface-100);
-  border-radius: var(--spds-border-radius-md);
-  color: var(--spds-zinc-500);
-}
-
-.error {
-  color: var(--spds-red-500);
+.feedback {
   margin: 0.75rem 0;
 }
 
 .launch-result {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: var(--spds-green-50);
-  border: 1px solid var(--spds-teal-500);
-  border-radius: var(--spds-border-radius-md);
-
-  h3 {
+  h2 {
     margin: 0 0 0.5rem;
   }
 
@@ -62,12 +48,12 @@
   code {
     padding: 0.1rem 0.35rem;
     border-radius: 0.25rem;
-    background: var(--spds-surface-0);
+    background: var(--spds-surface-200);
     font-size: 0.9em;
   }
 
   a {
-    color: var(--spds-blue-500);
+    color: var(--spds-branding-active-link-color);
     text-decoration: none;
 
     &:hover {
