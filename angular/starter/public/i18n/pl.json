@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "Przykłady API",
+		"intro": "SailPoint Angular SDK udostępnia typowane usługi do wywoływania interfejsów API ISC. Ta strona przedstawia dwa wzorce: <strong>Observable</strong> (dla reaktywnych potoków i powiązań szablonów) oraz <strong>Promise</strong> (dla procedur obsługi zdarzeń i sekwencyjnych łańcuchów).",
+		"observableBody": "Funkcja <code>IdentitiesService.listIdentitiesV1()</code> zwraca Observable. Używaj jej z <code>AsyncPipe</code> do automatycznego zarządzania subskrypcjami. Sygnał bramki kontroluje moment subskrypcji Observable.",
+		"observableButton": "Lista tożsamości (Observable)",
+		"observableHeading": "Wzorzec Observable",
+		"observableHint": "Preferuj Observable, gdy: wyniki są powiązane bezpośrednio z szablonami, łączysz wiele operacji asynchronicznych w sposób reaktywny lub gdy potrzebujesz anulowania przy niszczeniu komponentu.",
+		"promiseBody": "Funkcja <code>TenantService.getTenantV1()</code> opakowana w <code>firstValueFrom()</code> konwertuje Observable na Promise. Przydatne w przypadku procedur obsługi zdarzeń i łańcuchów <code>async/await</code>.",
+		"promiseButton": "Pobierz najemcę (Promise)",
+		"promiseHeading": "Wzorzec Promise",
+		"promiseHint": "Preferuj Promise, gdy: reagujesz na działania użytkownika w procedurach obsługi zdarzeń, piszesz sekwencyjną logikę asynchroniczną lub integrujesz się z bibliotekami opartymi na Promise."
+	},
+	"app": {
+		"title": "Starter wtyczki interfejsu użytkownika"
+	},
+	"hero": {
+		"eyebrow": "Wtyczka interfejsu użytkownika SailPoint",
+		"subtitle": "Wtyczka renderuje się jako natywny mikro-frontend w Chmurze zabezpieczeń tożsamości — korzysta z sesji i modelu zabezpieczeń najemcy, więc nie jest wymagane osobne logowanie ani żadne dodatkowe hostowanie. Zapoznaj się z przykładami, a następnie dostosuj wtyczkę do własnych potrzeb.",
+		"title": "Witamy we wtyczce interfejsu użytkownika"
+	},
+	"nav": {
+		"apiExamples": "Przykłady API",
+		"overview": "Informacje ogólne",
+		"workflows": "Przepływy pracy"
+	},
+	"overview": {
+		"gettingStartedBody": "Ten szablon możesz dowolnie przekształcać. Okablowanie SDK w <code>core/</code> obsługuje uzgadnianie z App Shell, dzięki czemu komponenty po prostu odczytują sygnały i wywołują usługi. Otwórz kartę <strong>Przepływy pracy</strong>, aby zobaczyć, jak wyświetlać listę Inicjatorów i je uruchamiać, oraz kartę <strong>Przykłady API</strong>, aby zapoznać się ze wzorcami Observable i Promise podczas wywoływania interfejsów API Chmury zabezpieczeń tożsamości.",
+		"gettingStartedHeading": "Rozpoczynanie",
+		"heading": "Tworzenie natywnych środowisk w Chmurze zabezpieczeń tożsamości",
+		"intro": "Wtyczka renderuje się jako mikro-frontend bezpośrednio w Chmurze zabezpieczeń tożsamości. Korzysta z sesji i modelu zabezpieczeń najemcy, więc nie jest wymagane osobne logowanie, zewnętrzne hostowanie ani żadne dodatkowe zabezpieczenia.",
+		"patterns": "Strony w tym szablonie przedstawiają wzorce używane na co dzień: odczytywanie kontekstu pluginu, wywoływanie interfejsów API Chmury zabezpieczeń tożsamości za pomocą typowanych usług SDK oraz uruchamianie przepływów pracy przez interfejs API Inicjatorów.",
+		"whatHeading": "Co możesz zbudować?",
+		"whatItem1": "Pulpity nawigacyjne łączące dane z dowolnego interfejsu API Chmury zabezpieczeń tożsamości",
+		"whatItem2": "Inicjatory przepływów pracy uruchamiane jednym kliknięciem, które rozpoczynają procesy biznesowe",
+		"whatItem3": "Narzędzia Admina dostosowane do potrzeb zarządzania Twojej Organizacji"
+	},
+	"status": {
+		"failed": "Niepowodzenie",
+		"pending": "Oczekujące",
+		"ready": "Gotowy"
+	},
+	"workflows": {
+		"availableHeading": "Dostępne inicjatory",
+		"disabled": "Wyłączono",
+		"emptyState": "Nie znaleziono inicjatorów. Inicjatory są przypisywane do użytkowników za pomocą konfiguracji Panelu inicjacji w Chmurze zabezpieczeń tożsamości. Jeśli spodziewasz się tu zobaczyć inicjatory, zweryfikuj przypisania w Panelu inicjacji.",
+		"heading": "Programy uruchamiające workflow",
+		"intro": "Wtyczki interfejsu użytkownika mogą uruchamiać przepływy pracy SailPoint za pośrednictwem interfejsu API Inicjatorów. Ta strona wyświetla inicjatory przypisane do Ciebie (przez Panel inicjacji) i umożliwia uruchomienie jednego z nich. Przepływ pracy jest wykonywany po stronie serwera; wtyczka otrzymuje identyfikator procesu interakcyjnego, który prowadzi do Panelu inicjacji dla wszelkich kroków interaktywnych.",
+		"loadButton": "Załaduj moje inicjatory",
+		"openInLaunchpad": "Otwórz w Panelu inicjacji →",
+		"processIdLabel": "Identyfikator procesu interakcyjnego:",
+		"startButton": "Rozpocznij",
+		"startedHeading": "Inicjator uruchomiony"
+	}
+}

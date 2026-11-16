@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API-eksempler",
+		"intro": "SailPoint Angular SDK tilbyr typede tjenester for kall til ISC-API-er. Denne siden viser to mønstre: <strong>Observable</strong> (for reaktive pipelines og binding i maler) og <strong>Promise</strong> (for hendelsesbehandlere og sekvensielle kjeder).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> returnerer et Observable. Bruk det med <code>AsyncPipe</code> for automatisk abonnementshåndtering. Et portsignal styrer når Observable-et abonneres på.",
+		"observableButton": "List opp identiteter (Observable)",
+		"observableHeading": "Observerbart mønster",
+		"observableHint": "Foretrekk Observables når: du binder resultater direkte til maler, kjeder flere asynkrone operasjoner reaktivt, eller når du trenger avbryting ved komponentdestruksjon.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code> pakket inn med <code>firstValueFrom()</code> konverterer Observable til et Promise. Nyttig for hendelsesbehandlere og <code>async/await</code>-kjeder.",
+		"promiseButton": "Hent leietaker (Promise)",
+		"promiseHeading": "Promise-mønster",
+		"promiseHint": "Foretrekk Promises når: du reagerer på brukerhandlinger i hendelsesbehandlere, skriver sekvensiell asynkron logikk, eller integrerer med Promise-baserte biblioteker."
+	},
+	"app": {
+		"title": "Startpunkt for UI-programtillegg"
+	},
+	"hero": {
+		"eyebrow": "SailPoint UI-programtillegg",
+		"subtitle": "Programtillegget ditt gjengis som et innebygd mikro-frontend inne i Identity Security Cloud. Det benytter tenantens økt og sikkerhetsmodell, slik at det ikke kreves en separat pålogging og ingenting ekstra å drifte. Utforsk eksemplene, og tilpass det deretter.",
+		"title": "Velkommen til ditt UI-programtillegg"
+	},
+	"nav": {
+		"apiExamples": "API-eksempler",
+		"overview": "Oversikt",
+		"workflows": "Arbeidsflyter"
+	},
+	"overview": {
+		"gettingStartedBody": "Du kan tilpasse denne malen etter behov. SDK-koblingen i <code>core/</code> håndterer håndtrykket med App Shell, slik at komponentene bare leser signaler og kaller tjenester. Åpne fanen <strong>Arbeidsflyter</strong> for å se hvordan du viser og starter launchere, og fanen <strong>API-eksempler</strong> for å se Observable- og Promise-mønstrene når du kaller API-er for Identity Security Cloud.",
+		"gettingStartedHeading": "Kom i gang",
+		"heading": "Bygg lokale opplevelser inne i Identity Security Cloud",
+		"intro": "Programtillegget ditt gjengis som et mikro-frontend direkte inne i Identity Security Cloud. Det benytter tenantens økt og sikkerhetsmodell, slik at det ikke kreves en separat pålogging, ingen ekstern drifting og ingenting ekstra å sikre.",
+		"patterns": "Sidene i denne malen viser mønstrene du vil bruke hver dag: lese programtilleggskontekst, kalle Identity Security Cloud API-er med typede SDK-tjenester og starte arbeidsflyter via Launchers API.",
+		"whatHeading": "Hva kan du bygge?",
+		"whatItem1": "Dashbord som samler data fra alle Identity Security Cloud API-er",
+		"whatItem2": "Arbeidsflytstartere med ett klikk som setter i gang forretningsprosessene dine",
+		"whatItem3": "Admin-verktøy tilpasset organisasjonens styringsbehov"
+	},
+	"status": {
+		"failed": "Mislyktes",
+		"pending": "Venter",
+		"ready": "Klar"
+	},
+	"workflows": {
+		"availableHeading": "Tilgjengelige Launchers",
+		"disabled": "Deaktivert",
+		"emptyState": "Ingen startprogrammer funnet. Startprogrammer tildeles brukere via Launchpad-konfigurasjonen i Identity Security Cloud. Hvis du forventer å se startprogrammer her, verifiser Launchpad-tildelingene dine.",
+		"heading": "Arbeidsflyt-startprogrammer",
+		"intro": "UI-programtillegg kan starte SailPoint-arbeidsflyter via Launchers API. Denne siden viser startprogrammer som er tildelt deg (via Launchpad) og lar deg starte ett. Arbeidsflyten kjører på serversiden; programtillegget mottar en interaktiv prosess-id som kobler til Launchpad for eventuelle interaktive trinn.",
+		"loadButton": "Last inn mine startprogrammer",
+		"openInLaunchpad": "Åpne i Launchpad →",
+		"processIdLabel": "Interaktiv prosess-id:",
+		"startButton": "Start",
+		"startedHeading": "Launcher startet"
+	}
+}

@@ -1,4 +1,7 @@
 {
+  "app": {
+    "greeting": "Hello, {{name}}"
+  },
   "nav": {
     "overview": "Overview",
     "workflows": "Workflows",

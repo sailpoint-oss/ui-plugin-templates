@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API-Beispiele",
+		"intro": "Das SailPoint Angular SDK stellt typisierte Dienste zum Aufrufen von ISC-APIs bereit. Diese Seite zeigt zwei Muster: <strong>Observable</strong> (für reaktive Pipelines und die Vorlagenbindung) und <strong>Promise</strong> (für Ereignishandler und sequenzielle Ketten).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> gibt ein Observable zurück. Verwenden Sie es mit <code>AsyncPipe</code> für die automatische Verwaltung von Abonnements. Ein Gate-Signal steuert, wann das Observable abonniert wird.",
+		"observableButton": "Identitäten auflisten (Observable)",
+		"observableHeading": "Observable-Muster",
+		"observableHint": "Bevorzugen Sie Observables, wenn Sie Ergebnisse direkt an Vorlagen binden, mehrere asynchrone Vorgänge reaktiv verketten oder beim Zerstören einer Komponente einen Abbruch benötigen.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code>, umschlossen von <code>firstValueFrom()</code>, wandelt das Observable in ein Promise um. Nützlich für Ereignishandler und <code>async/await</code>-Ketten.",
+		"promiseButton": "Mandant abrufen (Promise)",
+		"promiseHeading": "Promise-Muster",
+		"promiseHint": "Bevorzugen Sie Promises, wenn Sie auf Benutzeraktionen in Ereignishandlern reagieren, sequenzielle asynchrone Logik schreiben oder sie mit Promise-basierten Bibliotheken integrieren."
+	},
+	"app": {
+		"title": "UI-Plug-in-Starter"
+	},
+	"hero": {
+		"eyebrow": "SailPoint-UI-Plug-in",
+		"subtitle": "Ihr Plug-in wird als natives Micro-Frontend innerhalb von Identity Security Cloud dargestellt. Es verwendet die Sitzung und das Sicherheitsmodell des Mandanten, sodass keine separate Anmeldung und kein zusätzliches Hosting erforderlich sind. Erkunden Sie die Beispiele und passen Sie es anschließend an Ihre Anforderungen an.",
+		"title": "Willkommen bei Ihrem UI-Plug-in"
+	},
+	"nav": {
+		"apiExamples": "API-Beispiele",
+		"overview": "Überblick",
+		"workflows": "Workflows"
+	},
+	"overview": {
+		"gettingStartedBody": "Sie können diese Vorlage nach Ihren Anforderungen umgestalten. Die SDK-Verknüpfung in <code>core/</code> verarbeitet den App-Shell-Handshake, sodass Komponenten einfach Signale lesen und Dienste aufrufen. Öffnen Sie die Registerkarte <strong>Workflows</strong>, um zu sehen, wie Sie Launcher auflisten und starten, und die Registerkarte <strong>API-Beispiele</strong>, um die Observable- und Promise-Muster beim Aufrufen von Identity Security Cloud-APIs zu sehen.",
+		"gettingStartedHeading": "Erste Schritte",
+		"heading": "Native Erlebnisse innerhalb von Identity Security Cloud erstellen",
+		"intro": "Ihr Plug-in wird direkt innerhalb von Identity Security Cloud als Micro-Frontend dargestellt. Es verwendet die Sitzung und das Sicherheitsmodell des Mandanten, sodass keine separate Anmeldung, kein externes Hosting und keine zusätzliche Absicherung erforderlich sind.",
+		"patterns": "Die Seiten in dieser Vorlage zeigen die Muster, die Sie täglich verwenden: Lesen des Plug-in-Kontexts, Aufrufen von Identity Security Cloud-APIs mit typisierten SDK-Diensten und Starten von Workflows über die Launcher-API.",
+		"whatHeading": "Was können Sie erstellen?",
+		"whatItem1": "Dashboards, die Daten aus beliebigen Identity Security Cloud-APIs zusammenführen",
+		"whatItem2": "Workflow-Launcher mit einem Klick, die Ihre Geschäftsprozesse starten",
+		"whatItem3": "Admin-Tools, die auf die Governance-Anforderungen Ihrer Organisation abgestimmt sind"
+	},
+	"status": {
+		"failed": "Fehlgeschlagen",
+		"pending": "Ausstehend",
+		"ready": "Bereit"
+	},
+	"workflows": {
+		"availableHeading": "Verfügbare Launcher",
+		"disabled": "Deaktiviert",
+		"emptyState": "Keine Launcher gefunden. Launcher werden Benutzern über die Launchpad-Konfiguration in Identity Security Cloud zugewiesen. Wenn Sie hier Launcher erwarten, verifizieren Sie Ihre Launchpad-Zuweisungen.",
+		"heading": "Workflow-Startprogramme",
+		"intro": "UI-Plug-ins können SailPoint-Workflows über die Launcher-API starten. Diese Seite listet die Ihnen über das Launchpad zugewiesenen Launcher auf und ermöglicht Ihnen, einen zu starten. Der Workflow wird serverseitig ausgeführt. Das Plug-in erhält eine ID für den interaktiven Prozess, die für interaktive Schritte mit dem Launchpad verknüpft ist.",
+		"loadButton": "Meine Launcher laden",
+		"openInLaunchpad": "Im Launchpad öffnen →",
+		"processIdLabel": "ID des interaktiven Prozesses:",
+		"startButton": "Starten",
+		"startedHeading": "Launcher gestartet"
+	}
+}

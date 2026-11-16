@@ -18,8 +18,8 @@ export class App implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   // Plugin display name. The SailPoint CLI (`sail ui-plugins init`) rewrites the
-  // 'starter' literal to the alias the user provides. It is the plugin's own
-  // name, not UI copy, so it is intentionally not translated.
+  // 'starter' literal to the name the user provides. The name is not UI copy, so
+  // it stays out of the catalogs; the greeting passes it in as a parameter.
   protected readonly title = signal('starter');
   protected readonly context = this.plugin.context;
   protected readonly status = this.plugin.status;

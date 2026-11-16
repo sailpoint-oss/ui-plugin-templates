@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API-példák",
+		"intro": "A SailPoint Angular SDK típusos szolgáltatásokat biztosít az ISC API-k meghívásához. Ez az oldal két mintát mutat be: <strong>Observable</strong> (reaktív folyamatokhoz és sablonkötéshez) és <strong>Promise</strong> (eseménykezelőkhöz és szekvenciális láncokhoz).",
+		"observableBody": "A <code>IdentitiesService.listIdentitiesV1()</code> Observable-t ad vissza. Használja az <code>AsyncPipe</code> eszközzel az automatikus előfizetéskezeléshez. Egy kapujel szabályozza, hogy az Observable mikor kap előfizetést.",
+		"observableButton": "Identitások listázása (Observable)",
+		"observableHeading": "Observable-minta",
+		"observableHint": "Az Observable-okat akkor részesítse előnyben, ha az eredményeket közvetlenül sablonokhoz köti, több aszinkron műveletet reaktívan láncol össze, vagy ha az összetevő megsemmisítésekor megszakításra van szüksége.",
+		"promiseBody": "A <code>firstValueFrom()</code> függvénybe csomagolt <code>TenantService.getTenantV1()</code> az Observable-t Promise-szá alakítja. Hasznos eseménykezelőkhöz és <code>async/await</code>-láncokhoz.",
+		"promiseButton": "Bérlő lekérése (Promise)",
+		"promiseHeading": "Promise-minta",
+		"promiseHint": "A Promise-okat akkor részesítse előnyben, ha eseménykezelőkben felhasználói műveletekre reagál, szekvenciális aszinkron logikát ír, vagy Promise-alapú könyvtárakkal integrálódik."
+	},
+	"app": {
+		"title": "Felhasználói felületi bővítmény kezdőcsomagja"
+	},
+	"hero": {
+		"eyebrow": "SailPoint felhasználói felületi bővítmény",
+		"subtitle": "A beépülő modul natív mikroelőtérrendszerként jelenik meg az Identity Security Cloudon belül; a bérlő munkamenetét és biztonsági modelljét használja, így nincs szükség külön bejelentkezésre, és nincs szükség további üzemeltetésre. Tekintse meg a példákat, majd alakítsa a saját igényei szerint.",
+		"title": "Üdvözöljük a felhasználói felületi bővítményében"
+	},
+	"nav": {
+		"apiExamples": "API-példák",
+		"overview": "Áttekintés",
+		"workflows": "Munkafolyamatok"
+	},
+	"overview": {
+		"gettingStartedBody": "Ezt a sablont saját igényei szerint alakíthatja át. A <code>core/</code> mappában található SDK-integráció kezeli az App Shell-lel történő kézfogást, így az összetevők egyszerűen jeleket olvasnak be és szolgáltatásokat hívnak meg. Nyissa meg a <strong>Munkafolyamatok</strong> lapot, ahol megtekintheti, hogyan lehet listázni és indítani az indítókat, valamint az <strong>API-példák</strong> lapot az Observable- és Promise-mintákhoz az Identity Security Cloud API-k meghívásakor.",
+		"gettingStartedHeading": "Első lépések",
+		"heading": "Natív felületek létrehozása az Identity Security Cloudon belül",
+		"intro": "A bővítmény mikroelőtérrendszerként jelenik meg közvetlenül az Identity Security Cloudban. A bérlő munkamenetét és biztonsági modelljét használja, ezért nincs szükség külön bejelentkezésre, külső üzemeltetésre vagy további védelmi intézkedésekre.",
+		"patterns": "A sablon oldalai bemutatják a naponta használt mintákat: a beépülőmodul-környezet beolvasását, az Identity Security Cloud API-k meghívását típusos SDK-szolgáltatásokkal, valamint a munkafolyamatok indítását a Launchers API-n keresztül.",
+		"whatHeading": "Mit hozhat létre?",
+		"whatItem1": "Irányítópultok, amelyek bármely Identity Security Cloud API adatait egyesítik",
+		"whatItem2": "Egykattintásos munkafolyamat-indítók az üzleti folyamatok elindításához",
+		"whatItem3": "A szervezete irányítási igényeihez igazított adminisztrátori eszközök"
+	},
+	"status": {
+		"failed": "Sikertelen",
+		"pending": "Függőben",
+		"ready": "Kész"
+	},
+	"workflows": {
+		"availableHeading": "Elérhető indítók",
+		"disabled": "Letiltva",
+		"emptyState": "Nem találhatók indítók. Az indítókat az Identity Security Cloud Indítópanel-konfigurációján keresztül rendelik hozzá a felhasználókhoz. Ha itt indítókat vár, ellenőrizze az Indítópanel-hozzárendeléseit.",
+		"heading": "Munkafolyamat gyorsindítók",
+		"intro": "A felhasználói felületi beépülő modulok a Launchers API-n keresztül indíthatnak SailPoint Munkafolyamatokat. Ez az oldal felsorolja az Önnek kiosztott indítókat (az Indítópanelen keresztül), és lehetővé teszi egy indító elindítását. A munkafolyamat a szerveroldalon fut; a beépülő modul egy Interaktív folyamat-azonosítót kap, amely az Indítópanelhez kapcsolódik az esetleges interaktív lépésekhez.",
+		"loadButton": "Saját indítók betöltése",
+		"openInLaunchpad": "Megnyitás az Indítópanelen →",
+		"processIdLabel": "Interaktív folyamat azonosítója:",
+		"startButton": "Kezdés",
+		"startedHeading": "Indító elindítva"
+	}
+}

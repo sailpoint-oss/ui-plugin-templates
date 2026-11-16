@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API Örnekleri",
+		"intro": "SailPoint Angular SDK, ISC API'lerini çağırmak için yazılı hizmetler sağlar. Bu sayfa iki kalıbı göstermektedir: <strong>Observable</strong> (reaktif ardışık düzenler ve şablon bağlama için) ve <strong>Promise</strong> (olay işleyicileri ve sıralı zincirler için).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> bir Observable döndürür. Otomatik abonelik yönetimi için <code>AsyncPipe</code> ile kullanın. Bir kapı sinyali, Observable'ın ne zaman abone olunacağını denetler.",
+		"observableButton": "Kimlikleri Listele (Observable)",
+		"observableHeading": "Observable Kalıbı",
+		"observableHint": "Şu durumlarda Observable'ları tercih edin: sonuçları doğrudan şablonlara bağlarken, birden fazla zaman uyumsuz işlemi reaktif olarak zincirlerken veya bileşen yok edildiğinde iptal etme işlevi gerektiğinde.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code>, Observable'ı bir Promise'e dönüştürmek için <code>firstValueFrom()</code> ile sarmalanmıştır. Olay işleyicileri ve <code>async/await</code> zincirleri için kullanışlıdır.",
+		"promiseButton": "Kiracıyı Al (Promise)",
+		"promiseHeading": "Promise Kalıbı",
+		"promiseHint": "Şu durumlarda Promise'leri tercih edin: olay işleyicilerinde kullanıcı eylemlerine yanıt verirken, sıralı zaman uyumsuz mantık yazarken veya Promise tabanlı kitaplıklarla entegrasyon yaparken."
+	},
+	"app": {
+		"title": "UI Eklenti Başlangıç Noktası"
+	},
+	"hero": {
+		"eyebrow": "SailPoint UI Eklentisi",
+		"subtitle": "Eklentiniz, Identity Security Cloud içinde yerel bir mikro-frontend olarak çalışır; kiracının oturumunu ve güvenlik modelini kullandığından ayrı bir oturum açma işlemi gerekmez ve ekstra barındırma yapmanıza gerek yoktur. Örnekleri inceleyin, ardından eklentiyi kendinize göre özelleştirin.",
+		"title": "UI Eklentinize Hoş Geldiniz"
+	},
+	"nav": {
+		"apiExamples": "API Örnekleri",
+		"overview": "Genel Bakış",
+		"workflows": "İş Akışları"
+	},
+	"overview": {
+		"gettingStartedBody": "Bu şablon yeniden şekillendirmeniz için sizindir. <code>core/</code> içindeki SDK bağlantısı, Uygulama Kabuğu el sıkışmasını yönetir; böylece bileşenler yalnızca sinyalleri okur ve hizmetleri çağırır. Başlatıcıları nasıl listeleyeceğinizi ve başlatacağınızı görmek için <strong>İş Akışları</strong> sekmesini, Identity Security Cloud API'lerini çağırırken Observable ve Promise kalıpları için ise <strong>API Örnekleri</strong> sekmesini açın.",
+		"gettingStartedHeading": "Başlangıç",
+		"heading": "Identity Security Cloud içinde yerel deneyimler oluşturma",
+		"intro": "Eklentiniz, Identity Security Cloud içinde doğrudan bir mikro-frontend olarak çalışır. Kiracının oturumunu ve güvenlik modelini kullandığından ayrı bir oturum açma işlemi, harici barındırma veya ekstra güvenlik önlemi gerekmez.",
+		"patterns": "Bu şablondaki sayfalar, her gün kullanacağınız kalıpları gösterir: eklenti bağlamını okuma, yazılı SDK hizmetleriyle Identity Security Cloud API'lerini çağırma ve Başlatıcılar API'si aracılığıyla iş akışları başlatma.",
+		"whatHeading": "Neler oluşturabilirsiniz?",
+		"whatItem1": "Herhangi bir Identity Security Cloud API'sinden veri bir araya getiren panolar",
+		"whatItem2": "İş süreçlerinizi başlatan tek tıklamalı iş akışı başlatıcıları",
+		"whatItem3": "Kuruluşunuzun yönetişim ihtiyaçlarına göre ayarlanmış yönetici araçları"
+	},
+	"status": {
+		"failed": "Başarısız",
+		"pending": "Beklemede",
+		"ready": "Hazır"
+	},
+	"workflows": {
+		"availableHeading": "Kullanılabilir Başlatıcılar",
+		"disabled": "Devre dışı",
+		"emptyState": "Başlatıcı bulunamadı. Başlatıcılar, Identity Security Cloud'daki Başlatma Paneli yapılandırması aracılığıyla kullanıcılara atanır. Burada başlatıcı görmeyi bekliyorsanız Başlatma Paneli atamalarınızı doğrulayın.",
+		"heading": "İş Akışı Başlatıcıları",
+		"intro": "UI eklentileri, Başlatıcılar API'si aracılığıyla SailPoint İş Akışlarını başlatabilir. Bu sayfa, size atanmış başlatıcıları (Başlatma Paneli aracılığıyla) listeler ve bir tanesini başlatmanıza olanak tanır. İş akışı sunucu tarafında çalışır; eklenti, etkileşimli adımlar için Başlatma Paneli'ne bağlanan bir Etkileşimli Süreç Kimliği alır.",
+		"loadButton": "Başlatıcılarımı Yükle",
+		"openInLaunchpad": "Başlatma Paneli'nde Aç →",
+		"processIdLabel": "Etkileşimli Süreç Kimliği:",
+		"startButton": "Başlat",
+		"startedHeading": "Başlatıcı Başlatıldı"
+	}
+}

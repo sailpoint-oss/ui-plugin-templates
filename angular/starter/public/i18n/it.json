@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "Esempi API",
+		"intro": "L'SDK Angular di SailPoint fornisce servizi tipizzati per chiamare le API ISC. Questa pagina illustra due pattern: <strong>Observable</strong> (per pipeline reattive e binding di modelli) e <strong>Promise</strong> (per gestori di eventi e catene sequenziali).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> restituisce un Observable. Utilizzalo con <code>AsyncPipe</code> per la gestione automatica delle sottoscrizioni. Un segnale gate controlla quando viene effettuata la sottoscrizione all'Observable.",
+		"observableButton": "Elenca identità (Observable)",
+		"observableHeading": "Schema osservabile",
+		"observableHint": "Preferisci gli Observable quando: i risultati vengono associati direttamente ai modelli, si concatenano più operazioni asincrone in modo reattivo oppure quando è necessaria la cancellazione alla distruzione del componente.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code> con <code>firstValueFrom()</code> converte l'Observable in una Promise. Utile per i gestori di eventi e le catene <code>async/await</code>.",
+		"promiseButton": "Ottieni tenant (Promise)",
+		"promiseHeading": "Pattern Promise",
+		"promiseHint": "Preferisci le Promise quando: si risponde alle azioni dell'utente nei gestori di eventi, si scrive logica asincrona sequenziale o si integra con librerie basate su Promise."
+	},
+	"app": {
+		"title": "Starter per plugin UI"
+	},
+	"hero": {
+		"eyebrow": "Plugin UI SailPoint",
+		"subtitle": "Il tuo plugin viene visualizzato come micro-frontend nativo all'interno di Identity Security Cloud; utilizza il modello di sessione e sicurezza del tenant, quindi non è necessario un accesso separato né alcun elemento aggiuntivo da ospitare. Esplora gli esempi, poi personalizzalo.",
+		"title": "Ti diamo il benvenuto nel tuo plugin UI"
+	},
+	"nav": {
+		"apiExamples": "Esempi di API",
+		"overview": "Panoramica",
+		"workflows": "Flussi di lavoro"
+	},
+	"overview": {
+		"gettingStartedBody": "Puoi modificare questo modello come desideri. L'integrazione dell'SDK in <code>core/</code> gestisce l'handshake di App Shell, in modo che i componenti leggano semplicemente i segnali e chiamino i servizi. Apri la scheda <strong>Flussi di lavoro</strong> per vedere come elencare e avviare i launcher e la scheda <strong>Esempi di API</strong> per i pattern Observable e Promise quando si chiamano le API di Identity Security Cloud.",
+		"gettingStartedHeading": "Per iniziare",
+		"heading": "Crea esperienze native all'interno di Identity Security Cloud",
+		"intro": "Il tuo plugin viene visualizzato come micro-frontend direttamente all'interno di Identity Security Cloud. Utilizza il modello di sessione e sicurezza del tenant, quindi non ci sono un accesso separato, un hosting esterno o altri elementi da proteggere.",
+		"patterns": "Le pagine di questo template mostrano i pattern che utilizzerai ogni giorno: lettura del contesto del plugin, chiamata alle API di Identity Security Cloud con servizi SDK tipizzati e avvio dei flussi di lavoro tramite l'API dei Launcher.",
+		"whatHeading": "Cosa puoi creare?",
+		"whatItem1": "Dashboard che aggregano dati da qualsiasi API di Identity Security Cloud",
+		"whatItem2": "Launcher del flusso di lavoro con un clicche avviano i processi aziendali",
+		"whatItem3": "Strumenti di amministrazione adattati alle esigenze di governance della tua organizzazione"
+	},
+	"status": {
+		"failed": "Non riuscito",
+		"pending": "In attesa",
+		"ready": "Pronto"
+	},
+	"workflows": {
+		"availableHeading": "Launcher disponibili",
+		"disabled": "Disabilitato",
+		"emptyState": "Nessun launcher trovato. I launcher vengono assegnati agli utenti tramite la configurazione del Launchpad in Identity Security Cloud. Se prevedi di visualizzare dei launcher qui, verifica le assegnazioni del tuo Launchpad.",
+		"heading": "Launcher del flusso di lavoro",
+		"intro": "I plugin UI possono avviare i flussi di lavoro SailPoint tramite l'API dei launcher. Questa pagina elenca i launcher assegnati a te (tramite Launchpad) e consente di avviarne uno. Il flusso di lavoro viene eseguito lato server; il plugin riceve un ID processo interattivo che rimanda a Launchpad per eventuali passaggi interattivi.",
+		"loadButton": "Carica i miei launcher",
+		"openInLaunchpad": "Apri nel Launchpad →",
+		"processIdLabel": "ID processo interattivo:",
+		"startButton": "Inizio",
+		"startedHeading": "Launcher avviato"
+	}
+}
