@@ -16,7 +16,7 @@ description: Use when editing `sp-ui-plugin.json`, choosing a plugin alias, decl
 
 - **`alias`** — tenant-unique, path-safe key: lowercase alphanumeric and dashes, 3–63 characters, not shaped like a UUID. It is a stable, environment-independent key: the same alias maps to a different plugin instance in each tenant, so the same code promotes across staging and production.
 - **`name` / `description`** — localized display strings (`{ "en": "…" }`).
-- **`apiScopes`** — the SailPoint API scopes the plugin's calls may use (up to 20); see below.
+- **`apiScopes`** — the SailPoint API scopes the plugin's calls may use (up to 20); see below. Note, the `sail scopes analyze` command will only work for Angular projects using the angular-sdk. 
 - **`permissionPolicy` / `iframeAllow` / `contentSecurityPolicies`** — declarative security fields; edit by hand as features need them. Keep them `{}` unless required. UMS merges them with the platform baseline.
 - **`slots`** — where the plugin mounts (`full-page` is the only slot today).
 
