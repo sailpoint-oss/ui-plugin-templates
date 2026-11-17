@@ -1,0 +1,55 @@
+{
+	"apiExamples": {
+		"heading": "API-esimerkit",
+		"intro": "SailPoint Angular SDK tarjoaa tyypitetyt palvelut ISC API:en kutsumiseen. Tällä sivulla esitellään kaksi mallia: <strong>Observable</strong> (reaktiivisille putkistoille ja mallisidonnalle) ja <strong>Promise</strong> (tapahtumankäsittelijöille ja peräkkäisille ketjuille).",
+		"observableBody": "<code>IdentitiesService.listIdentitiesV1()</code> palauttaa Observablen. Käytä sitä <code>AsyncPipe</code>n kanssa automaattiseen tilauksen hallintaan. Porttisignaali ohjaa, milloin Observable tilataan.",
+		"observableButton": "Listaa identiteetit (Observable)",
+		"observableHeading": "Observable-malli",
+		"observableHint": "Suosi Observableja, kun: sidot tuloksia suoraan malleihin, ketjutat useita asynkronisia toimintoja reaktiivisesti tai tarvitset peruutuksen komponentin tuhoutuessa.",
+		"promiseBody": "<code>TenantService.getTenantV1()</code> käärittynä <code>firstValueFrom()</code>-funktiolla muuntaa Observablen Promiseksi. Hyödyllinen tapahtumankäsittelijöille ja <code>async/await</code>-ketjuille.",
+		"promiseButton": "Hae vuokraaja (Promise)",
+		"promiseHeading": "Promise-malli",
+		"promiseHint": "Suosi Promiseja, kun: reagoit käyttäjän toimiin tapahtumankäsittelijöissä, kirjoitat peräkkäistä asynkronista logiikkaa tai integroit Promise-pohjaisten kirjastojen kanssa."
+	},
+	"app": {
+		"title": "Käyttöliittymälaajennuksen aloituspaketti"
+	},
+	"hero": {
+		"eyebrow": "SailPoint-käyttöliittymälaajennus",
+		"subtitle": "Laajennuksesi näkyy natiivin mikrofrontend-sovelluksen tapaan Identity Security Cloudissa. Se hyödyntää vuokraajan istuntoa ja tietoturvamallia, joten erillistä kirjautumista tai ylimääräistä isännöintiä ei tarvita. Tutustu esimerkkeihin ja muokkaa laajennus omanlaiseksesi.",
+		"title": "Tervetuloa käyttöliittymälaajennukseesi"
+	},
+	"nav": {
+		"apiExamples": "API-esimerkit",
+		"overview": "Yleisnäkymä",
+		"workflows": "Työnkulut"
+	},
+	"overview": {
+		"gettingStartedBody": "Tämä malli on muokattavissasi vapaasti. <code>core/</code>-kansion SDK-kytkentä hoitaa App Shell -kättelyn, joten komponentit lukevat signaaleja ja kutsuvat palveluja suoraan. Avaa <strong>Työnkulut</strong>-välilehti nähdäksesi, miten käynnistimet listataan ja käynnistetään, sekä <strong>API-esimerkit</strong>-välilehti Observable- ja Promise-toimintamalleja varten Identity Security Cloud -API:en kutsuissa.",
+		"gettingStartedHeading": "Aloittaminen",
+		"heading": "Luo natiiveja käyttökokemuksia Identity Security Cloudissa",
+		"intro": "Laajennuksesi näkyy mikrofrontend-sovelluksena suoraan Identity Security Cloudissa. Se hyödyntää vuokraajan istuntoa ja tietoturvamallia, joten erillistä kirjautumista, ulkoista isännöintiä tai ylimääräisiä suojaustoimia ei tarvita.",
+		"patterns": "Tämän mallin sivut esittelevät päivittäin käyttämäsi toimintamallit: laajennuskontekstin lukemisen, Identity Security Cloud -API:en kutsumisen tyypitetyillä SDK-palveluilla sekä työnkulkujen käynnistämisen Launchers API:n kautta.",
+		"whatHeading": "Mitä voit rakentaa?",
+		"whatItem1": "Koontinäyttöjä, jotka kokoavat tietoja mistä tahansa Identity Security Cloud -API:sta",
+		"whatItem2": "Yhden napsautuksen työnkulun käynnistimiä, jotka käynnistävät liiketoimintaprosessisi",
+		"whatItem3": "Järjestelmänvalvojan työkalut organisaatiosi hallintotarpeisiin"
+	},
+	"status": {
+		"failed": "Epäonnistui",
+		"pending": "Odottava",
+		"ready": "Valmis"
+	},
+	"workflows": {
+		"availableHeading": "Käytettävissä olevat käynnistimet",
+		"disabled": "Ei käytössä",
+		"emptyState": "Käynnistimiä ei löytynyt. Käynnistimet määritetään käyttäjille käynnistysalustan asetusten kautta Identity Security Cloudissa. Jos odotat käynnistimien näkyvän tässä, varmenna käynnistysalustan määritykset.",
+		"heading": "Työnkulun käynnistysohjelmat",
+		"intro": "Käyttöliittymälaajennukset voivat käynnistää SailPoint-työnkulkuja Launchers API:n kautta. Tällä sivulla näkyvät sinulle määritetyt käynnistimet (käynnistysalustan kautta), ja voit käynnistää niistä yhden. Työnkulku suoritetaan palvelinpuolella, ja laajennus saa interaktiivisen prosessin tunnuksen, joka linkittyy käynnistysalustaan mahdollisia interaktiivisia vaiheita varten.",
+		"loadButton": "Lataa omat käynnistimeni",
+		"openInLaunchpad": "Avaa Launchpadissa →",
+		"processIdLabel": "Interaktiivisen prosessin tunnus:",
+		"startButton": "Käynnistä",
+		"startedHeading": "Käynnistin aloitettu"
+	}
+}

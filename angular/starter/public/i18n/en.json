@@ -1,4 +1,7 @@
 {
+  "app": {
+    "greeting": "Hello, {{name}}"
+  },
   "nav": {
     "label": "Plugin sections",
     "overview": "Overview",
