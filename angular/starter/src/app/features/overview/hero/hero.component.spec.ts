@@ -30,5 +30,6 @@ describe('HeroComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.hero__constellation')).toBeTruthy();
     expect(compiled.querySelectorAll('.c-nodes circle').length).toBeGreaterThan(0);
+    expect(compiled.querySelector('p-card.hero-card')).toBeTruthy();
   });
 });

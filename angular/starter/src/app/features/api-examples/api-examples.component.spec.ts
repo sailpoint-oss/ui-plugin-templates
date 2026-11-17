@@ -44,12 +44,16 @@ describe('ApiExamplesComponent', () => {
   });
 
   it('renders the heading', () => {
-    expect(compiled.querySelector('h2')?.textContent).toContain('API Examples');
+    const heading = compiled.querySelector('h1');
+    expect(heading?.textContent).toContain('API Examples');
+    expect(heading?.classList).toContain('spds-h2');
+    expect(compiled.querySelector('.api-examples__intro')).toBeTruthy();
   });
 
   it('renders both example sections', () => {
     const sections = compiled.querySelectorAll('.example-section');
     expect(sections.length).toBe(2);
+    expect(compiled.querySelectorAll('p-card').length).toBe(2);
     expect(sections[0].textContent).toContain('Observable Pattern');
     expect(sections[1].textContent).toContain('Promise Pattern');
   });

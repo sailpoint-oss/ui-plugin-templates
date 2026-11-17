@@ -63,7 +63,7 @@ describe('WorkflowsComponent', () => {
   });
 
   it('renders the heading', () => {
-    expect(compiled.querySelector('h2')?.textContent).toContain('Workflow Launchers');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Workflow Launchers');
   });
 
   it('loads launchers when loadLaunchers is called', async () => {
@@ -84,7 +84,7 @@ describe('WorkflowsComponent', () => {
     await component.loadLaunchers();
     fixture.detectChanges();
 
-    expect(compiled.querySelector('.error')?.textContent).toContain('Network error');
+    expect(compiled.querySelector('p-message[severity="error"]')?.textContent).toContain('Network error');
   });
 
   it('displays empty state when no launchers found', async () => {
@@ -93,7 +93,7 @@ describe('WorkflowsComponent', () => {
     await component.loadLaunchers();
     fixture.detectChanges();
 
-    expect(compiled.querySelector('.empty-state')?.textContent).toContain('No launchers found');
+    expect(compiled.querySelector('p-message[severity="secondary"]')?.textContent).toContain('No launchers found');
   });
 
   it('starts a launcher and shows the result', async () => {
@@ -127,6 +127,6 @@ describe('WorkflowsComponent', () => {
     await component.startLauncher(launchers[0]);
     fixture.detectChanges();
 
-    expect(compiled.querySelectorAll('.error')[0]?.textContent).toContain('Launch failed');
+    expect(compiled.querySelector('p-message[severity="error"]')?.textContent).toContain('Launch failed');
   });
 });

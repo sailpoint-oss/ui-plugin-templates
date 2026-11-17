@@ -1,7 +1,8 @@
 /**
  * Copyright (C) 2026 SailPoint Technologies, Inc.  All rights reserved.
  */
-// AUTO-GENERATED. Do not hand-modify.
+// AUTO-GENERATED. Do not edit.
+
 import type { Preset } from '@primeuix/themes/types';
 
 const data = {
@@ -186,35 +187,40 @@ const data = {
 			},
 		},
 		avatar: {
-			root: {
-				background: '{content.border.color}',
-				borderRadius: '{content.border.radius}',
-				color: '{content.color}',
-				fontSize: '1rem',
-				height: '2rem',
-				width: '2rem',
-			},
 			extend: {
+				ai: {
+					icon: {
+						color: '#ffffffff',
+					},
+				},
 				danger: {
-					background: '{red.100}',
+					background: 'light-dark({red.100}, {red.300})',
 					color: '{red.950}',
 				},
 				empty: {
-					background: '{blue.50}',
+					background: 'light-dark({blue.50}, {lightblue.950})',
 					color: '{primary.color}',
 				},
 				primary: {
-					background: '{primary.100}',
-					color: '{primary.700}',
+					background: 'light-dark({primary.100}, {cyan.300})',
+					color: 'light-dark({primary.700}, {cyan.950})',
 				},
 				success: {
-					background: '{teal.100}',
+					background: 'light-dark({teal.100}, {teal.300})',
 					color: '{teal.950}',
 				},
 				warn: {
-					background: '{amber.100}',
+					background: 'light-dark({amber.100}, {amber.200})',
 					color: '{amber.950}',
 				},
+			},
+			root: {
+				background: 'light-dark({content.border.color}, {slate.200})',
+				borderRadius: '{content.border.radius}',
+				color: 'light-dark({content.color}, {zinc.900})',
+				fontSize: '{font.size.md}',
+				height: '2rem',
+				width: '2rem',
 			},
 			group: {
 				borderColor: '{content.background}',
@@ -235,7 +241,7 @@ const data = {
 				width: '3rem',
 			},
 			xl: {
-				fontSize: '2rem',
+				fontSize: '{font.size.4xl}',
 				group: {
 					offset: '-1.5rem',
 				},
@@ -288,8 +294,8 @@ const data = {
 				},
 				dark: {
 					contrast: {
-						background: '{surface.0}',
-						color: '{surface.950}',
+						background: '{carbon.100}',
+						color: '{surface.100}',
 					},
 					danger: {
 						background: '{red.400}',
@@ -376,6 +382,33 @@ const data = {
 			},
 		},
 		button: {
+			extend: {
+				ai: {
+					icon: {
+						color: '#ffffffff',
+					},
+				},
+				min: {
+					width: '7.5rem',
+				},
+				raised: {
+					background: 'light-dark(#ffffff03, #00000003)',
+				},
+				xs: {
+					border: {
+						radius: '{border.radius.sm}',
+					},
+					icon: {
+						only: {
+							width: '1.5rem',
+						},
+					},
+					padding: {
+						x: '{scale.0-5}',
+						y: '{scale.0-25}',
+					},
+				},
+			},
 			root: {
 				badgeSize: '1rem',
 				borderRadius: '{form.field.border.radius}',
@@ -533,7 +566,7 @@ const data = {
 							},
 							hoverBackground: '{surface.100}',
 							hoverBorderColor: '{primary.hover.color}',
-							hoverColor: '{button.text.secondary.hover.background}',
+							hoverColor: '{primary.hover.color}',
 						},
 						success: {
 							activeBackground: '{teal.700}',
@@ -609,7 +642,7 @@ const data = {
 						secondary: {
 							activeBackground: '{surface.100}',
 							borderColor: '{primary.200}',
-							color: '{surface.0}',
+							color: '{primary.color}',
 							hoverBackground: '{surface.50}',
 						},
 						success: {
@@ -658,8 +691,8 @@ const data = {
 						},
 						secondary: {
 							activeBackground: '{primary.active.color}',
-							color: '{primary.color}',
-							hoverBackground: '{primary.hover.color}',
+							color: '{zinc.500}',
+							hoverBackground: '{surface.100}',
 						},
 						success: {
 							activeBackground: '{teal.100}',
@@ -833,7 +866,7 @@ const data = {
 						secondary: {
 							activeBackground: '#ffffff29',
 							borderColor: '{primary.color}',
-							color: '{carbon.800}',
+							color: '{primary.color}',
 							hoverBackground: '#ffffff0a',
 						},
 						success: {
@@ -882,8 +915,8 @@ const data = {
 						},
 						secondary: {
 							activeBackground: '{primary.600}',
-							color: '{lightblue.500}',
-							hoverBackground: '{primary.600}',
+							color: '{zinc.300}',
+							hoverBackground: '{zinc.900}',
 						},
 						success: {
 							activeBackground: '#1b8c7129',
@@ -896,14 +929,6 @@ const data = {
 							hoverBackground: '#fb923c0a',
 						},
 					},
-				},
-			},
-			extend: {
-				min: {
-					width: '7.5rem',
-				},
-				raised: {
-					background: 'light-dark(#ffffff03, #00000003)',
 				},
 			},
 		},
@@ -925,7 +950,7 @@ const data = {
 				color: '{text.muted.color}',
 			},
 			title: {
-				fontSize: '1.25rem',
+				fontSize: '{font.heading.medium.size}',
 				fontWeight: '500',
 			},
 		},
@@ -1838,7 +1863,7 @@ const data = {
 				padding: '{overlay.modal.padding}',
 			},
 			title: {
-				fontSize: '1.25rem',
+				fontSize: '{font.heading.medium.size}',
 				fontWeight: '600',
 			},
 		},
@@ -1919,7 +1944,7 @@ const data = {
 				padding: '{overlay.modal.padding}',
 			},
 			title: {
-				fontSize: '1.5rem',
+				fontSize: '{font.heading.large.size}',
 				fontWeight: '600',
 			},
 		},
@@ -2425,7 +2450,7 @@ const data = {
 				invalidBorderColor: '{form.field.invalid.border.color}',
 				invalidPlaceholderColor: '{form.field.invalid.placeholder.color}',
 				lg: {
-					fontSize: '1.125rem',
+					fontSize: '{form.field.lg.font.size}',
 					paddingX: '{form.field.lg.padding.x}',
 					paddingY: '{form.field.lg.padding.y}',
 				},
@@ -2434,7 +2459,7 @@ const data = {
 				placeholderColor: '{form.field.placeholder.color}',
 				shadow: '0 1px 2px 0 #1212170d',
 				sm: {
-					fontSize: '0.875rem',
+					fontSize: '{form.field.sm.font.size}',
 					paddingX: '{form.field.sm.padding.x}',
 					paddingY: '{form.field.sm.padding.y}',
 				},
@@ -2937,15 +2962,15 @@ const data = {
 							focusRing: {
 								color: '{message.secondary.outlined.border.color}',
 							},
-							hoverBackground: '{surface.100}',
+							hoverBackground: '{surface.200}',
 						},
-						color: '{surface.950}',
+						color: '{surface.100}',
 						outlined: {
-							borderColor: '{surface.0}',
-							color: '{surface.0}',
+							borderColor: '{surface.100}',
+							color: '{surface.100}',
 						},
 						simple: {
-							color: '{surface.0}',
+							color: '{surface.100}',
 						},
 					},
 					error: {
@@ -3112,13 +3137,13 @@ const data = {
 				shadow: '0 4px 8px 0 #0108040a',
 			},
 			text: {
-				fontSize: '1rem',
+				fontSize: '{font.size.md}',
 				fontWeight: '500',
 				lg: {
-					fontSize: '1.125rem',
+					fontSize: '{font.size.lg}',
 				},
 				sm: {
-					fontSize: '1rem',
+					fontSize: '{font.size.md}',
 				},
 			},
 			warn: {
@@ -3370,7 +3395,7 @@ const data = {
 			root: {
 				background: '{card.background}',
 				borderColor: '{content.border.color}',
-				borderRadius: '{content.border.radius}',
+				borderRadius: '{border.radius.xl}',
 				color: '{content.color}',
 			},
 			content: {
@@ -4047,7 +4072,7 @@ const data = {
 		tag: {
 			root: {
 				borderRadius: '{content.border.radius}',
-				fontSize: '0.875rem',
+				fontSize: '{font.size.sm}',
 				fontWeight: '700',
 				gap: '0.25rem',
 				padding: '0.25rem 0.5rem',
@@ -4064,7 +4089,7 @@ const data = {
 				},
 				info: {
 					border: {
-						color: 'light-dark({tag.info.color}, {sky.200})',
+						color: '{sky.200}',
 					},
 				},
 				padding: {
@@ -4073,12 +4098,12 @@ const data = {
 				},
 				primary: {
 					border: {
-						color: '{tag.primary.color}',
+						color: 'light-dark({blue.300}, {tag.primary.color})',
 					},
 				},
 				secondary: {
 					border: {
-						color: '{tag.secondary.color}',
+						color: 'light-dark({zinc.100}, {tag.secondary.color})',
 					},
 				},
 				success: {
@@ -4192,7 +4217,7 @@ const data = {
 			root: {
 				background: '{form.field.background}',
 				borderColor: '{form.field.border.color}',
-				borderRadius: '{border.radius.xl}',
+				borderRadius: '{form.field.border.radius}',
 				color: '{form.field.color}',
 				disabledBackground: '{form.field.disabled.background}',
 				disabledColor: '{form.field.disabled.color}',
@@ -4509,7 +4534,7 @@ const data = {
 				shadow: '0 8px 16px 0 #45515a1a',
 			},
 			detail: {
-				fontSize: '0.875rem',
+				fontSize: '{font.size.sm}',
 				fontWeight: '500',
 			},
 			error: {
@@ -4588,7 +4613,7 @@ const data = {
 				shadow: '0 8px 16px 0 #45515a1a',
 			},
 			summary: {
-				fontSize: '1rem',
+				fontSize: '{font.size.md}',
 				fontWeight: '500',
 			},
 			text: {
@@ -5113,6 +5138,231 @@ const data = {
 			},
 		},
 	},
+	extend: {
+		ai: {
+			gradient: {
+				bottom: '#a855f7ff',
+				top: '#ff2ec4ff',
+			},
+			icon: {
+				color: 'light-dark({purple.500}, {purple.200})',
+			},
+		},
+		blue: {
+			'450': '#155fffff',
+			'550': '#2065ffff',
+			'650': '#004bc5ff',
+		},
+		carbon: {
+			'100': '#f9fafbff',
+			'200': '#f4f6f8ff',
+			'300': '#dfe3e8ff',
+			'400': '#c4cdd5ff',
+			'500': '#95a0abff',
+			'600': '#6a7681ff',
+			'700': '#454f5bff',
+			'800': '#212b36ff',
+			'900': '#161c24ff',
+		},
+		'dark-blue': {
+			'50': '#f2f5faff',
+			'100': '#c2cee8ff',
+			'200': '#91a7d7ff',
+			'300': '#6181c5ff',
+			'400': '#305ab3ff',
+			'500': '#0033a1ff',
+			'600': '#002b89ff',
+			'700': '#002471ff',
+			'800': '#001c59ff',
+			'900': '#001440ff',
+			'950': '#000d28ff',
+		},
+		font: {
+			family: {
+				inter: 'Inter',
+			},
+			heading: {
+				large: {
+					bold: '{font.weight.bold} {font.size.2xl}/2rem {font.family.inter}, sans-serif',
+					lineheight: '2rem',
+					semibold: '{font.weight.semibold} {font.size.2xl}/2rem {font.family.inter}, sans-serif',
+					size: '{font.size.2xl}',
+				},
+				medium: {
+					bold: '{font.weight.bold} {font.size.xl}/2rem {font.family.inter}, sans-serif',
+					lineheight: '2rem',
+					semibold: '{font.weight.semibold} {font.size.xl}/2rem {font.family.inter}, sans-serif',
+					size: '{font.size.xl}',
+				},
+				small: {
+					bold: '{font.weight.bold} {font.size.lg}/1.75rem {font.family.inter}, sans-serif',
+					lineheight: '1.75rem',
+					semibold: '{font.weight.semibold} {font.size.lg}/1.75rem {font.family.inter}, sans-serif',
+					size: '{font.size.lg}',
+				},
+				xlarge: {
+					bold: '{font.weight.bold} {font.size.3xl}/2.5rem {font.family.inter}, sans-serif',
+					lineheight: '2.5rem',
+					semibold: '{font.weight.semibold} {font.size.3xl}/2.5rem {font.family.inter}, sans-serif',
+					size: '{font.size.3xl}',
+				},
+				xsmall: {
+					bold: '{font.weight.bold} {font.size.md}/1.5rem {font.family.inter}, sans-serif',
+					lineheight: '1.5rem',
+					semibold: '{font.weight.semibold} {font.size.md}/1.5rem {font.family.inter}, sans-serif',
+					size: '{font.size.md}',
+				},
+				xxsmall: {
+					bold: '{font.weight.bold} {font.size.sm}/1.25rem {font.family.inter}, sans-serif',
+					lineheight: '1.25rem',
+					semibold: '{font.weight.semibold} {font.size.sm}/1.25rem {font.family.inter}, sans-serif',
+					size: '{font.size.sm}',
+				},
+			},
+			size: {
+				'2xl': '1.5rem',
+				'2xs': '0.625rem',
+				'3xl': '1.75rem',
+				'4xl': '2rem',
+				lg: '1.125rem',
+				md: '1rem',
+				sm: '0.875rem',
+				xl: '1.25rem',
+				xs: '0.75rem',
+			},
+			weight: {
+				black: '900',
+				bold: '700',
+				medium: '500',
+				regular: '400',
+				semibold: '600',
+				thin: '100',
+			},
+			'weight-light': '300',
+		},
+		lightblue: {
+			'50': '#e6f7ffff',
+			'100': '#ccefffff',
+			'200': '#99dfffff',
+			'300': '#66cfffff',
+			'400': '#33bfffff',
+			'500': '#00aaffff',
+			'600': '#0088ccff',
+			'700': '#006699ff',
+			'800': '#004466ff',
+			'900': '#002233ff',
+			'950': '#00111aff',
+		},
+		list: {
+			header: {
+				padding: {
+					bottom: '0.25rem',
+					left: '1rem',
+					right: '1rem',
+					top: '0.5rem',
+				},
+			},
+			option: {
+				group: {
+					padding: {
+						x: '0.75rem',
+						y: '0.5rem',
+					},
+				},
+				padding: {
+					x: '0.75rem',
+					y: '0.5rem',
+				},
+			},
+			padding: {
+				x: '{scale.0-25}',
+				y: '{scale.0-25}',
+			},
+		},
+		navigation: {
+			item: {
+				padding: {
+					x: '0.75rem',
+					y: '0.875rem',
+				},
+			},
+			list: {
+				padding: {
+					x: '{scale.0-25}',
+					y: '{scale.0-25}',
+				},
+			},
+			submenu: {
+				label: {
+					padding: {
+						x: '{scale.0-875}',
+						y: '{scale.0-875}',
+					},
+				},
+			},
+		},
+		opacity: {
+			'0': '0',
+			'10': '0.1',
+			'20': '0.2',
+			'30': '0.3',
+			'40': '0.4',
+			'50': '0.5',
+			'60': '0.6',
+			'70': '0.7',
+			'80': '0.8',
+			'90': '0.9',
+			'100': '1',
+		},
+		page: {
+			background: 'light-dark({surface.0}, {carbon.800})',
+		},
+		primary: {
+			'550': '{blue.550}',
+		},
+		scale: {
+			'1': '1rem',
+			'2': '2rem',
+			'3': '3rem',
+			'4': '4rem',
+			'5': '5rem',
+			'6': '6rem',
+			'8': '8rem',
+			'10': '10rem',
+			'12': '12rem',
+			'18': '18rem',
+			'25': '25rem',
+			'0-125': '0.125rem',
+			'0-25': '0.25rem',
+			'0-375': '0.375rem',
+			'0-5': '0.5rem',
+			'0-625': '0.625rem',
+			'0-75': '0.75rem',
+			'0-875': '0.875rem',
+			'1-125': '1.125rem',
+			'1-143': '1.143rem',
+			'1-25': '1.25rem',
+			'1-5': '1.5rem',
+			'1-625': '1.625rem',
+			'1-75': '1.75rem',
+			'12-5': '12.5rem',
+			'2-25': '2.25rem',
+			'2-5': '2.5rem',
+			'2-75': '2.75rem',
+			'neg-0-125': '-0.125rem',
+			'neg-0-25': '-0.25rem',
+			'neg-0-375': '-0.375rem',
+			'neg-0-5': '-0.5rem',
+			'neg-0-625': '-0.625rem',
+			'neg-0-75': '-0.75rem',
+			'neg-0-875': '-0.875rem',
+			'neg-1': '-1rem',
+			'neg-1-125': '-1.125rem',
+			'neg-1-25': '-1.25rem',
+			'neg-1-5': '-1.5rem',
+		},
+		transparent: '#ffffff00',
+	},
 	primitive: {
 		amber: {
 			'50': '#fffbf4ff',
@@ -5604,7 +5854,7 @@ const data = {
 				width: '0',
 			},
 			lg: {
-				fontSize: '1.125rem',
+				fontSize: '{font.size.lg}',
 				paddingX: '0.875rem',
 				paddingY: '8.25px',
 			},
@@ -5612,7 +5862,7 @@ const data = {
 			paddingY: '0.5rem',
 			shadow: '0 1px 2px 0 #1212170d',
 			sm: {
-				fontSize: '0.875rem',
+				fontSize: '{font.size.sm}',
 				paddingX: '0.625rem',
 				paddingY: '6.75px',
 			},
@@ -5689,222 +5939,49 @@ const data = {
 		},
 		transitionDuration: '0.2s',
 	},
-	extend: {
-		blue: {
-			'450': '#155fffff',
-			'550': '#2065ffff',
-			'650': '#004bc5ff',
-		},
-		carbon: {
-			'100': '#f9fafbff',
-			'200': '#f4f6f8ff',
-			'300': '#dfe3e8ff',
-			'400': '#c4cdd5ff',
-			'500': '#95a0abff',
-			'600': '#6a7681ff',
-			'700': '#454f5bff',
-			'800': '#212b36ff',
-			'900': '#161c24ff',
-		},
-		'dark-blue': {
-			'50': '#f2f5faff',
-			'100': '#c2cee8ff',
-			'200': '#91a7d7ff',
-			'300': '#6181c5ff',
-			'400': '#305ab3ff',
-			'500': '#0033a1ff',
-			'600': '#002b89ff',
-			'700': '#002471ff',
-			'800': '#001c59ff',
-			'900': '#001440ff',
-			'950': '#000d28ff',
-		},
-		font: {
-			heading: {
-				large: {
-					bold: '700 1.5rem / 2rem Inter, sans-serif',
-					semibold: '600 1.5rem / 2rem Inter, sans-serif',
-				},
-				medium: {
-					bold: '700 1.25rem / 2rem Inter, sans-serif',
-					semibold: '600 1.25rem / 2rem Inter, sans-serif',
-				},
-				small: {
-					bold: '700 1.125rem / 1.75rem Inter, sans-serif',
-					semibold: '600 1.125rem / 1.75rem Inter, sans-serif',
-				},
-				xlarge: {
-					bold: '700 1.75rem / 2.5rem Inter, sans-serif',
-					semibold: '600 1.75rem / 2.5rem Inter, sans-serif',
-				},
-				xsmall: {
-					bold: '700 1rem / 1.5rem Inter, sans-serif',
-					semibold: '600 1rem / 1.5rem Inter, sans-serif',
-				},
-				xxsmall: {
-					bold: '700 0.875rem / 1.25rem Inter, sans-serif',
-					semibold: '600 0.875rem / 1.25rem Inter, sans-serif',
-				},
-			},
-		},
-		lightblue: {
-			'50': '#e6f7ffff',
-			'100': '#ccefffff',
-			'200': '#99dfffff',
-			'300': '#66cfffff',
-			'400': '#33bfffff',
-			'500': '#00aaffff',
-			'600': '#0088ccff',
-			'700': '#006699ff',
-			'800': '#004466ff',
-			'900': '#002233ff',
-			'950': '#00111aff',
-		},
-		list: {
-			header: {
-				padding: {
-					bottom: '0.25rem',
-					left: '1rem',
-					right: '1rem',
-					top: '0.5rem',
-				},
-			},
-			option: {
-				group: {
-					padding: {
-						x: '0.75rem',
-						y: '0.5rem',
-					},
-				},
-				padding: {
-					x: '0.75rem',
-					y: '0.5rem',
-				},
-			},
-			padding: {
-				x: '{scale.0-25}',
-				y: '{scale.0-25}',
-			},
-		},
-		navigation: {
-			item: {
-				padding: {
-					x: '0.75rem',
-					y: '0.875rem',
-				},
-			},
-			list: {
-				padding: {
-					x: '{scale.0-25}',
-					y: '{scale.0-25}',
-				},
-			},
-			submenu: {
-				label: {
-					padding: {
-						x: '{scale.0-875}',
-						y: '{scale.0-875}',
-					},
-				},
-			},
-		},
-		opacity: {
-			'0': '0',
-			'10': '0.1',
-			'20': '0.2',
-			'30': '0.3',
-			'40': '0.4',
-			'50': '0.5',
-			'60': '0.6',
-			'70': '0.7',
-			'80': '0.8',
-			'90': '0.9',
-			'100': '1',
-		},
-		primary: {
-			'550': '{blue.550}',
-		},
-		scale: {
-			'1': '1rem',
-			'2': '2rem',
-			'3': '3rem',
-			'4': '4rem',
-			'5': '5rem',
-			'18': '18rem',
-			'25': '25rem',
-			'0-125': '0.125rem',
-			'0-25': '0.25rem',
-			'0-375': '0.375rem',
-			'0-5': '0.5rem',
-			'0-625': '0.625rem',
-			'0-75': '0.75rem',
-			'0-875': '0.875rem',
-			'1-125': '1.125rem',
-			'1-143': '1.143rem',
-			'1-25': '1.25rem',
-			'1-5': '1.5rem',
-			'1-625': '1.625rem',
-			'1-75': '1.75rem',
-			'12-5': '12.5rem',
-			'2-25': '2.25rem',
-			'2-5': '2.5rem',
-			'2-75': '2.75rem',
-			'neg-0-125': '-0.125rem',
-			'neg-0-25': '-0.25rem',
-			'neg-0-375': '-0.375rem',
-			'neg-0-5': '-0.5rem',
-			'neg-0-625': '-0.625rem',
-			'neg-0-75': '-0.75rem',
-			'neg-0-875': '-0.875rem',
-			'neg-1': '-1rem',
-			'neg-1-125': '-1.125rem',
-			'neg-1-25': '-1.25rem',
-			'neg-1-5': '-1.5rem',
-		},
-		transparent: '#ffffff00',
-	},
 };
 
-/**
- * The option bag PrimeNG hands a preset `css` callback.
- *
- * `dt(tokenPath)` returns the `var(--<prefix>-…)` reference for a preset token under the theme’s
- * active options, which is why the stylesheets below go through it rather than carrying a literal
- * `var(--spds-…)`: mount this preset under another prefix and the CSS follows it.
- */
-interface SailPointDesignSystemPresetCssOptions {
+interface PresetCssOptions {
 	readonly dt: (tokenPath: string, fallback?: string) => string;
 }
 
-// SailPointDesignSystem global stylesheets. PrimeNG emits the preset’s root `css` once, up front.
-const spdsTypographyGlobalCss = ({ dt }: SailPointDesignSystemPresetCssOptions) =>
+const typographyGlobalCss = ({ dt }: PresetCssOptions) =>
 	`:root {
-	font-family: Inter, sans-serif;
-	line-height: normal;
+	font-family: ${dt('font.family.inter')}, sans-serif;
+	font-size: ${dt('font.size.md')};
+	font-weight: ${dt('font.weight.regular')};
+	line-height: 1.5;
+	color: ${dt('text.color')};
 }
 
 h1 {
 	font: ${dt('font.heading.xlarge.bold')};
+	line-height: 1.5rem;
 }
 
 h2 {
 	font: ${dt('font.heading.large.bold')};
+	line-height: 1.5rem;
 }
 
 h3 {
 	font: ${dt('font.heading.medium.bold')};
+	line-height: 1.5rem;
 }
 
 h4 {
 	font: ${dt('font.heading.small.bold')};
+	line-height: 1.5rem;
 }
 
 h5 {
 	font: ${dt('font.heading.xsmall.bold')};
+	line-height: 1.5rem;
 }
 
 h6 {
 	font: ${dt('font.heading.xxsmall.bold')};
+	line-height: 1.5rem;
 }
 
 .spds-h1 {
@@ -5954,22 +6031,57 @@ h6 {
 .spds-h6--semibold {
 	font: ${dt('font.heading.xxsmall.semibold')};
 }
+
+:where(*, *:before, *:after) {
+	font-variant-ligatures: no-contextual !important;
+}
 `;
 
-// SailPointDesignSystem component stylesheets, each emitted when PrimeNG first loads that component.
-const spdsCheckboxComponentCss = () =>
+const checkboxComponentCss = ({ dt }: PresetCssOptions) =>
 	`p-checkbox {
 	display: inline-flex;
 }
-`;
 
-const spdsDialogComponentCss = () =>
-	`.p-dialog-header-actions {
-	align-self: flex-start;
+p-checkbox:has(.p-checkbox.p-disabled) {
+	cursor: not-allowed;
+}
+
+.p-checkbox.p-checkbox-checked.p-disabled .p-checkbox-box {
+	background: ${dt('checkbox.checked.disabled.background.color')};
+	border-color: ${dt('checkbox.checked.disabled.border.color')};
+}
+
+.p-checkbox.p-disabled:not(.p-checkbox-checked) .p-checkbox-box {
+	border-color: ${dt('checkbox.border.color')};
 }
 `;
 
-const spdsTagComponentCss = ({ dt }: SailPointDesignSystemPresetCssOptions) =>
+const dialogComponentCss = ({ dt }: PresetCssOptions) =>
+	`.p-dialog-header-actions {
+	align-self: flex-start;
+	flex-shrink: 0;
+}
+
+p-button:has(> .p-dialog-close-button) {
+	flex-shrink: 0;
+}
+
+.p-dialog-close-button.p-button-text.p-button-secondary {
+	color: ${dt('iconfield.icon.color')};
+}
+
+.p-dialog-close-button.p-button-text.p-button-secondary:not(:disabled):hover {
+	background: ${dt('button.text.primary.hover.background')};
+	color: ${dt('iconfield.icon.color')};
+}
+
+.p-dialog-close-button.p-button-text.p-button-secondary:not(:disabled):active {
+	background: ${dt('button.text.primary.active.background')};
+	color: ${dt('iconfield.icon.color')};
+}
+`;
+
+const tagComponentCss = ({ dt }: PresetCssOptions) =>
 	`.p-tag {
 	border: 1px solid ${dt('tag.primary.border.color')};
 	line-height: 1;
@@ -6005,12 +6117,12 @@ const spdsTagComponentCss = ({ dt }: SailPointDesignSystemPresetCssOptions) =>
 
 const spdsPrimePreset = {
 	...data,
-	css: (options: SailPointDesignSystemPresetCssOptions) => [spdsTypographyGlobalCss(options)].join('\n'),
+	css: (options: PresetCssOptions) => [typographyGlobalCss(options)].join('\n'),
 	components: {
 		...data.components,
-		checkbox: { ...data.components.checkbox, css: spdsCheckboxComponentCss },
-		dialog: { ...data.components.dialog, css: spdsDialogComponentCss },
-		tag: { ...data.components.tag, css: spdsTagComponentCss },
+		checkbox: { ...data.components.checkbox, css: checkboxComponentCss },
+		dialog: { ...data.components.dialog, css: dialogComponentCss },
+		tag: { ...data.components.tag, css: tagComponentCss },
 	},
 };
 

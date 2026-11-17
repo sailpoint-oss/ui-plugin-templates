@@ -5,13 +5,15 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { IdentitiesService } from '@sailpoint/angular-sdk/identities';
 import { TenantService, type Tenant } from '@sailpoint/angular-sdk/tenant';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { MessageModule } from 'primeng/message';
 import { EMPTY, firstValueFrom } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-api-examples',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, ButtonModule, TranslatePipe],
+  imports: [AsyncPipe, JsonPipe, ButtonModule, CardModule, MessageModule, TranslatePipe],
   providers: [IdentitiesService, TenantService],
   templateUrl: './api-examples.component.html',
   styleUrl: './api-examples.component.scss',

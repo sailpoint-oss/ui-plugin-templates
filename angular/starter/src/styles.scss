@@ -3,13 +3,25 @@
 // Placeholder to ensure the compiled stylesheet is not empty.
 // This prevents file upload errors during early deployment phases.
 :root {
-	color-scheme: light;
+  color-scheme: light;
 }
 
 body {
   margin: 0;
 }
 
-p, li {
+p,
+li {
   line-height: 1.5rem;
+}
+
+.page-title {
+  margin: 0 0 1rem;
+}
+
+// PrimeNG owns the Menu link markup, so lift its router-active class to the
+// item surface and apply the tenant's branded navigation color.
+.shell-sidenav .p-menu-item-content:has(> .p-menu-item-link-active) {
+  background: var(--spds-menu-item-active-background);
+  color: var(--spds-menu-item-active-color);
 }

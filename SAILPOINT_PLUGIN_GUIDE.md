@@ -193,7 +193,7 @@ function createBootstrap(): PluginBootstrap {
   let ready: Promise<PluginContext>;
 
   try {
-    sdk = createSDK();
+    sdk = createSDK({ useSpds: true });
     ready = sdk.getContext();
   } catch {
     ready = Promise.reject(new Error('Open the plugin in SailPoint Identity Security with ?spPluginDev=<alias>.'));
@@ -359,9 +359,9 @@ The invariants are the same everywhere: one SDK instance, one shared handshake p
 
 **Component library (other frameworks):** _TBD._ The Prime family offers framework-specific equivalents ([PrimeReact](https://primereact.org/), [PrimeVue](https://primevue.org/)) that share the same theming model. The SailPoint Design System preset in the Angular starter is built and tested with components in the PrimeNG library; using it with PrimeReact or PrimeVue may work, but it is not officially supported by SailPoint and there may be unexpected theming gaps in certain components. 
 
-**ISC design tokens:** _TBD._ ISC-compatible design tokens and component library theme configuration will be delivered by the SailPoint Design System package. For Angular, `provideSds()` will be a thin wrapper around `providePrimeNG()` that applies the ISC theme preset automatically. Equivalent integration points for other frameworks are TBD alongside the framework starter decisions.
+**ISC design tokens (Angular):** The Angular starter configures `providePrimeNG()` with the generated SailPoint Design System preset. The preset injects `--spds-*` design-token variables and uses `.spds-dark` as its dark-mode selector. Equivalent integration points for other frameworks are TBD alongside the framework starter decisions.
 
-**Dark mode:** The theme supports dark mode under the selector `.spds-dark`. Once the SailPoint Design System package is available, plugins will be configurable to automatically apply this class to sync with the color scheme of the ISC tenant. For early development, plugin authors would apply this class on their iframe's `html` element to view dark mode.
+**Dark mode and tenant branding (Angular):** Initialize the SDK with `createSDK({ useSpds: true })`. The SDK synchronizes `.spds-dark` with the App Shell color scheme and installs the supported tenant-branding variables and PrimeNG token redirects. Remove competing plugin-owned color-scheme listeners, App Shell appearance messages, and branding CSS.
 
 **Icons:** Font Awesome icons are the standard for SailPoint UI plugins across all frameworks. Bundling mechanism _TBD_.
 

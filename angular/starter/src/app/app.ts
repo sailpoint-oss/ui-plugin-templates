@@ -1,14 +1,16 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { SailpointPluginService } from '@core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import type { MenuItem } from 'primeng/api';
+import { MenuModule } from 'primeng/menu';
 import { TagModule } from 'primeng/tag';
 import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, TagModule, TranslatePipe],
+  imports: [MenuModule, RouterOutlet, TagModule, TranslatePipe],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -16,6 +18,7 @@ export class App implements OnInit {
   private readonly plugin = inject(SailpointPluginService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly translate = inject(TranslateService);
 
   // Plugin display name. The SailPoint CLI (`sail ui-plugins init`) rewrites the
   // 'starter' literal to the name the user provides. The name is not UI copy, so
@@ -23,6 +26,7 @@ export class App implements OnInit {
   protected readonly title = signal('starter');
   protected readonly context = this.plugin.context;
   protected readonly status = this.plugin.status;
+  protected navigationItems: MenuItem[] = [];
   protected readonly handshakeSeverity = {
     pending: 'warn',
     ready: 'success',
@@ -30,6 +34,27 @@ export class App implements OnInit {
   } as const;
 
   ngOnInit(): void {
+    this.translate
+      .stream(['nav.overview', 'nav.workflows', 'nav.apiExamples'])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((labels) => {
+        this.navigationItems = [
+          {
+            label: labels['nav.overview'],
+            routerLink: '/',
+            routerLinkActiveOptions: { exact: true },
+          },
+          {
+            label: labels['nav.workflows'],
+            routerLink: '/workflows',
+          },
+          {
+            label: labels['nav.apiExamples'],
+            routerLink: '/api-examples',
+          },
+        ];
+      });
+
     // The host may have deep-linked to a sub-route (e.g. after a reload of
     // /ui/plugin/starter/workflows). The SDK derives that plugin-relative route
     // as `page.subPath`; the explicit navigation below restores it. Initial

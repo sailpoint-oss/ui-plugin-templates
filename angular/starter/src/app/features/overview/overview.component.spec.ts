@@ -28,6 +28,13 @@ describe('OverviewComponent', () => {
     );
   });
 
+  it('renders the page header and card surfaces', () => {
+    const pageHeading = compiled.querySelector('h1');
+    expect(pageHeading?.textContent).toContain('Overview');
+    expect(pageHeading?.classList).toContain('spds-h2');
+    expect(compiled.querySelectorAll('p-card').length).toBe(2);
+  });
+
   it('lists what users can build', () => {
     const items = compiled.querySelectorAll('li');
     expect(items.length).toBe(3);

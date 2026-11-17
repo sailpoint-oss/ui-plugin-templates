@@ -6,6 +6,7 @@ import {
   inject,
 } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { CardModule } from 'primeng/card';
 
 import {
   CONSTELLATION_EDGES,
@@ -23,17 +24,15 @@ const FRAME_INTERVAL_MS = 1000 / 30;
 /**
  * Landing hero for the Overview page.
  *
- * Self-contained: inline SVG + CSS only, no third-party dependencies and no
- * external assets, so authors can delete this one component without touching
- * package.json. The connected-node "constellation" is described as data in the
- * sibling hero-constellation module; the template renders it once and this
- * component animates a slow per-node drift by writing SVG attributes directly,
+ * The connected-node "constellation" is described as data in the sibling
+ * hero-constellation module; the template renders it once and this component
+ * animates a slow per-node drift by writing SVG attributes directly,
  * deliberately outside Angular's change detection.
  */
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [CardModule, TranslatePipe],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })

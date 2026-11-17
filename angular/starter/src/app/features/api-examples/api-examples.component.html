@@ -1,42 +1,51 @@
-<section>
-  <h2 class="spds-h4">{{ 'apiExamples.heading' | translate }}</h2>
-  <p [innerHTML]="'apiExamples.intro' | translate"></p>
+<h1 class="page-title spds-h2">{{ 'apiExamples.heading' | translate }}</h1>
 
-  <div class="example-section">
-    <h3 class="spds-h5">{{ 'apiExamples.observableHeading' | translate }}</h3>
-    <p [innerHTML]="'apiExamples.observableBody' | translate"></p>
-    <p class="hint">{{ 'apiExamples.observableHint' | translate }}</p>
-    <p-button
-      [label]="'apiExamples.observableButton' | translate"
-      (onClick)="loadIdentities()"
-      [loading]="identitiesLoading()"
-      [disabled]="getIdentities() || !apiReady()"
-    />
-    @if (identitiesError()) {
-      <pre class="error">{{ identitiesError() }}</pre>
-    }
-    @if (getIdentities()) {
-      @if (identities$ | async; as identities) {
-        <pre class="result">{{ identities | json }}</pre>
-      }
-    }
-  </div>
+<section class="api-examples">
+  <p class="api-examples__intro" [innerHTML]="'apiExamples.intro' | translate"></p>
 
-  <div class="example-section">
-    <h3 class="spds-h5">{{ 'apiExamples.promiseHeading' | translate }}</h3>
-    <p [innerHTML]="'apiExamples.promiseBody' | translate"></p>
-    <p class="hint">{{ 'apiExamples.promiseHint' | translate }}</p>
-    <p-button
-      [label]="'apiExamples.promiseButton' | translate"
-      (onClick)="promiseApiCall()"
-      [loading]="tenantLoading()"
-      [disabled]="tenantLoading() || tenant() || tenantError() || !apiReady()"
-    />
-    @if (tenantError()) {
-      <pre class="error">{{ tenantError() }}</pre>
-    }
-    @if (tenant(); as tenantData) {
-      <pre class="result">{{ tenantData | json }}</pre>
-    }
+  <div class="example-list">
+    <p-card>
+      <div class="example-section">
+        <h2 class="spds-h5">
+          {{ 'apiExamples.observableHeading' | translate }}
+        </h2>
+        <p [innerHTML]="'apiExamples.observableBody' | translate"></p>
+        <p class="hint">{{ 'apiExamples.observableHint' | translate }}</p>
+        <p-button
+          [label]="'apiExamples.observableButton' | translate"
+          (onClick)="loadIdentities()"
+          [loading]="identitiesLoading()"
+          [disabled]="getIdentities() || !apiReady()"
+        />
+        @if (identitiesError()) {
+          <p-message class="feedback" severity="error" [text]="identitiesError()" />
+        }
+        @if (getIdentities()) {
+          @if (identities$ | async; as identities) {
+            <pre class="result">{{ identities | json }}</pre>
+          }
+        }
+      </div>
+    </p-card>
+
+    <p-card>
+      <div class="example-section">
+        <h2 class="spds-h5">{{ 'apiExamples.promiseHeading' | translate }}</h2>
+        <p [innerHTML]="'apiExamples.promiseBody' | translate"></p>
+        <p class="hint">{{ 'apiExamples.promiseHint' | translate }}</p>
+        <p-button
+          [label]="'apiExamples.promiseButton' | translate"
+          (onClick)="promiseApiCall()"
+          [loading]="tenantLoading()"
+          [disabled]="tenantLoading() || tenant() || tenantError() || !apiReady()"
+        />
+        @if (tenantError()) {
+          <p-message class="feedback" severity="error" [text]="tenantError()" />
+        }
+        @if (tenant(); as tenantData) {
+          <pre class="result">{{ tenantData | json }}</pre>
+        }
+      </div>
+    </p-card>
   </div>
 </section>
